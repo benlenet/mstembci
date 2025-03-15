@@ -1,0 +1,47 @@
+6.4196 	INFO 	Loaded monitor calibration from ['2025_02_27 13:12']
+6.4336 	WARNING 	User requested fullscreen with size [1024  768], but screen is actually [2560, 1600]. Using actual size
+7.1361 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, autoLog=True, backendConf=UNKNOWN, backgroundFit=<method-wrapper '__getattribute__' of attributeSetter object at 0x0000024EA0EAE020>, backgroundImage=<method-wrapper '__getattribute__' of attributeSetter object at 0x0000024EA0EADFC0>, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0, 0, 0]), colorSpace='rgb', depthBits=8, fullscr=True, gamma=None, gammaErrorPolicy='raise', infoMsg=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x0000024EA0F3AB90>, multiSample=False, name='window1', numSamples=2, pos=[0.0, 0.0], screen=0, size=array([2560, 1600]), stencilBits=0, stereo=False, title='PsychoPy', units='height', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+7.1362 	EXP 	window1: backgroundImage = ''
+7.1362 	EXP 	window1: backgroundFit = 'none'
+7.2345 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+7.2346 	EXP 	window1: recordFrameIntervals = False
+7.3813 	EXP 	window1: recordFrameIntervals = True
+7.5664 	EXP 	Screen (0) actual frame rate measured at 59.64Hz
+7.5665 	EXP 	window1: recordFrameIntervals = False
+10.4078 	INFO 	keyboard.Keyboard is using iohub backend.
+10.4078 	INFO 	keyboard.Keyboard is using iohub backend.
+10.4079 	INFO 	keyboard.Keyboard is using iohub backend.
+10.4079 	EXP 	Sternberg: status = STARTED
+10.5275 	EXP 	Created WelcomeText = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([0., 0., 0.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='WelcomeText', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+10.5589 	EXP 	Created text_norm = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='text_norm', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='norm', win=Window(...), wrapWidth=1.8)
+10.5628 	EXP 	Created Cross_Fixation = ShapeStim(__class__=<class 'psychopy.visual.shape.ShapeStim'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=0.0, draggable=False, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=0.05, name='Cross_Fixation', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...), windingRule=None)
+10.5639 	EXP 	Created letter_stimulus = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='letter_stimulus', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+10.5656 	EXP 	Created image = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, image=None, interpolate=True, mask=None, maskParams=None, name='image', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), texRes=128.0, units='height', win=Window(...))
+0.0033 	EXP 	text_norm: alignText = 'center'
+0.0109 	INFO 	Keyboard events cleared
+0.0102 	EXP 	WelcomeText: autoDraw = True
+15.2525 	DATA 	Mouse: Left button down, pos=(1426,364)
+15.4198 	DATA 	Mouse:  Left button up, pos=(1426,364)
+17.2272 	DATA 	Keypress: lalt
+17.2495 	INFO 	Keyboard events cleared
+17.2492 	EXP 	WelcomeText: autoDraw = False
+17.2492 	EXP 	text_norm: autoDraw = True
+17.2492 	EXP 	text_norm: height = 0.1
+17.2492 	EXP 	text_norm: height = 0.1
+17.2492 	EXP 	text_norm: height = 0.1
+17.2492 	EXP 	text_norm: text = 'Welcome to the Experiment!\nThis memory based test is known as the Sternberg Task.\nThis task is broken into five distinct sections:\n'
+18.2324 	EXP 	text_norm: autoDraw = False
+18.2324 	EXP 	Cross_Fixation: autoDraw = True
+20.4562 	DATA 	Mouse: Left button down, pos=(1722,892)
+20.5852 	DATA 	Mouse:  Left button up, pos=(1722,892)
+22.4522 	DATA 	Keypress: period
+28.2327 	EXP 	Cross_Fixation: autoDraw = False
+28.2327 	EXP 	letter_stimulus: autoDraw = True
+29.2326 	EXP 	letter_stimulus: autoDraw = False
+29.2326 	EXP 	letter_stimulus: autoDraw = False
+29.2326 	EXP 	image: autoDraw = True
+32.2326 	EXP 	image: autoDraw = False
+32.2326 	EXP 	image: autoDraw = False
+32.2331 	EXP 	Sternberg: status = STOPPED
+32.3034 	INFO 	saved data to 'C:\\Users\\04Ben\\OneDrive\\Desktop\\Sternberg\\data/300755_Sternberg_2025-03-10_12h26.12.909.csv'
+32.3049 	INFO 	saved data to C:\Users\04Ben\OneDrive\Desktop\Sternberg\data/300755_Sternberg_2025-03-10_12h26.12.909.psydat

@@ -1,0 +1,87 @@
+6.7896 	DEBUG 	Fullscreen settings ignored as running in pilot mode.
+6.7904 	INFO 	Loaded monitor calibration from ['2025_02_27 13:12']
+7.1289 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, autoLog=True, backendConf=UNKNOWN, backgroundFit=<method-wrapper '__getattribute__' of attributeSetter object at 0x0000016DE298F040>, backgroundImage=<method-wrapper '__getattribute__' of attributeSetter object at 0x0000016DE298EC50>, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([-1., -1., -1.]), colorSpace='rgb', depthBits=8, fullscr=False, gamma=None, gammaErrorPolicy='raise', infoMsg=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x0000016DEACAECB0>, multiSample=False, name='window1', numSamples=2, pos=[880.0, 500.0], screen=0, size=array([800, 600]), stencilBits=0, stereo=False, title='PsychoPy', units='height', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+7.1290 	EXP 	window1: backgroundImage = ''
+7.1291 	EXP 	window1: backgroundFit = 'none'
+7.1381 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1389 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1397 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1406 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1419 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1427 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1435 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1450 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1457 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1461 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1469 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1477 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1484 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1492 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1498 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1506 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1513 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1517 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1522 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1532 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1536 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1542 	DEBUG 	Uploading Texture Font fontname to graphics card
+7.1686 	DEBUG 	Upload of Texture Font fontname complete
+7.1758 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1771 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1781 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1785 	DEBUG 	Uploading Texture Font fontname to graphics card
+7.1929 	DEBUG 	Upload of Texture Font fontname complete
+7.1952 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+7.1953 	EXP 	window1: recordFrameIntervals = False
+7.3797 	EXP 	window1: recordFrameIntervals = True
+7.5638 	EXP 	Screen (0) actual frame rate measured at 59.76Hz
+7.5639 	EXP 	window1: recordFrameIntervals = False
+7.5727 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.5733 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.5744 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.5764 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.5777 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.5788 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.5793 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.5802 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.5812 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.5821 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.5825 	DEBUG 	Uploading Texture Font fontname to graphics card
+7.5831 	DEBUG 	Upload of Texture Font fontname complete
+7.5988 	WARNING 	launchHubServer: If using the iohub mouse or eyetracker devices, fullScr should be True.
+10.5315 	INFO 	keyboard.Keyboard is using iohub backend.
+10.5316 	INFO 	keyboard.Keyboard is using iohub backend.
+10.5316 	INFO 	keyboard.Keyboard is using iohub backend.
+10.5316 	EXP 	Sternberg: status = STARTED
+10.6494 	EXP 	Created WelcomeText = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([0., 0., 0.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='WelcomeText', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+10.6682 	EXP 	Created text_norm = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='text_norm', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='norm', win=Window(...), wrapWidth=1.8)
+10.6722 	EXP 	Created Cross_Fixation = ShapeStim(__class__=<class 'psychopy.visual.shape.ShapeStim'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=0.0, draggable=False, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=0.05, name='Cross_Fixation', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...), windingRule=None)
+10.6736 	EXP 	Created letter_stimulus = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='letter_stimulus', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+10.6763 	EXP 	Created image = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, image=None, interpolate=True, mask=None, maskParams=None, name='image', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), texRes=128.0, units='height', win=Window(...))
+0.0180 	EXP 	text_norm: alignText = 'center'
+0.0345 	INFO 	Keyboard events cleared
+0.0341 	EXP 	WelcomeText: autoDraw = True
+5.5175 	DATA 	Keypress: period
+5.5334 	INFO 	Keyboard events cleared
+5.5331 	EXP 	WelcomeText: autoDraw = False
+5.5331 	EXP 	text_norm: autoDraw = True
+5.5331 	EXP 	text_norm: height = 0.1
+5.5331 	EXP 	text_norm: height = 0.1
+5.5331 	EXP 	text_norm: height = 0.1
+5.5331 	EXP 	text_norm: text = 'Welcome to the Experiment!\nThis memory based test is known as the Sternberg Task.\nThis task is broken into five distinct sections:\n'
+12.6255 	DATA 	Keypress: period
+12.6337 	EXP 	text_norm: autoDraw = False
+12.6337 	EXP 	Cross_Fixation: autoDraw = True
+13.2707 	DATA 	Keypress: period
+22.6347 	EXP 	Cross_Fixation: autoDraw = False
+22.6347 	EXP 	Cross_Fixation: autoDraw = False
+22.6347 	EXP 	letter_stimulus: autoDraw = True
+23.6348 	EXP 	letter_stimulus: autoDraw = False
+23.6348 	EXP 	letter_stimulus: autoDraw = False
+23.6348 	EXP 	image: autoDraw = True
+26.6362 	EXP 	image: autoDraw = False
+26.6362 	EXP 	image: autoDraw = False
+26.6388 	EXP 	Sternberg: status = STOPPED
+26.7081 	INFO 	saved data to 'C:\\Users\\04Ben\\OneDrive\\Desktop\\Sternberg\\data/901567_Sternberg_2025-03-10_12h39.31.250.csv'
+26.7094 	INFO 	saved data to C:\Users\04Ben\OneDrive\Desktop\Sternberg\data/901567_Sternberg_2025-03-10_12h39.31.250.psydat
+27.4158 	DEBUG 	Saving data for Sternberg ExperimentHandler
