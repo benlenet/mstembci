@@ -1,0 +1,76 @@
+21.8582 	DEBUG 	Fullscreen settings ignored as running in pilot mode.
+21.8595 	INFO 	Loaded monitor calibration from ['2025_02_27 13:12']
+24.2771 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, autoLog=True, backendConf=UNKNOWN, backgroundFit=<method-wrapper '__getattribute__' of attributeSetter object at 0x0000025238987C40>, backgroundImage=<method-wrapper '__getattribute__' of attributeSetter object at 0x0000025238987EB0>, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0, 0, 0]), colorSpace='rgb', depthBits=8, fullscr=False, gamma=None, gammaErrorPolicy='raise', infoMsg=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x0000025243B90D00>, multiSample=False, name='window1', numSamples=2, pos=[880.0, 500.0], screen=0, size=array([800, 600]), stencilBits=0, stereo=False, title='PsychoPy', units='height', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+24.2772 	EXP 	window1: backgroundImage = ''
+24.2772 	EXP 	window1: backgroundFit = 'none'
+24.3183 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3191 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3199 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3207 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3216 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3220 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3227 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3236 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3239 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3242 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3249 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3256 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3262 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3269 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3275 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3282 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3288 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3293 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3297 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3306 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3313 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3331 	DEBUG 	Uploading Texture Font fontname to graphics card
+24.3459 	DEBUG 	Upload of Texture Font fontname complete
+24.3544 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3553 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3562 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.3565 	DEBUG 	Uploading Texture Font fontname to graphics card
+24.3687 	DEBUG 	Upload of Texture Font fontname complete
+24.3716 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+24.3717 	EXP 	window1: recordFrameIntervals = False
+24.5716 	EXP 	window1: recordFrameIntervals = True
+24.7560 	EXP 	Screen (0) actual frame rate measured at 59.67Hz
+24.7560 	EXP 	window1: recordFrameIntervals = False
+24.7616 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.7622 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.7630 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.7641 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.7650 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.7659 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.7664 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.7672 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.7681 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.7690 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+24.7693 	DEBUG 	Uploading Texture Font fontname to graphics card
+24.7697 	DEBUG 	Upload of Texture Font fontname complete
+24.8313 	WARNING 	launchHubServer: If using the iohub mouse or eyetracker devices, fullScr should be True.
+28.7968 	INFO 	keyboard.Keyboard is using iohub backend.
+28.7969 	INFO 	keyboard.Keyboard is using iohub backend.
+28.7969 	EXP 	buttontest: status = STARTED
+28.8048 	EXP 	Created image = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([0., 0., 0.]), colorSpace='rgb', contrast=1.0, depth=-1.0, draggable=False, flipHoriz=False, flipVert=False, image=None, interpolate=True, mask=None, maskParams=None, name='image', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), texRes=128.0, units='height', win=Window(...))
+28.9300 	EXP 	Created fb = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, draggable=False, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='fb', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+0.0254 	INFO 	Keyboard events cleared
+0.0249 	EXP 	image: autoDraw = True
+1.0251 	EXP 	image: autoDraw = False
+7.1591 	DATA 	Keypress: comma
+8.1280 	DATA 	Keypress: period
+8.4279 	DATA 	Keypress: comma
+8.6279 	DATA 	Keypress: period
+8.8281 	DATA 	Keypress: comma
+11.0147 	DATA 	Mouse: Left button down, pos=(410,209)
+11.1166 	DATA 	Mouse:  Left button up, pos=(410,209)
+20.5160 	DATA 	Mouse: Left button down, pos=(458,411)
+20.7296 	DATA 	Mouse:  Left button up, pos=(458,411)
+31.1654 	DATA 	Mouse: Left button down, pos=(456,411)
+31.2817 	DATA 	Mouse:  Left button up, pos=(456,411)
+32.0950 	DATA 	Keypress: escape
+32.2115 	EXP 	buttontest: status = STOPPED
+32.2264 	EXP 	buttontest: status = STOPPED
+32.2283 	INFO 	saved data to 'C:\\Users\\04Ben\\github\\mstembci\\Sternberg_2\\testing\\data/580740_buttontest_2025-03-19_12h40.30.458.csv'
+32.2288 	INFO 	saved data to C:\Users\04Ben\github\mstembci\Sternberg_2\testing\data/580740_buttontest_2025-03-19_12h40.30.458.psydat
+32.8869 	DEBUG 	Saving data for buttontest ExperimentHandler
