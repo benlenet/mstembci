@@ -1,0 +1,87 @@
+6.7893 	DEBUG 	Fullscreen settings ignored as running in pilot mode.
+6.7903 	INFO 	Loaded monitor calibration from ['2025_02_27 13:12']
+7.0848 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, autoLog=True, backendConf=UNKNOWN, backgroundFit=<method-wrapper '__getattribute__' of attributeSetter object at 0x000001F4E8BF6350>, backgroundImage=<method-wrapper '__getattribute__' of attributeSetter object at 0x000001F4E8BF62F0>, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([-1., -1., -1.]), colorSpace='rgb', depthBits=8, fullscr=False, gamma=None, gammaErrorPolicy='raise', infoMsg=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x000001F4E8CC11B0>, multiSample=False, name='window1', numSamples=2, pos=[880.0, 500.0], screen=0, size=array([800, 600]), stencilBits=0, stereo=False, title='PsychoPy', units='height', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+7.0848 	EXP 	window1: backgroundImage = ''
+7.0848 	EXP 	window1: backgroundFit = 'none'
+7.0928 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0935 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0942 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0951 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0960 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0964 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0972 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0981 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0984 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0987 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0995 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1003 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1010 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1017 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1022 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1030 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1037 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1042 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1047 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1056 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1060 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1064 	DEBUG 	Uploading Texture Font fontname to graphics card
+7.1113 	DEBUG 	Upload of Texture Font fontname complete
+7.1177 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1187 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1196 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1199 	DEBUG 	Uploading Texture Font fontname to graphics card
+7.1241 	DEBUG 	Upload of Texture Font fontname complete
+7.1259 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+7.1260 	EXP 	window1: recordFrameIntervals = False
+7.3034 	EXP 	window1: recordFrameIntervals = True
+7.4871 	EXP 	Screen (0) actual frame rate measured at 60.10Hz
+7.4872 	EXP 	window1: recordFrameIntervals = False
+7.4957 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.4963 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.4972 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.4982 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.4992 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.5009 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.5016 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.5024 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.5035 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.5044 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.5047 	DEBUG 	Uploading Texture Font fontname to graphics card
+7.5052 	DEBUG 	Upload of Texture Font fontname complete
+7.5184 	WARNING 	launchHubServer: If using the iohub mouse or eyetracker devices, fullScr should be True.
+10.5412 	INFO 	keyboard.Keyboard is using iohub backend.
+10.5412 	INFO 	keyboard.Keyboard is using iohub backend.
+10.5413 	INFO 	keyboard.Keyboard is using iohub backend.
+10.5413 	INFO 	keyboard.Keyboard is using iohub backend.
+10.5413 	EXP 	Sternberg: status = STARTED
+10.6465 	EXP 	Created WelcomeText = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='WelcomeText', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+10.6619 	EXP 	Created text_norm = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='text_norm', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='norm', win=Window(...), wrapWidth=1.8)
+10.6667 	EXP 	Created text_2 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-3.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text_2', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='Any text\n\nincluding line breaks', units='height', win=Window(...), wrapWidth=1)
+10.6698 	EXP 	Created Cross_Fixation = ShapeStim(__class__=<class 'psychopy.visual.shape.ShapeStim'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=0.0, draggable=False, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=0.05, name='Cross_Fixation', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...), windingRule=None)
+10.6729 	EXP 	Created letter_display = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='letter_display', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='error: text not properly updated', units='height', win=Window(...), wrapWidth=1)
+10.6744 	EXP 	Created image = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, image=None, interpolate=True, mask=None, maskParams=None, name='image', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), texRes=128.0, units='height', win=Window(...))
+10.6764 	EXP 	Created rt_fb = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, draggable=False, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='rt_fb', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+10.6819 	EXP 	Created text = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='Incorrect', units='height', win=Window(...), wrapWidth=1)
+10.6887 	EXP 	Created text_3 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text_3', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='CORRECT', units='height', win=Window(...), wrapWidth=1)
+10.6925 	EXP 	Created text_4 = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='text_4', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='INCORRECT', units='height', win=Window(...), wrapWidth=1)
+10.7036 	EXP 	Created ending_stim = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='ending_stim', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+0.0137 	EXP 	text_norm: alignText = 'center'
+0.0317 	INFO 	Keyboard events cleared
+0.0312 	EXP 	WelcomeText: autoDraw = True
+18.4229 	DATA 	Keypress: space
+18.4307 	INFO 	Keyboard events cleared
+18.4304 	EXP 	WelcomeText: autoDraw = False
+18.4304 	EXP 	text_norm: autoDraw = True
+18.4304 	EXP 	text_2: autoDraw = True
+18.4304 	EXP 	text_norm: height = 0.1
+18.4304 	EXP 	text_norm: height = 0.1
+18.4304 	EXP 	text_norm: height = 0.1
+18.4304 	EXP 	text_norm: text = 'Welcome to the Experiment!\nThis memory based test is known as the Sternberg Task.\nThis task is broken into five distinct sections:\n'
+24.5871 	DATA 	Keypress: escape
+24.7210 	EXP 	Sternberg: status = STOPPED
+24.7313 	EXP 	text_norm: autoDraw = False
+24.7313 	EXP 	text_2: autoDraw = False
+24.7348 	EXP 	Sternberg: status = STOPPED
+24.8006 	INFO 	saved data to 'C:\\Users\\04Ben\\OneDrive\\Desktop\\Sternberg_2\\data/965415_Sternberg_2025-03-18_14h30.28.891.csv'
+24.8013 	INFO 	saved data to C:\Users\04Ben\OneDrive\Desktop\Sternberg_2\data/965415_Sternberg_2025-03-18_14h30.28.891.psydat
+25.4088 	DEBUG 	Saving data for Sternberg ExperimentHandler

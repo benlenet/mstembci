@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on March 14, 2025, at 10:48
+    on March 18, 2025, at 14:30
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -33,19 +33,6 @@ import sys  # to get file system encoding
 import psychopy.iohub as io
 from psychopy.hardware import keyboard
 
-# Run 'Before Experiment' code from text_gen
-import random
-import string
-
-# generate random letter string
-def sb_rand(num_letters = 2):
-    if num_letters > 26:
-        return "Error: num_letters must be less than or equal to 26"
-    else:
-        return " ".join(random.sample(string.ascii_lowercase, num_letters))
-n_val = 4
-# supply arg with number of letters
-text_stim = sb_rand(n_val)
 # --- Setup global variables (available in all functions) ---
 # create a device manager to handle hardware (keyboards, mice, mirophones, speakers, etc.)
 deviceManager = hardware.DeviceManager()
@@ -402,6 +389,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         depth=0.0);
     ready = keyboard.Keyboard(deviceName='ready')
     # Run 'Begin Experiment' code from var_init
+    import random
+    import string
     text_stim = "error: text not properly updated"
     key_s = "error: key press not properly updated"
     n_val = 0
@@ -471,7 +460,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     def sb_validate(string, char_key):
         return char_key in string
         
-    if (sb_validate(text_stim, key_stim)):
+    if (sb_validate(key_stim, text_stim)):
         output_resp = "Correct"
     else:
         output_resp = "Incorrect"
@@ -998,6 +987,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         continueRoutine = True
         # update component parameters for each repeat
         # Run 'Begin Routine' code from text_gen
+        import random
+        import string
+        
         # generate random letter string
         def sb_rand(num_letters = 2):
             if num_letters > 26:
