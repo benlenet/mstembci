@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on March 21, 2025, at 12:14
+    on March 21, 2025, at 12:15
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -157,7 +157,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\04Ben\\github\\mstembci\\Sternberg_2\\testing\\buttontest_lastrun.py',
+        originPath='C:\\Users\\04Ben\\github\\mstembci\\Sternberg_2\\testing\\buttontest.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -1039,11 +1039,11 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # 2. dedent lines 16 to 21
     
     print(key_resp, "was recorded\n")
+    print(key_resp.corr)
     fb_text = 'no key_resp component found - look at the Std out window for info'
     fb_col = 'black'
     
     try:
-        print(key_resp, "was recorded\n")
         if key_resp.corr:
             fb_text = 'Correct!'
             fb_col = 'green'
