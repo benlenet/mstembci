@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on March 21, 2025, at 12:14
+    on March 21, 2025, at 12:38
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -418,6 +418,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     string_prompt = sb_rand()
     key_prompt = gen_key(string_prompt)
     map_correct = input_val(sb_validate(string_prompt, key_prompt))
+    print("string prompt is", string_prompt, "\n",
+          "key prompt is", key_prompt, "\n",
+          "button to indicate correct is", map_correct, "\n")
     
     # --- Initialize components for Routine "prompt" ---
     string_prompt = visual.TextStim(win=win, name='string_prompt',
@@ -427,16 +430,14 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
-    
-    # --- Initialize components for Routine "blank" ---
-    blan = visual.ImageStim(
+    image = visual.ImageStim(
         win=win,
-        name='blan', 
+        name='image', 
         image=None, mask=None, anchor='center',
         ori=0.0, pos=(0, 0), draggable=False, size=(0.5, 0.5),
         color=[1,1,1], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
-        texRes=128.0, interpolate=True, depth=0.0)
+        texRes=128.0, interpolate=True, depth=-1.0)
     
     # --- Initialize components for Routine "response" ---
     key_resp = keyboard.Keyboard(deviceName='key_resp')
@@ -622,7 +623,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # create an object to store info about Routine prompt
     prompt = data.Routine(
         name='prompt',
-        components=[string_prompt],
+        components=[string_prompt, image],
     )
     prompt.status = NOT_STARTED
     continueRoutine = True
@@ -649,7 +650,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Run Routine "prompt" ---
     prompt.forceEnded = routineForceEnded = not continueRoutine
-    while continueRoutine and routineTimer.getTime() < 1.0:
+    while continueRoutine and routineTimer.getTime() < 2.0:
         # get current time
         t = routineTimer.getTime()
         tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -690,6 +691,40 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 # update status
                 string_prompt.status = FINISHED
                 string_prompt.setAutoDraw(False)
+        
+        # *image* updates
+        
+        # if image is starting this frame...
+        if image.status == NOT_STARTED and tThisFlip >= 1.0-frameTolerance:
+            # keep track of start time/frame for later
+            image.frameNStart = frameN  # exact frame index
+            image.tStart = t  # local t and not account for scr refresh
+            image.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(image, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'image.started')
+            # update status
+            image.status = STARTED
+            image.setAutoDraw(True)
+        
+        # if image is active this frame...
+        if image.status == STARTED:
+            # update params
+            pass
+        
+        # if image is stopping this frame...
+        if image.status == STARTED:
+            # is it time to stop? (based on global clock, using actual start)
+            if tThisFlipGlobal > image.tStartRefresh + 1-frameTolerance:
+                # keep track of stop time/frame for later
+                image.tStop = t  # not accounting for scr refresh
+                image.tStopRefresh = tThisFlipGlobal  # on global time
+                image.frameNStop = frameN  # exact frame index
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'image.stopped')
+                # update status
+                image.status = FINISHED
+                image.setAutoDraw(False)
         
         # check for quit (typically the Esc key)
         if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -736,128 +771,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     elif prompt.forceEnded:
         routineTimer.reset()
     else:
-        routineTimer.addTime(-1.000000)
-    thisExp.nextEntry()
-    
-    # --- Prepare to start Routine "blank" ---
-    # create an object to store info about Routine blank
-    blank = data.Routine(
-        name='blank',
-        components=[blan],
-    )
-    blank.status = NOT_STARTED
-    continueRoutine = True
-    # update component parameters for each repeat
-    # store start times for blank
-    blank.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
-    blank.tStart = globalClock.getTime(format='float')
-    blank.status = STARTED
-    thisExp.addData('blank.started', blank.tStart)
-    blank.maxDuration = None
-    # keep track of which components have finished
-    blankComponents = blank.components
-    for thisComponent in blank.components:
-        thisComponent.tStart = None
-        thisComponent.tStop = None
-        thisComponent.tStartRefresh = None
-        thisComponent.tStopRefresh = None
-        if hasattr(thisComponent, 'status'):
-            thisComponent.status = NOT_STARTED
-    # reset timers
-    t = 0
-    _timeToFirstFrame = win.getFutureFlipTime(clock="now")
-    frameN = -1
-    
-    # --- Run Routine "blank" ---
-    blank.forceEnded = routineForceEnded = not continueRoutine
-    while continueRoutine and routineTimer.getTime() < 1.0:
-        # get current time
-        t = routineTimer.getTime()
-        tThisFlip = win.getFutureFlipTime(clock=routineTimer)
-        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
-        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
-        # update/draw components on each frame
-        
-        # *blan* updates
-        
-        # if blan is starting this frame...
-        if blan.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-            # keep track of start time/frame for later
-            blan.frameNStart = frameN  # exact frame index
-            blan.tStart = t  # local t and not account for scr refresh
-            blan.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(blan, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'blan.started')
-            # update status
-            blan.status = STARTED
-            blan.setAutoDraw(True)
-        
-        # if blan is active this frame...
-        if blan.status == STARTED:
-            # update params
-            pass
-        
-        # if blan is stopping this frame...
-        if blan.status == STARTED:
-            # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > blan.tStartRefresh + 1.0-frameTolerance:
-                # keep track of stop time/frame for later
-                blan.tStop = t  # not accounting for scr refresh
-                blan.tStopRefresh = tThisFlipGlobal  # on global time
-                blan.frameNStop = frameN  # exact frame index
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'blan.stopped')
-                # update status
-                blan.status = FINISHED
-                blan.setAutoDraw(False)
-        
-        # check for quit (typically the Esc key)
-        if defaultKeyboard.getKeys(keyList=["escape"]):
-            thisExp.status = FINISHED
-        if thisExp.status == FINISHED or endExpNow:
-            endExperiment(thisExp, win=win)
-            return
-        # pause experiment here if requested
-        if thisExp.status == PAUSED:
-            pauseExperiment(
-                thisExp=thisExp, 
-                win=win, 
-                timers=[routineTimer], 
-                playbackComponents=[]
-            )
-            # skip the frame we paused on
-            continue
-        
-        # check if all components have finished
-        if not continueRoutine:  # a component has requested a forced-end of Routine
-            blank.forceEnded = routineForceEnded = True
-            break
-        continueRoutine = False  # will revert to True if at least one component still running
-        for thisComponent in blank.components:
-            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-                continueRoutine = True
-                break  # at least one component has not yet finished
-        
-        # refresh the screen
-        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-            win.flip()
-    
-    # --- Ending Routine "blank" ---
-    for thisComponent in blank.components:
-        if hasattr(thisComponent, "setAutoDraw"):
-            thisComponent.setAutoDraw(False)
-    # store stop times for blank
-    blank.tStop = globalClock.getTime(format='float')
-    blank.tStopRefresh = tThisFlipGlobal
-    thisExp.addData('blank.stopped', blank.tStop)
-    # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
-    if blank.maxDurationReached:
-        routineTimer.addTime(-blank.maxDuration)
-    elif blank.forceEnded:
-        routineTimer.reset()
-    else:
-        routineTimer.addTime(-1.000000)
+        routineTimer.addTime(-2.000000)
     thisExp.nextEntry()
     
     # --- Prepare to start Routine "response" ---
@@ -1039,11 +953,11 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # 2. dedent lines 16 to 21
     
     print(key_resp, "was recorded\n")
+    print(key_resp.corr)
     fb_text = 'no key_resp component found - look at the Std out window for info'
     fb_col = 'black'
     
     try:
-        print(key_resp, "was recorded\n")
         if key_resp.corr:
             fb_text = 'Correct!'
             fb_col = 'green'
