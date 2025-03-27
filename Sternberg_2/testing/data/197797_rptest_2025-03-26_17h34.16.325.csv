@@ -1,0 +1,3 @@
+﻿thisRow.t,notes,trial.started,key_resp.started,trial.stopped,key_resp.keys,key_resp.corr,key_resp.rt,key_resp.duration,resp.started,fb.started,resp.stopped,participant,session,date,expName,psychopyVersion,frameRate,expStart,
+,,0.02420200000051409,0.04175720000057481,5.48054069999489,left,0,5.354067300009774,None,,,,197797,001,2025-03-26_17h34.16.325,rptest,2024.2.4,59.50772826811277,2025-03-26 17h35.03.928822 -0700,
+,,,,,,,,,5.794126699998742,5.806983599992236,6.495783099991968,197797,001,2025-03-26_17h34.16.325,rptest,2024.2.4,59.50772826811277,2025-03-26 17h35.03.928822 -0700,
