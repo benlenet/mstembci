@@ -454,23 +454,6 @@
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
       </RoutineSettingsComponent>
-      <CodeComponent name="text_gen" plugin="None">
-        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="import * as random from 'random';&amp;#10;import * as string from 'string';&amp;#10;function sb_rand(num_letters = 2) {&amp;#10;    if ((num_letters &gt; 26)) {&amp;#10;        return &quot;Error: num_letters must be less than or equal to 26&quot;;&amp;#10;    } else {&amp;#10;        return Math.random.sample(string.ascii_lowercase, num_letters).join(&quot; &quot;);&amp;#10;    }&amp;#10;}&amp;#10;n_val = 4;&amp;#10;text_stim = sb_rand(n_val);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="import random&amp;#10;import string&amp;#10;&amp;#10;# generate random letter string&amp;#10;def sb_rand(num_letters = 2):&amp;#10;    if num_letters &gt; 26:&amp;#10;        return &quot;Error: num_letters must be less than or equal to 26&quot;&amp;#10;    else:&amp;#10;        return &quot; &quot;.join(random.sample(string.ascii_lowercase, num_letters))&amp;#10;n_val = 4&amp;#10;# supply arg with number of letters&amp;#10;text_stim = sb_rand(n_val)" valType="extendedCode" updates="constant" name="Begin Routine"/>
-        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="text_gen" valType="code" updates="None" name="name"/>
-      </CodeComponent>
       <TextComponent name="letter_display" plugin="None">
         <Param val="white" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
@@ -697,8 +680,8 @@
     </LoopInitiator>
     <LoopInitiator loopType="TrialHandler" name="loop">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
-      <Param name="conditions" updates="None" val="None" valType="str"/>
-      <Param name="conditionsFile" updates="None" val="" valType="file"/>
+      <Param name="conditions" updates="None" val="[{'cross_time': 1, 'stimulus_time': 1, 'maintenance_time': 1, 'feedback_time': 5, 'response_time': 3, 'loop_count': 10, 'trial_count': 3, 'key_resp': ','}, {'cross_time': None, 'stimulus_time': None, 'maintenance_time': None, 'feedback_time': None, 'response_time': None, 'loop_count': None, 'trial_count': None, 'key_resp': '.'}]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="conditions.xlsx" valType="file"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="sequential" valType="str"/>
@@ -710,32 +693,8 @@
     <Routine name="Maintenance"/>
     <Routine name="Response"/>
     <Routine name="feedback"/>
-    <LoopInitiator loopType="TrialHandler" name="dummy_loop_c">
-      <Param name="Selected rows" updates="None" val="" valType="str"/>
-      <Param name="conditions" updates="None" val="None" valType="str"/>
-      <Param name="conditionsFile" updates="None" val="" valType="file"/>
-      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
-      <Param name="isTrials" updates="None" val="True" valType="bool"/>
-      <Param name="loopType" updates="None" val="sequential" valType="str"/>
-      <Param name="nReps" updates="None" val="1" valType="num"/>
-      <Param name="name" updates="None" val="dummy_loop_c" valType="code"/>
-      <Param name="random seed" updates="None" val="" valType="code"/>
-    </LoopInitiator>
     <Routine name="disp_correct"/>
-    <LoopTerminator name="dummy_loop_c"/>
-    <LoopInitiator loopType="TrialHandler" name="dummy_loop_nc">
-      <Param name="Selected rows" updates="None" val="" valType="str"/>
-      <Param name="conditions" updates="None" val="None" valType="str"/>
-      <Param name="conditionsFile" updates="None" val="" valType="file"/>
-      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
-      <Param name="isTrials" updates="None" val="True" valType="bool"/>
-      <Param name="loopType" updates="None" val="sequential" valType="str"/>
-      <Param name="nReps" updates="None" val="1" valType="num"/>
-      <Param name="name" updates="None" val="dummy_loop_nc" valType="code"/>
-      <Param name="random seed" updates="None" val="" valType="code"/>
-    </LoopInitiator>
     <Routine name="disp_incorrect"/>
-    <LoopTerminator name="dummy_loop_nc"/>
     <LoopTerminator name="loop"/>
     <LoopTerminator name="new_N"/>
     <Routine name="ending"/>
