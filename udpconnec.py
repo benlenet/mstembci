@@ -1,6 +1,7 @@
 import socket
 
-def udpsend():
+# marker send to MATLAB
+def udpsend(marker_string):
     # 🔹 UDP Setup
     UDP_IP = "127.0.0.1"
     UDP_PORT = 50000
@@ -8,6 +9,9 @@ def udpsend():
     # 🔹 EEG Stream Settings
     # fs = 500  # Sampling rate (Hz)
     # samples_per_packet = 125  # Send 50 samples per packet (0.1 sec of data)
-    eeg_bytes = "test value".tobytes()
+    eeg_bytes = marker_string.tostring().tobytes()
     sock.sendto(eeg_bytes, (UDP_IP, UDP_PORT))
 
+# retrieve frame of PsychoPy  
+def timesync():
+    pass
