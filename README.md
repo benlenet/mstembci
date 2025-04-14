@@ -1,2 +1,0 @@
-# mstembci
-MSTEM BCI Psychopy 
