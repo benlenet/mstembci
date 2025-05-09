@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on March 26, 2025, at 11:01
+    on April 22, 2025, at 22:25
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -36,7 +36,16 @@ from psychopy.hardware import keyboard
 # Run 'Before Experiment' code from init_function
 import random
 import string
-import openpyxl
+
+# timing of each stimulus (global variables)
+dCross = 2
+dBlank = 1
+dPrompt = 1
+dResponse = 1
+dButton = 1
+dFb = 1
+
+
 
 # return a character for response stimulus
 def gen_key(string_prompt, correct_rate = 0.5):
@@ -60,10 +69,14 @@ def sb_validate(string_prompt, char_key):
 # after supplying sb_rand to the stimulus, run gen_key to generate a key.
 # then run sb_validate to check if the key is valid. If sb_validate returns True,
 # use bool response to display correct/incorrect response.
-def input_val(validation, correct_key = '.', incorrect_key = ','):
+def input_val(validation, correct_key = 'period', incorrect_key = 'comma'):
         return correct_key if validation else incorrect_key
 
-
+def loop_counter(cross_en, count = 0, loop = 5):
+    count += 1
+    if count == loop:
+        cross_en = true
+    return cross_en
 
 # --- Setup global variables (available in all functions) ---
 # create a device manager to handle hardware (keyboards, mice, mirophones, speakers, etc.)
@@ -158,7 +171,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\e203gtec\\Desktop\\mstembci\\Sternberg_2\\testing\\buttontest_lastrun.py',
+        originPath='C:\\Users\\Ben\\git folders\\mstembci\\buttontest.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -406,32 +419,38 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # Start Code - component code to be run after the window creation
     
     # --- Initialize components for Routine "intro" ---
-    text_2 = visual.TextStim(win=win, name='text_2',
-        text='prompting stuff',
+    intro_disp = visual.TextStim(win=win, name='intro_disp',
+        text='Hello! Thank you for participating in the Sternberg Trial Test.',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
     key_nex = keyboard.Keyboard(deviceName='key_nex')
-    # Run 'Begin Experiment' code from init_gen
+    # Run 'Begin Experiment' code from init_function
     # before each cycle, update each variable
     string_prompt = sb_rand()
     key_prompt = gen_key(string_prompt)
     map_correct = input_val(sb_validate(string_prompt, key_prompt))
-    workbook = openpyxl.load_workbook('conditions.xlsx')
-    sheet = workbook.active
-    sheet['A2'] = map_correct
-    workbook.save('conditions.xlsx')
+    loop_iter = 0
+    loop_count = 3
+    cross_en = False
     print("string prompt is", string_prompt, "\n",
           "key prompt is", key_prompt, "\n",
-          "button to indicate correct is", map_correct, "\n"
-          "workbook has saved value of", sheet['A2'].value, "\n")
-         
+          "button to indicate correct is", map_correct, "\n")
+    
+    # --- Initialize components for Routine "cross_fix" ---
+    polygon = visual.ShapeStim(
+        win=win, name='polygon', vertices='cross',
+        size=(0.5, 0.5),
+        ori=0.0, pos=(0, 0), draggable=False, anchor='center',
+        lineWidth=1.0,
+        colorSpace='rgb', lineColor='white', fillColor='white',
+        opacity=None, depth=0.0, interpolate=True)
     
     # --- Initialize components for Routine "prompt" ---
-    string_prompt = visual.TextStim(win=win, name='string_prompt',
-        text=string_prompt,
+    string_prompt_disp = visual.TextStim(win=win, name='string_prompt_disp',
+        text='',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -448,8 +467,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "response" ---
     key_resp = keyboard.Keyboard(deviceName='key_resp')
-    text_3 = visual.TextStim(win=win, name='text_3',
-        text=key_prompt,
+    key_response_disp = visual.TextStim(win=win, name='key_response_disp',
+        text='',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -457,7 +476,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         depth=-1.0);
     
     # --- Initialize components for Routine "button_record" ---
-    fb = visual.TextStim(win=win, name='fb',
+    fb_disp = visual.TextStim(win=win, name='fb_disp',
         text='',
         font='Open Sans',
         pos=(0, 0), draggable=False, height=0.1, wrapWidth=None, ori=0.0, 
@@ -497,7 +516,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # create an object to store info about Routine intro
     intro = data.Routine(
         name='intro',
-        components=[text_2, key_nex],
+        components=[intro_disp, key_nex],
     )
     intro.status = NOT_STARTED
     continueRoutine = True
@@ -511,7 +530,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     intro.tStart = globalClock.getTime(format='float')
     intro.status = STARTED
     thisExp.addData('intro.started', intro.tStart)
-    intro.maxDuration = 2
+    intro.maxDuration = None
     # keep track of which components have finished
     introComponents = intro.components
     for thisComponent in intro.components:
@@ -535,28 +554,24 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         tThisFlipGlobal = win.getFutureFlipTime(clock=None)
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
-        # is it time to end the Routine? (based on local clock)
-        if tThisFlip > intro.maxDuration-frameTolerance:
-            intro.maxDurationReached = True
-            continueRoutine = False
         
-        # *text_2* updates
+        # *intro_disp* updates
         
-        # if text_2 is starting this frame...
-        if text_2.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # if intro_disp is starting this frame...
+        if intro_disp.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
             # keep track of start time/frame for later
-            text_2.frameNStart = frameN  # exact frame index
-            text_2.tStart = t  # local t and not account for scr refresh
-            text_2.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(text_2, 'tStartRefresh')  # time at next scr refresh
+            intro_disp.frameNStart = frameN  # exact frame index
+            intro_disp.tStart = t  # local t and not account for scr refresh
+            intro_disp.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(intro_disp, 'tStartRefresh')  # time at next scr refresh
             # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'text_2.started')
+            thisExp.timestampOnFlip(win, 'intro_disp.started')
             # update status
-            text_2.status = STARTED
-            text_2.setAutoDraw(True)
+            intro_disp.status = STARTED
+            intro_disp.setAutoDraw(True)
         
-        # if text_2 is active this frame...
-        if text_2.status == STARTED:
+        # if intro_disp is active this frame...
+        if intro_disp.status == STARTED:
             # update params
             pass
         
@@ -629,11 +644,11 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # set up handler to look after randomisation of conditions etc
     trials = data.TrialHandler2(
         name='trials',
-        nReps=1.0, 
+        nReps=3.0, 
         method='random', 
         extraInfo=expInfo, 
         originPath=-1, 
-        trialList=data.importConditions('conditions.xlsx'), 
+        trialList=[None], 
         seed=None, 
     )
     thisExp.addLoop(trials)  # add the loop to the experiment
@@ -642,30 +657,148 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     if thisTrial != None:
         for paramName in thisTrial:
             globals()[paramName] = thisTrial[paramName]
-    if thisSession is not None:
-        # if running in a Session with a Liaison client, send data up to now
-        thisSession.sendExperimentData()
     
     for thisTrial in trials:
         currentLoop = trials
         thisExp.timestampOnFlip(win, 'thisRow.t', format=globalClock.format)
-        if thisSession is not None:
-            # if running in a Session with a Liaison client, send data up to now
-            thisSession.sendExperimentData()
         # abbreviate parameter names if possible (e.g. rgb = thisTrial.rgb)
         if thisTrial != None:
             for paramName in thisTrial:
                 globals()[paramName] = thisTrial[paramName]
         
+        # --- Prepare to start Routine "cross_fix" ---
+        # create an object to store info about Routine cross_fix
+        cross_fix = data.Routine(
+            name='cross_fix',
+            components=[polygon],
+        )
+        cross_fix.status = NOT_STARTED
+        continueRoutine = True
+        # update component parameters for each repeat
+        # store start times for cross_fix
+        cross_fix.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
+        cross_fix.tStart = globalClock.getTime(format='float')
+        cross_fix.status = STARTED
+        thisExp.addData('cross_fix.started', cross_fix.tStart)
+        cross_fix.maxDuration = None
+        # skip Routine cross_fix if its 'Skip if' condition is True
+        cross_fix.skipped = continueRoutine and not (cross_en)
+        continueRoutine = cross_fix.skipped
+        # keep track of which components have finished
+        cross_fixComponents = cross_fix.components
+        for thisComponent in cross_fix.components:
+            thisComponent.tStart = None
+            thisComponent.tStop = None
+            thisComponent.tStartRefresh = None
+            thisComponent.tStopRefresh = None
+            if hasattr(thisComponent, 'status'):
+                thisComponent.status = NOT_STARTED
+        # reset timers
+        t = 0
+        _timeToFirstFrame = win.getFutureFlipTime(clock="now")
+        frameN = -1
+        
+        # --- Run Routine "cross_fix" ---
+        # if trial has changed, end Routine now
+        if isinstance(trials, data.TrialHandler2) and thisTrial.thisN != trials.thisTrial.thisN:
+            continueRoutine = False
+        cross_fix.forceEnded = routineForceEnded = not continueRoutine
+        while continueRoutine:
+            # get current time
+            t = routineTimer.getTime()
+            tThisFlip = win.getFutureFlipTime(clock=routineTimer)
+            tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+            frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+            # update/draw components on each frame
+            
+            # *polygon* updates
+            
+            # if polygon is starting this frame...
+            if polygon.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                polygon.frameNStart = frameN  # exact frame index
+                polygon.tStart = t  # local t and not account for scr refresh
+                polygon.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(polygon, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'polygon.started')
+                # update status
+                polygon.status = STARTED
+                polygon.setAutoDraw(True)
+            
+            # if polygon is active this frame...
+            if polygon.status == STARTED:
+                # update params
+                pass
+            
+            # if polygon is stopping this frame...
+            if polygon.status == STARTED:
+                # is it time to stop? (based on global clock, using actual start)
+                if tThisFlipGlobal > polygon.tStartRefresh + dCross-frameTolerance:
+                    # keep track of stop time/frame for later
+                    polygon.tStop = t  # not accounting for scr refresh
+                    polygon.tStopRefresh = tThisFlipGlobal  # on global time
+                    polygon.frameNStop = frameN  # exact frame index
+                    # add timestamp to datafile
+                    thisExp.timestampOnFlip(win, 'polygon.stopped')
+                    # update status
+                    polygon.status = FINISHED
+                    polygon.setAutoDraw(False)
+            
+            # check for quit (typically the Esc key)
+            if defaultKeyboard.getKeys(keyList=["escape"]):
+                thisExp.status = FINISHED
+            if thisExp.status == FINISHED or endExpNow:
+                endExperiment(thisExp, win=win)
+                return
+            # pause experiment here if requested
+            if thisExp.status == PAUSED:
+                pauseExperiment(
+                    thisExp=thisExp, 
+                    win=win, 
+                    timers=[routineTimer], 
+                    playbackComponents=[]
+                )
+                # skip the frame we paused on
+                continue
+            
+            # check if all components have finished
+            if not continueRoutine:  # a component has requested a forced-end of Routine
+                cross_fix.forceEnded = routineForceEnded = True
+                break
+            continueRoutine = False  # will revert to True if at least one component still running
+            for thisComponent in cross_fix.components:
+                if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                    continueRoutine = True
+                    break  # at least one component has not yet finished
+            
+            # refresh the screen
+            if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+                win.flip()
+        
+        # --- Ending Routine "cross_fix" ---
+        for thisComponent in cross_fix.components:
+            if hasattr(thisComponent, "setAutoDraw"):
+                thisComponent.setAutoDraw(False)
+        # store stop times for cross_fix
+        cross_fix.tStop = globalClock.getTime(format='float')
+        cross_fix.tStopRefresh = tThisFlipGlobal
+        thisExp.addData('cross_fix.stopped', cross_fix.tStop)
+        # Run 'End Routine' code from cross_enable
+        cross_en = True;
+        # the Routine "cross_fix" was not non-slip safe, so reset the non-slip timer
+        routineTimer.reset()
+        
         # --- Prepare to start Routine "prompt" ---
         # create an object to store info about Routine prompt
         prompt = data.Routine(
             name='prompt',
-            components=[string_prompt, image],
+            components=[string_prompt_disp, image],
         )
         prompt.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
+        string_prompt_disp.setText(string_prompt)
         # store start times for prompt
         prompt.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         prompt.tStart = globalClock.getTime(format='float')
@@ -691,7 +824,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if isinstance(trials, data.TrialHandler2) and thisTrial.thisN != trials.thisTrial.thisN:
             continueRoutine = False
         prompt.forceEnded = routineForceEnded = not continueRoutine
-        while continueRoutine and routineTimer.getTime() < 2.0:
+        while continueRoutine:
             # get current time
             t = routineTimer.getTime()
             tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -699,44 +832,44 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
             # update/draw components on each frame
             
-            # *string_prompt* updates
+            # *string_prompt_disp* updates
             
-            # if string_prompt is starting this frame...
-            if string_prompt.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # if string_prompt_disp is starting this frame...
+            if string_prompt_disp.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
                 # keep track of start time/frame for later
-                string_prompt.frameNStart = frameN  # exact frame index
-                string_prompt.tStart = t  # local t and not account for scr refresh
-                string_prompt.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(string_prompt, 'tStartRefresh')  # time at next scr refresh
+                string_prompt_disp.frameNStart = frameN  # exact frame index
+                string_prompt_disp.tStart = t  # local t and not account for scr refresh
+                string_prompt_disp.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(string_prompt_disp, 'tStartRefresh')  # time at next scr refresh
                 # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'string_prompt.started')
+                thisExp.timestampOnFlip(win, 'string_prompt_disp.started')
                 # update status
-                string_prompt.status = STARTED
-                string_prompt.setAutoDraw(True)
+                string_prompt_disp.status = STARTED
+                string_prompt_disp.setAutoDraw(True)
             
-            # if string_prompt is active this frame...
-            if string_prompt.status == STARTED:
+            # if string_prompt_disp is active this frame...
+            if string_prompt_disp.status == STARTED:
                 # update params
                 pass
             
-            # if string_prompt is stopping this frame...
-            if string_prompt.status == STARTED:
+            # if string_prompt_disp is stopping this frame...
+            if string_prompt_disp.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > string_prompt.tStartRefresh + 1-frameTolerance:
+                if tThisFlipGlobal > string_prompt_disp.tStartRefresh + dPrompt-frameTolerance:
                     # keep track of stop time/frame for later
-                    string_prompt.tStop = t  # not accounting for scr refresh
-                    string_prompt.tStopRefresh = tThisFlipGlobal  # on global time
-                    string_prompt.frameNStop = frameN  # exact frame index
+                    string_prompt_disp.tStop = t  # not accounting for scr refresh
+                    string_prompt_disp.tStopRefresh = tThisFlipGlobal  # on global time
+                    string_prompt_disp.frameNStop = frameN  # exact frame index
                     # add timestamp to datafile
-                    thisExp.timestampOnFlip(win, 'string_prompt.stopped')
+                    thisExp.timestampOnFlip(win, 'string_prompt_disp.stopped')
                     # update status
-                    string_prompt.status = FINISHED
-                    string_prompt.setAutoDraw(False)
+                    string_prompt_disp.status = FINISHED
+                    string_prompt_disp.setAutoDraw(False)
             
             # *image* updates
             
             # if image is starting this frame...
-            if image.status == NOT_STARTED and tThisFlip >= 1.0-frameTolerance:
+            if image.status == NOT_STARTED and tThisFlip >= dPrompt-frameTolerance:
                 # keep track of start time/frame for later
                 image.frameNStart = frameN  # exact frame index
                 image.tStart = t  # local t and not account for scr refresh
@@ -756,7 +889,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             # if image is stopping this frame...
             if image.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > image.tStartRefresh + 1-frameTolerance:
+                if tThisFlipGlobal > image.tStartRefresh + dBlank-frameTolerance:
                     # keep track of stop time/frame for later
                     image.tStop = t  # not accounting for scr refresh
                     image.tStopRefresh = tThisFlipGlobal  # on global time
@@ -806,19 +939,14 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         prompt.tStop = globalClock.getTime(format='float')
         prompt.tStopRefresh = tThisFlipGlobal
         thisExp.addData('prompt.stopped', prompt.tStop)
-        # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
-        if prompt.maxDurationReached:
-            routineTimer.addTime(-prompt.maxDuration)
-        elif prompt.forceEnded:
-            routineTimer.reset()
-        else:
-            routineTimer.addTime(-2.000000)
+        # the Routine "prompt" was not non-slip safe, so reset the non-slip timer
+        routineTimer.reset()
         
         # --- Prepare to start Routine "response" ---
         # create an object to store info about Routine response
         response = data.Routine(
             name='response',
-            components=[key_resp, text_3],
+            components=[key_resp, key_response_disp],
         )
         response.status = NOT_STARTED
         continueRoutine = True
@@ -827,12 +955,13 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         key_resp.keys = []
         key_resp.rt = []
         _key_resp_allKeys = []
+        key_response_disp.setText(key_prompt)
         # store start times for response
         response.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         response.tStart = globalClock.getTime(format='float')
         response.status = STARTED
         thisExp.addData('response.started', response.tStart)
-        response.maxDuration = 2
+        response.maxDuration = dResponse
         # keep track of which components have finished
         responseComponents = response.components
         for thisComponent in response.components:
@@ -883,37 +1012,37 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 win.callOnFlip(key_resp.clock.reset)  # t=0 on next screen flip
                 win.callOnFlip(key_resp.clearEvents, eventType='keyboard')  # clear events on next screen flip
             if key_resp.status == STARTED and not waitOnFlip:
-                theseKeys = key_resp.getKeys(keyList=None, ignoreKeys=["escape"], waitRelease=False)
+                theseKeys = key_resp.getKeys(keyList=['comma','period'], ignoreKeys=["escape"], waitRelease=False)
                 _key_resp_allKeys.extend(theseKeys)
                 if len(_key_resp_allKeys):
                     key_resp.keys = _key_resp_allKeys[-1].name  # just the last key pressed
                     key_resp.rt = _key_resp_allKeys[-1].rt
                     key_resp.duration = _key_resp_allKeys[-1].duration
                     # was this correct?
-                    if (key_resp.keys == str(corrAns)) or (key_resp.keys == corrAns):
+                    if (key_resp.keys == str(map_correct)) or (key_resp.keys == map_correct):
                         key_resp.corr = 1
                     else:
                         key_resp.corr = 0
                     # a response ends the routine
                     continueRoutine = False
             
-            # *text_3* updates
+            # *key_response_disp* updates
             
-            # if text_3 is starting this frame...
-            if text_3.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # if key_response_disp is starting this frame...
+            if key_response_disp.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
                 # keep track of start time/frame for later
-                text_3.frameNStart = frameN  # exact frame index
-                text_3.tStart = t  # local t and not account for scr refresh
-                text_3.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(text_3, 'tStartRefresh')  # time at next scr refresh
+                key_response_disp.frameNStart = frameN  # exact frame index
+                key_response_disp.tStart = t  # local t and not account for scr refresh
+                key_response_disp.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(key_response_disp, 'tStartRefresh')  # time at next scr refresh
                 # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'text_3.started')
+                thisExp.timestampOnFlip(win, 'key_response_disp.started')
                 # update status
-                text_3.status = STARTED
-                text_3.setAutoDraw(True)
+                key_response_disp.status = STARTED
+                key_response_disp.setAutoDraw(True)
             
-            # if text_3 is active this frame...
-            if text_3.status == STARTED:
+            # if key_response_disp is active this frame...
+            if key_response_disp.status == STARTED:
                 # update params
                 pass
             
@@ -960,7 +1089,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if key_resp.keys in ['', [], None]:  # No response was made
             key_resp.keys = None
             # was no response the correct answer?!
-            if str(corrAns).lower() == 'none':
+            if str(map_correct).lower() == 'none':
                key_resp.corr = 1;  # correct non-response
             else:
                key_resp.corr = 0;  # failed to respond (incorrectly)
@@ -977,7 +1106,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # create an object to store info about Routine button_record
         button_record = data.Routine(
             name='button_record',
-            components=[fb],
+            components=[fb_disp],
         )
         button_record.status = NOT_STARTED
         continueRoutine = True
@@ -997,7 +1126,18 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         
         fb_text = 'no key_resp component found - look at the Std out window for info'
         fb_col = 'black'
-        print(key_resp)
+        
+        loop_iter += 1;
+        if loop_iter == loop_count:
+            cross_en = False;
+        
+        string_prompt = sb_rand()
+        key_prompt = gen_key(string_prompt)
+        map_correct = input_val(sb_validate(string_prompt, key_prompt))
+        print("string prompt is", string_prompt, "\n",
+              "key prompt is", key_prompt, "\n",
+              "button to indicate correct is", map_correct, "\n")
+        
         try:
             if key_resp.corr:
                 fb_text = 'Correct!'
@@ -1008,8 +1148,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         except:
             print('Make sure that you have:\n1. a routine with a keyboard component in it called "key_resp"\n 2. In the key_Resp component in the "data" tab select "Store Correct".\n in the "Correct answer" field use "$corrAns" (where corrAns is a column header in your conditions file indicating the correct key press')
         
-        fb.setColor(fb_col, colorSpace='rgb')
-        fb.setText(fb_text)
+        fb_disp.setColor(fb_col, colorSpace='rgb')
+        fb_disp.setText(fb_text)
         # store start times for button_record
         button_record.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         button_record.tStart = globalClock.getTime(format='float')
@@ -1035,7 +1175,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if isinstance(trials, data.TrialHandler2) and thisTrial.thisN != trials.thisTrial.thisN:
             continueRoutine = False
         button_record.forceEnded = routineForceEnded = not continueRoutine
-        while continueRoutine and routineTimer.getTime() < 1.0:
+        while continueRoutine:
             # get current time
             t = routineTimer.getTime()
             tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -1043,39 +1183,39 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
             # update/draw components on each frame
             
-            # *fb* updates
+            # *fb_disp* updates
             
-            # if fb is starting this frame...
-            if fb.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # if fb_disp is starting this frame...
+            if fb_disp.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
                 # keep track of start time/frame for later
-                fb.frameNStart = frameN  # exact frame index
-                fb.tStart = t  # local t and not account for scr refresh
-                fb.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(fb, 'tStartRefresh')  # time at next scr refresh
+                fb_disp.frameNStart = frameN  # exact frame index
+                fb_disp.tStart = t  # local t and not account for scr refresh
+                fb_disp.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(fb_disp, 'tStartRefresh')  # time at next scr refresh
                 # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'fb.started')
+                thisExp.timestampOnFlip(win, 'fb_disp.started')
                 # update status
-                fb.status = STARTED
-                fb.setAutoDraw(True)
+                fb_disp.status = STARTED
+                fb_disp.setAutoDraw(True)
             
-            # if fb is active this frame...
-            if fb.status == STARTED:
+            # if fb_disp is active this frame...
+            if fb_disp.status == STARTED:
                 # update params
                 pass
             
-            # if fb is stopping this frame...
-            if fb.status == STARTED:
+            # if fb_disp is stopping this frame...
+            if fb_disp.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > fb.tStartRefresh + 1.0-frameTolerance:
+                if tThisFlipGlobal > fb_disp.tStartRefresh + dFb-frameTolerance:
                     # keep track of stop time/frame for later
-                    fb.tStop = t  # not accounting for scr refresh
-                    fb.tStopRefresh = tThisFlipGlobal  # on global time
-                    fb.frameNStop = frameN  # exact frame index
+                    fb_disp.tStop = t  # not accounting for scr refresh
+                    fb_disp.tStopRefresh = tThisFlipGlobal  # on global time
+                    fb_disp.frameNStop = frameN  # exact frame index
                     # add timestamp to datafile
-                    thisExp.timestampOnFlip(win, 'fb.stopped')
+                    thisExp.timestampOnFlip(win, 'fb_disp.stopped')
                     # update status
-                    fb.status = FINISHED
-                    fb.setAutoDraw(False)
+                    fb_disp.status = FINISHED
+                    fb_disp.setAutoDraw(False)
             
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1116,20 +1256,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         button_record.tStop = globalClock.getTime(format='float')
         button_record.tStopRefresh = tThisFlipGlobal
         thisExp.addData('button_record.stopped', button_record.tStop)
-        # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
-        if button_record.maxDurationReached:
-            routineTimer.addTime(-button_record.maxDuration)
-        elif button_record.forceEnded:
-            routineTimer.reset()
-        else:
-            routineTimer.addTime(-1.000000)
-        thisExp.nextEntry()
-        
-    # completed 1.0 repeats of 'trials'
+        # the Routine "button_record" was not non-slip safe, so reset the non-slip timer
+        routineTimer.reset()
+    # completed 3.0 repeats of 'trials'
     
-    if thisSession is not None:
-        # if running in a Session with a Liaison client, send data up to now
-        thisSession.sendExperimentData()
     
     # mark experiment as finished
     endExperiment(thisExp, win=win)
