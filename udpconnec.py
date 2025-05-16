@@ -11,7 +11,7 @@ def udpsend(marker_string):
     # samples_per_packet = 125  # Send 50 samples per packet (0.1 sec of data)
     eeg_bytes = marker_string.tostring().tobytes()
     sock.sendto(eeg_bytes, (UDP_IP, UDP_PORT))
-
+    
 # retrieve frame of PsychoPy  
 def timesync():
     pass
