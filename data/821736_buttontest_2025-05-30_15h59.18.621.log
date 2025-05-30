@@ -1,0 +1,69 @@
+6.3994 	DEBUG 	Fullscreen settings ignored as running in pilot mode.
+6.4002 	INFO 	Loaded monitor calibration from ['2025_03_03 13:02']
+7.0759 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, autoLog=True, backendConf=UNKNOWN, backgroundFit=<method-wrapper '__getattribute__' of attributeSetter object at 0x000001419AC4A1D0>, backgroundImage=<method-wrapper '__getattribute__' of attributeSetter object at 0x000001419AC485B0>, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0, 0, 0]), colorSpace='rgb', depthBits=8, fullscr=False, gamma=None, gammaErrorPolicy='raise', infoMsg=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x00000141A3885420>, multiSample=False, name='window1', numSamples=2, pos=[560.0, 240.0], screen=0, size=array([800, 600]), stencilBits=0, stereo=False, title='PsychoPy', units='height', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+7.0760 	EXP 	window1: backgroundImage = ''
+7.0760 	EXP 	window1: backgroundFit = 'none'
+7.0840 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0849 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0859 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0871 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0883 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0889 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0897 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0908 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0911 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0916 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0924 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0932 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0939 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0947 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0954 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0962 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0971 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0976 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0981 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0991 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.0996 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1000 	DEBUG 	Uploading Texture Font fontname to graphics card
+7.1028 	DEBUG 	Upload of Texture Font fontname complete
+7.1089 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1100 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1110 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.1113 	DEBUG 	Uploading Texture Font fontname to graphics card
+7.1124 	DEBUG 	Upload of Texture Font fontname complete
+7.1143 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+7.1143 	EXP 	window1: recordFrameIntervals = False
+7.2783 	EXP 	window1: recordFrameIntervals = True
+7.4617 	EXP 	Screen (0) actual frame rate measured at 59.92Hz
+7.4618 	EXP 	window1: recordFrameIntervals = False
+7.4772 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.4790 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.4823 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.4851 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.4875 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.4901 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.4913 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.4932 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.4947 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.4961 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+7.4965 	DEBUG 	Uploading Texture Font fontname to graphics card
+7.4976 	DEBUG 	Upload of Texture Font fontname complete
+7.5213 	WARNING 	launchHubServer: If using the iohub mouse or eyetracker devices, fullScr should be True.
+10.2283 	INFO 	keyboard.Keyboard is using iohub backend.
+10.2283 	INFO 	keyboard.Keyboard is using iohub backend.
+10.2284 	INFO 	keyboard.Keyboard is using iohub backend.
+10.2284 	EXP 	buttontest: status = STARTED
+10.3254 	EXP 	Created intro_disp = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='intro_disp', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text=str(...), units='height', win=Window(...), wrapWidth=1)
+10.3291 	EXP 	Created polygon = ShapeStim(__class__=<class 'psychopy.visual.shape.ShapeStim'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=0.0, draggable=False, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1., 1., 1.]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='polygon', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...), windingRule=None)
+10.3301 	EXP 	Created string_prompt_disp = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='string_prompt_disp', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+10.3322 	EXP 	Created image = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, draggable=False, flipHoriz=False, flipVert=False, image=None, interpolate=True, mask=None, maskParams=None, name='image', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), texRes=128.0, units='height', win=Window(...))
+10.3332 	EXP 	Created key_response_disp = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='key_response_disp', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+10.3360 	EXP 	Created fb_disp = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, draggable=False, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='fb_disp', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+0.0272 	EXP 	intro_disp: autoDraw = True
+0.7329 	EXP 	New trial (rep=0, index=0): <Trial 0 (0 in rep 0) data={'thisN': 0, 'thisTrialN': 0, 'thisRepN': 0}>
+0.7358 	DATA 	Keypress: period
+0.7437 	EXP 	intro_disp: autoDraw = False
+0.7437 	EXP 	polygon: autoDraw = True
+2.7817 	DEBUG 	Saving data for buttontest ExperimentHandler
+2.7826 	INFO 	saved data to C:\Users\e203gtec\Desktop\mstembci\data/821736_buttontest_2025-05-30_15h59.18.621.psydat
+2.7833 	INFO 	saved data to 'C:\\Users\\e203gtec\\Desktop\\mstembci\\data/821736_buttontest_2025-05-30_15h59.18.621.csv'
