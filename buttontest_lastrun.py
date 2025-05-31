@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on May 30, 2025, at 16:38
+    on May 30, 2025, at 17:01
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -501,6 +501,13 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         color=[-1.0000, -1.0000, -1.0000], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
         texRes=128.0, interpolate=True, depth=-2.0)
+    timeout_text = visual.TextStim(win=win, name='timeout_text',
+        text=timeout_fb,
+        font='Arial',
+        pos=(0, -1), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=-3.0);
     
     # create some handy timers
     
@@ -1220,7 +1227,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # create an object to store info about Routine button_record
         button_record = data.Routine(
             name='button_record',
-            components=[fb_disp, image_2],
+            components=[fb_disp, image_2, timeout_text],
         )
         button_record.status = NOT_STARTED
         continueRoutine = True
@@ -1239,16 +1246,19 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         
         fb_text = 'no key_resp component found - look at the Std out window for info'
         fb_col = 'black'
+        timeout_fb ='test will resume after 10 seconds'
         
         # display feedback to participant
+        print(key_resp.keys,"was pressed\n")
         try:
-            if key_resp.corr:
-                fb_text = 'Correct!'
-                fb_col = 'green'
-            elif key_resp == "":
-                fb_text = 'timed out; please respond within a shorter time period'
+            if key_resp.keys == None:
+                fb_text = 'please respond within a shorter time period.'
+                timing_map["dFb"] = 10
                 fb_col = 'white'
                 stim_map["loop_iter"] -= 1
+            elif key_resp.corr:
+                fb_text = 'Correct!'
+                fb_col = 'green'
             else:
                 fb_text = 'Incorrect'
                 fb_col = 'red'
@@ -1260,8 +1270,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # increment loop, enable cross if loop reaches max
         stim_map["loop_iter"] += 1
         if stim_map["loop_iter"] == stim_map["loop_count"]:
-            stim_map["cross_en"] = False
+            stim_map["loop_iter"] = 0
             stim_map["char_length"] += 2
+            stim_map["cross_en"] = False
         fb_disp.setColor(fb_col, colorSpace='rgb')
         fb_disp.setText(fb_text)
         # store start times for button_record
@@ -1364,6 +1375,40 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     # update status
                     image_2.status = FINISHED
                     image_2.setAutoDraw(False)
+            
+            # *timeout_text* updates
+            
+            # if timeout_text is starting this frame...
+            if timeout_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                timeout_text.frameNStart = frameN  # exact frame index
+                timeout_text.tStart = t  # local t and not account for scr refresh
+                timeout_text.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(timeout_text, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'timeout_text.started')
+                # update status
+                timeout_text.status = STARTED
+                timeout_text.setAutoDraw(True)
+            
+            # if timeout_text is active this frame...
+            if timeout_text.status == STARTED:
+                # update params
+                pass
+            
+            # if timeout_text is stopping this frame...
+            if timeout_text.status == STARTED:
+                # is it time to stop? (based on global clock, using actual start)
+                if tThisFlipGlobal > timeout_text.tStartRefresh + timing_map["dFb"]-frameTolerance:
+                    # keep track of stop time/frame for later
+                    timeout_text.tStop = t  # not accounting for scr refresh
+                    timeout_text.tStopRefresh = tThisFlipGlobal  # on global time
+                    timeout_text.frameNStop = frameN  # exact frame index
+                    # add timestamp to datafile
+                    thisExp.timestampOnFlip(win, 'timeout_text.stopped')
+                    # update status
+                    timeout_text.status = FINISHED
+                    timeout_text.setAutoDraw(False)
             
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
