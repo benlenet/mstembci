@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on May 30, 2025, at 17:01
+    on June 03, 2025, at 12:00
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -91,6 +91,9 @@ def input_val(validation, correct_key = 'period', incorrect_key = 'comma'):
 #  
 
 
+# Run 'Before Experiment' code from fb_code
+# rewrite this later
+timeout_fb ='test will resume after 10 seconds'
 # --- Setup global variables (available in all functions) ---
 # create a device manager to handle hardware (keyboards, mice, mirophones, speakers, etc.)
 deviceManager = hardware.DeviceManager()
@@ -501,13 +504,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         color=[-1.0000, -1.0000, -1.0000], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
         texRes=128.0, interpolate=True, depth=-2.0)
-    timeout_text = visual.TextStim(win=win, name='timeout_text',
-        text=timeout_fb,
-        font='Arial',
-        pos=(0, -1), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
-        color='white', colorSpace='rgb', opacity=None, 
-        languageStyle='LTR',
-        depth=-3.0);
     
     # create some handy timers
     
@@ -1227,7 +1223,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # create an object to store info about Routine button_record
         button_record = data.Routine(
             name='button_record',
-            components=[fb_disp, image_2, timeout_text],
+            components=[fb_disp, image_2],
         )
         button_record.status = NOT_STARTED
         continueRoutine = True
@@ -1375,40 +1371,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     # update status
                     image_2.status = FINISHED
                     image_2.setAutoDraw(False)
-            
-            # *timeout_text* updates
-            
-            # if timeout_text is starting this frame...
-            if timeout_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-                # keep track of start time/frame for later
-                timeout_text.frameNStart = frameN  # exact frame index
-                timeout_text.tStart = t  # local t and not account for scr refresh
-                timeout_text.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(timeout_text, 'tStartRefresh')  # time at next scr refresh
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'timeout_text.started')
-                # update status
-                timeout_text.status = STARTED
-                timeout_text.setAutoDraw(True)
-            
-            # if timeout_text is active this frame...
-            if timeout_text.status == STARTED:
-                # update params
-                pass
-            
-            # if timeout_text is stopping this frame...
-            if timeout_text.status == STARTED:
-                # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > timeout_text.tStartRefresh + timing_map["dFb"]-frameTolerance:
-                    # keep track of stop time/frame for later
-                    timeout_text.tStop = t  # not accounting for scr refresh
-                    timeout_text.tStopRefresh = tThisFlipGlobal  # on global time
-                    timeout_text.frameNStop = frameN  # exact frame index
-                    # add timestamp to datafile
-                    thisExp.timestampOnFlip(win, 'timeout_text.stopped')
-                    # update status
-                    timeout_text.status = FINISHED
-                    timeout_text.setAutoDraw(False)
             
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):

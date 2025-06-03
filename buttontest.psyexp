@@ -163,8 +163,8 @@
         <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
       </RoutineSettingsComponent>
       <CodeComponent name="fb_code" plugin="None">
-        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="# rewrite this later&amp;#10;timeout_fb ='test will resume after 10 seconds'" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="timeout_fb = &quot;test will resume after 10 seconds&quot;;&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="fb_text = &quot;no key_resp component found - look at the Std out window for info&quot;;&amp;#10;fb_col = &quot;black&quot;;&amp;#10;timeout_fb = &quot;test will resume after 10 seconds&quot;;&amp;#10;console.log(key_resp.keys, &quot;was pressed\n&quot;);&amp;#10;try {&amp;#10;    if ((key_resp.keys === null)) {&amp;#10;        fb_text = &quot;please respond within a shorter time period.&quot;;&amp;#10;        timing_map[&quot;dFb&quot;] = 10;&amp;#10;        fb_col = &quot;white&quot;;&amp;#10;        stim_map[&quot;loop_iter&quot;] -= 1;&amp;#10;    } else {&amp;#10;        if (key_resp.corr) {&amp;#10;            fb_text = &quot;Correct!&quot;;&amp;#10;            fb_col = &quot;green&quot;;&amp;#10;        } else {&amp;#10;            fb_text = &quot;Incorrect&quot;;&amp;#10;            fb_col = &quot;red&quot;;&amp;#10;        }&amp;#10;    }&amp;#10;} catch(e) {&amp;#10;    console.log(&quot;Make sure that you have:\n1. a routine with a keyboard component in it called \&quot;key_resp\&quot;\n 2. In the key_Resp component in the \&quot;data\&quot; tab select \&quot;Store Correct\&quot;.\n in the \&quot;Correct answer\&quot; field use \&quot;$corrAns\&quot; (where corrAns is a column header in your conditions file indicating the correct key press&quot;);&amp;#10;}&amp;#10;stim_map[&quot;loop_iter&quot;] += 1;&amp;#10;if ((stim_map[&quot;loop_iter&quot;] === stim_map[&quot;loop_count&quot;])) {&amp;#10;    stim_map[&quot;loop_iter&quot;] = 0;&amp;#10;    stim_map[&quot;char_length&quot;] += 2;&amp;#10;    stim_map[&quot;cross_en&quot;] = false;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
@@ -235,33 +235,6 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
       </ImageComponent>
-      <TextComponent name="timeout_text" plugin="None">
-        <Param val="white" valType="color" updates="constant" name="color"/>
-        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
-        <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="code" updates="constant" name="draggable"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="None" valType="str" updates="constant" name="flip"/>
-        <Param val="Arial" valType="str" updates="constant" name="font"/>
-        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="timeout_text" valType="code" updates="None" name="name"/>
-        <Param val="" valType="num" updates="constant" name="opacity"/>
-        <Param val="0" valType="num" updates="constant" name="ori"/>
-        <Param val="(0, -1)" valType="list" updates="constant" name="pos"/>
-        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="0.0" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="$timing_map[&quot;dFb&quot;]" valType="code" updates="constant" name="stopVal"/>
-        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="$timeout_fb" valType="str" updates="constant" name="text"/>
-        <Param val="from exp settings" valType="str" updates="None" name="units"/>
-        <Param val="" valType="code" updates="None" name="validator"/>
-        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
-      </TextComponent>
     </Routine>
     <Routine name="prompt">
       <RoutineSettingsComponent name="prompt" plugin="None">
