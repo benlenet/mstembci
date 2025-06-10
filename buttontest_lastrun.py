@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on June 03, 2025, at 12:00
+    on June 10, 2025, at 16:03
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -33,10 +33,18 @@ import sys  # to get file system encoding
 import psychopy.iohub as io
 from psychopy.hardware import keyboard
 
-# Run 'Before Experiment' code from init_function
+# Run 'Before Experiment' code from code_initfunction
 import random
 import string
 import socket
+
+# constants declaration
+TIMEOUT_DURATION = 10
+CHARACTER_INCREMENT = 2
+DEFAULT_FEEDBACK = 1
+
+# ensure all texts are initialized
+instruction_prompt = ""
 
 # timing of each stimulus (global variables)
 timing_map = {"dCross": 2,
@@ -91,9 +99,6 @@ def input_val(validation, correct_key = 'period', incorrect_key = 'comma'):
 #  
 
 
-# Run 'Before Experiment' code from fb_code
-# rewrite this later
-timeout_fb ='test will resume after 10 seconds'
 # --- Setup global variables (available in all functions) ---
 # create a device manager to handle hardware (keyboards, mice, mirophones, speakers, etc.)
 deviceManager = hardware.DeviceManager()
@@ -187,7 +192,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\e203gtec\\Desktop\\mstembci\\buttontest_lastrun.py',
+        originPath='C:\\Users\\04Ben\\github\\mstembci\\buttontest_lastrun.py',
         savePickle=True, saveWideText=False,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -315,11 +320,23 @@ def setupDevices(expInfo, thisExp, win):
             deviceClass='keyboard',
             deviceName='key_nex',
         )
+    if deviceManager.getDevice('key_resp_instruction') is None:
+        # initialise key_resp_instruction
+        key_resp_instruction = deviceManager.addDevice(
+            deviceClass='keyboard',
+            deviceName='key_resp_instruction',
+        )
     if deviceManager.getDevice('key_resp') is None:
         # initialise key_resp
         key_resp = deviceManager.addDevice(
             deviceClass='keyboard',
             deviceName='key_resp',
+        )
+    if deviceManager.getDevice('fb_keyboard_continue') is None:
+        # initialise fb_keyboard_continue
+        fb_keyboard_continue = deviceManager.addDevice(
+            deviceClass='keyboard',
+            deviceName='fb_keyboard_continue',
         )
     # return True if completed successfully
     return True
@@ -429,12 +446,12 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     intro_disp = visual.TextStim(win=win, name='intro_disp',
         text='Hello! Thank you for participating in the Sternberg Trial Test.',
         font='Arial',
-        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), draggable=False, height=0.1, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
     key_nex = keyboard.Keyboard(deviceName='key_nex')
-    # Run 'Begin Experiment' code from init_function
+    # Run 'Begin Experiment' code from code_initfunction
     # before each cycle, update each variable
     # string_prompt: stimulus display
     # key_prompt: key selected to display
@@ -446,26 +463,40 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     
     
+    text = visual.TextStim(win=win, name='text',
+        text='please wait for the experimenter to continue.',
+        font='Arial',
+        pos=(0, -.3), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=-3.0);
+    
+    # --- Initialize components for Routine "instruction_page" ---
+    text_2 = visual.TextStim(win=win, name='text_2',
+        text='',
+        font='Arial',
+        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=0.0);
+    key_resp_instruction = keyboard.Keyboard(deviceName='key_resp_instruction')
     
     # --- Initialize components for Routine "initcodevalues" ---
     
     # --- Initialize components for Routine "cross_fix" ---
     polygon = visual.ShapeStim(
         win=win, name='polygon', vertices='cross',
-        size=(0.5, 0.5),
+        size=(0.2, 0.2),
         ori=0.0, pos=(0, 0), draggable=False, anchor='center',
         lineWidth=1.0,
         colorSpace='rgb', lineColor='white', fillColor='white',
         opacity=None, depth=0.0, interpolate=True)
-    # Run 'Begin Experiment' code from readjust_cross_en
-    
-    
     
     # --- Initialize components for Routine "prompt" ---
     string_prompt_disp = visual.TextStim(win=win, name='string_prompt_disp',
         text='',
         font='Arial',
-        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), draggable=False, height=0.15, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -483,7 +514,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     key_response_disp = visual.TextStim(win=win, name='key_response_disp',
         text='',
         font='Arial',
-        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), draggable=False, height=0.15, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-1.0);
@@ -504,6 +535,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         color=[-1.0000, -1.0000, -1.0000], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
         texRes=128.0, interpolate=True, depth=-2.0)
+    fb_keyboard_continue = keyboard.Keyboard(deviceName='fb_keyboard_continue')
     
     # create some handy timers
     
@@ -537,7 +569,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # create an object to store info about Routine intro
     intro = data.Routine(
         name='intro',
-        components=[intro_disp, key_nex],
+        components=[intro_disp, key_nex, text],
     )
     intro.status = NOT_STARTED
     continueRoutine = True
@@ -619,6 +651,26 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 # a response ends the routine
                 continueRoutine = False
         
+        # *text* updates
+        
+        # if text is starting this frame...
+        if text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            text.frameNStart = frameN  # exact frame index
+            text.tStart = t  # local t and not account for scr refresh
+            text.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(text, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'text.started')
+            # update status
+            text.status = STARTED
+            text.setAutoDraw(True)
+        
+        # if text is active this frame...
+        if text.status == STARTED:
+            # update params
+            pass
+        
         # check for quit (typically the Esc key)
         if defaultKeyboard.getKeys(keyList=["escape"]):
             thisExp.status = FINISHED
@@ -662,6 +714,157 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # the Routine "intro" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     
+    # --- Prepare to start Routine "instruction_page" ---
+    # create an object to store info about Routine instruction_page
+    instruction_page = data.Routine(
+        name='instruction_page',
+        components=[text_2, key_resp_instruction],
+    )
+    instruction_page.status = NOT_STARTED
+    continueRoutine = True
+    # update component parameters for each repeat
+    # Run 'Begin Routine' code from code_textshift
+    # initialize texts for instructions
+    text_list = ["This activity is designed to explore how we hold and use information in our minds, a key cognitive function known as working memory. Your participation will help us understand this important mental process better. Please read the following instructions carefully.",
+                "You are about to engage in the Sternberg working memory task. In each round, or \"trial,\" you will first see a set of items to memorize. After a brief pause, a single \"probe\" item will appear on the screen. Your job is to decide as quickly and accurately as possible whether this probe item was part of the set you just memorized.",
+                "Get Ready: Each trial will start with a fixation point, like a cross or a dot, in the center of the screen. This is to help you focus your attention."]
+    instruction_prompt = text_list[0]
+    
+    print("recorded", key_resp_instruction.keys, "\n")
+    for text in text_list:
+        while key_resp_instruction.keys != None:
+            instruction_prompt = text
+            key_resp_instruction.keys = None
+    # create starting attributes for key_resp_instruction
+    key_resp_instruction.keys = []
+    key_resp_instruction.rt = []
+    _key_resp_instruction_allKeys = []
+    # store start times for instruction_page
+    instruction_page.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
+    instruction_page.tStart = globalClock.getTime(format='float')
+    instruction_page.status = STARTED
+    thisExp.addData('instruction_page.started', instruction_page.tStart)
+    instruction_page.maxDuration = None
+    # keep track of which components have finished
+    instruction_pageComponents = instruction_page.components
+    for thisComponent in instruction_page.components:
+        thisComponent.tStart = None
+        thisComponent.tStop = None
+        thisComponent.tStartRefresh = None
+        thisComponent.tStopRefresh = None
+        if hasattr(thisComponent, 'status'):
+            thisComponent.status = NOT_STARTED
+    # reset timers
+    t = 0
+    _timeToFirstFrame = win.getFutureFlipTime(clock="now")
+    frameN = -1
+    
+    # --- Run Routine "instruction_page" ---
+    instruction_page.forceEnded = routineForceEnded = not continueRoutine
+    while continueRoutine:
+        # get current time
+        t = routineTimer.getTime()
+        tThisFlip = win.getFutureFlipTime(clock=routineTimer)
+        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
+        
+        # *text_2* updates
+        
+        # if text_2 is starting this frame...
+        if text_2.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            text_2.frameNStart = frameN  # exact frame index
+            text_2.tStart = t  # local t and not account for scr refresh
+            text_2.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(text_2, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'text_2.started')
+            # update status
+            text_2.status = STARTED
+            text_2.setAutoDraw(True)
+        
+        # if text_2 is active this frame...
+        if text_2.status == STARTED:
+            # update params
+            text_2.setText(instruction_prompt, log=False)
+        
+        # *key_resp_instruction* updates
+        waitOnFlip = False
+        
+        # if key_resp_instruction is starting this frame...
+        if key_resp_instruction.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            key_resp_instruction.frameNStart = frameN  # exact frame index
+            key_resp_instruction.tStart = t  # local t and not account for scr refresh
+            key_resp_instruction.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(key_resp_instruction, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'key_resp_instruction.started')
+            # update status
+            key_resp_instruction.status = STARTED
+            # keyboard checking is just starting
+            waitOnFlip = True
+            win.callOnFlip(key_resp_instruction.clock.reset)  # t=0 on next screen flip
+            win.callOnFlip(key_resp_instruction.clearEvents, eventType='keyboard')  # clear events on next screen flip
+        if key_resp_instruction.status == STARTED and not waitOnFlip:
+            theseKeys = key_resp_instruction.getKeys(keyList=None, ignoreKeys=["escape"], waitRelease=False)
+            _key_resp_instruction_allKeys.extend(theseKeys)
+            if len(_key_resp_instruction_allKeys):
+                key_resp_instruction.keys = _key_resp_instruction_allKeys[-1].name  # just the last key pressed
+                key_resp_instruction.rt = _key_resp_instruction_allKeys[-1].rt
+                key_resp_instruction.duration = _key_resp_instruction_allKeys[-1].duration
+        
+        # check for quit (typically the Esc key)
+        if defaultKeyboard.getKeys(keyList=["escape"]):
+            thisExp.status = FINISHED
+        if thisExp.status == FINISHED or endExpNow:
+            endExperiment(thisExp, win=win)
+            return
+        # pause experiment here if requested
+        if thisExp.status == PAUSED:
+            pauseExperiment(
+                thisExp=thisExp, 
+                win=win, 
+                timers=[routineTimer], 
+                playbackComponents=[]
+            )
+            # skip the frame we paused on
+            continue
+        
+        # check if all components have finished
+        if not continueRoutine:  # a component has requested a forced-end of Routine
+            instruction_page.forceEnded = routineForceEnded = True
+            break
+        continueRoutine = False  # will revert to True if at least one component still running
+        for thisComponent in instruction_page.components:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
+        
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()
+    
+    # --- Ending Routine "instruction_page" ---
+    for thisComponent in instruction_page.components:
+        if hasattr(thisComponent, "setAutoDraw"):
+            thisComponent.setAutoDraw(False)
+    # store stop times for instruction_page
+    instruction_page.tStop = globalClock.getTime(format='float')
+    instruction_page.tStopRefresh = tThisFlipGlobal
+    thisExp.addData('instruction_page.stopped', instruction_page.tStop)
+    # check responses
+    if key_resp_instruction.keys in ['', [], None]:  # No response was made
+        key_resp_instruction.keys = None
+    thisExp.addData('key_resp_instruction.keys',key_resp_instruction.keys)
+    if key_resp_instruction.keys != None:  # we had a response
+        thisExp.addData('key_resp_instruction.rt', key_resp_instruction.rt)
+        thisExp.addData('key_resp_instruction.duration', key_resp_instruction.duration)
+    thisExp.nextEntry()
+    # the Routine "instruction_page" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset()
+    
     # set up handler to look after randomisation of conditions etc
     trials = data.TrialHandler2(
         name='trials',
@@ -696,7 +899,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         initcodevalues.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
-        # Run 'Begin Routine' code from loopvalue
+        # Run 'Begin Routine' code from code_loopvalue
         # initialize values in map
         stim_map["string_prompt"] = sb_rand(stim_map["char_length"])
         stim_map["key_prompt"] = gen_key(stim_map["string_prompt"])
@@ -900,7 +1103,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         cross_fix.tStop = globalClock.getTime(format='float')
         cross_fix.tStopRefresh = tThisFlipGlobal
         thisExp.addData('cross_fix.stopped', cross_fix.tStop)
-        # Run 'End Routine' code from readjust_cross_en
+        # Run 'End Routine' code from code_crossen
         # set in routine to skip if cross_en == True
         stim_map["cross_en"] = True
         # the Routine "cross_fix" was not non-slip safe, so reset the non-slip timer
@@ -1223,35 +1426,24 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # create an object to store info about Routine button_record
         button_record = data.Routine(
             name='button_record',
-            components=[fb_disp, image_2],
+            components=[fb_disp, image_2, fb_keyboard_continue],
         )
         button_record.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
-        # Run 'Begin Routine' code from fb_code
-        # Check if the key press was correct or not.
-        # This routine will need to follow another routine with a 
-        # key response component in it called "key_resp" 
-        # and the "store correct" option enabled. 
-        # If your experiment is missing that you will 
-        # not receive feedback and an error message will be displayed.
+        # Run 'Begin Routine' code from code_fb
         
-        # If a key response component has been added and feedback is functioning.
-        # 1. remove lines 12, 13, 15, 22 and 23.
-        # 2. dedent lines 16 to 21
         
-        fb_text = 'no key_resp component found - look at the Std out window for info'
-        fb_col = 'black'
-        timeout_fb ='test will resume after 10 seconds'
-        
-        # display feedback to participant
+        # display feedback to log
         print(key_resp.keys,"was pressed\n")
         try:
             if key_resp.keys == None:
-                fb_text = 'please respond within a shorter time period.'
-                timing_map["dFb"] = 10
+                # add timeout text, decrement loop, enable fixation
+                fb_text = 'please respond within a shorter time period.\nPress any key to continue.'
+                timing_map["dFb"] = TIMEOUT_DURATION
                 fb_col = 'white'
                 stim_map["loop_iter"] -= 1
+                stim_map["cross_en"] = False
             elif key_resp.corr:
                 fb_text = 'Correct!'
                 fb_col = 'green'
@@ -1267,10 +1459,14 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         stim_map["loop_iter"] += 1
         if stim_map["loop_iter"] == stim_map["loop_count"]:
             stim_map["loop_iter"] = 0
-            stim_map["char_length"] += 2
+            stim_map["char_length"] += CHARACTER_INCREMENT
             stim_map["cross_en"] = False
         fb_disp.setColor(fb_col, colorSpace='rgb')
         fb_disp.setText(fb_text)
+        # create starting attributes for fb_keyboard_continue
+        fb_keyboard_continue.keys = []
+        fb_keyboard_continue.rt = []
+        _fb_keyboard_continue_allKeys = []
         # store start times for button_record
         button_record.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         button_record.tStart = globalClock.getTime(format='float')
@@ -1372,6 +1568,48 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     image_2.status = FINISHED
                     image_2.setAutoDraw(False)
             
+            # *fb_keyboard_continue* updates
+            waitOnFlip = False
+            
+            # if fb_keyboard_continue is starting this frame...
+            if fb_keyboard_continue.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                fb_keyboard_continue.frameNStart = frameN  # exact frame index
+                fb_keyboard_continue.tStart = t  # local t and not account for scr refresh
+                fb_keyboard_continue.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(fb_keyboard_continue, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'fb_keyboard_continue.started')
+                # update status
+                fb_keyboard_continue.status = STARTED
+                # keyboard checking is just starting
+                waitOnFlip = True
+                win.callOnFlip(fb_keyboard_continue.clock.reset)  # t=0 on next screen flip
+                win.callOnFlip(fb_keyboard_continue.clearEvents, eventType='keyboard')  # clear events on next screen flip
+            
+            # if fb_keyboard_continue is stopping this frame...
+            if fb_keyboard_continue.status == STARTED:
+                # is it time to stop? (based on global clock, using actual start)
+                if tThisFlipGlobal > fb_keyboard_continue.tStartRefresh + timing_map["dFb"]-frameTolerance:
+                    # keep track of stop time/frame for later
+                    fb_keyboard_continue.tStop = t  # not accounting for scr refresh
+                    fb_keyboard_continue.tStopRefresh = tThisFlipGlobal  # on global time
+                    fb_keyboard_continue.frameNStop = frameN  # exact frame index
+                    # add timestamp to datafile
+                    thisExp.timestampOnFlip(win, 'fb_keyboard_continue.stopped')
+                    # update status
+                    fb_keyboard_continue.status = FINISHED
+                    fb_keyboard_continue.status = FINISHED
+            if fb_keyboard_continue.status == STARTED and not waitOnFlip:
+                theseKeys = fb_keyboard_continue.getKeys(keyList=None, ignoreKeys=["escape"], waitRelease=False)
+                _fb_keyboard_continue_allKeys.extend(theseKeys)
+                if len(_fb_keyboard_continue_allKeys):
+                    fb_keyboard_continue.keys = _fb_keyboard_continue_allKeys[-1].name  # just the last key pressed
+                    fb_keyboard_continue.rt = _fb_keyboard_continue_allKeys[-1].rt
+                    fb_keyboard_continue.duration = _fb_keyboard_continue_allKeys[-1].duration
+                    # a response ends the routine
+                    continueRoutine = False
+            
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
                 thisExp.status = FINISHED
@@ -1411,6 +1649,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         button_record.tStop = globalClock.getTime(format='float')
         button_record.tStopRefresh = tThisFlipGlobal
         thisExp.addData('button_record.stopped', button_record.tStop)
+        # Run 'End Routine' code from code_fb
+        # ensure that fb is reset to 1
+        timing_map["dFb"] = DEFAULT_FEEDBACK
         # the Routine "button_record" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
     # completed stim_map["loop_maxcount"] repeats of 'trials'
