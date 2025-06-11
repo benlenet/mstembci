@@ -22,6 +22,8 @@ while(1):
     print("sent to udp value:", eegbytes, '\n')
 
 # retrieve frame of PsychoPy  
-def timesync():
-    pass
+def matlab_send(stage):
+    match stage:
+        case "fixation":
+            eegbytes = bytes([1])  # Example value for fixation
 
