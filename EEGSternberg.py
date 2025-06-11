@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on June 10, 2025, at 17:41
+    on June 10, 2025, at 17:42
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -78,11 +78,11 @@ stim_map = {"loop_iter": 0,
 
 # instruction page initialization
 # initialize texts for instructions
-text_list = ["This activity is designed to explore how we hold and use information in our minds, a key cognitive function known as working memory. Your participation will help us understand this important mental process better. Please read the following instructions carefully.",
-            "You are about to engage in the Sternberg working memory task. In each round, or \"trial,\" you will first see a set of items to memorize. After a brief pause, a single \"probe\" item will appear on the screen. Your job is to decide as quickly and accurately as possible whether this probe item was part of the set you just memorized.",
-            "Get Ready: Each trial will start with a fixation point, like a cross or a dot, in the center of the screen. This is to help you focus your attention.",
-            "bruh"]
-
+#text_list = ["This activity is designed to explore how we hold and use information in our minds, a key cognitive function known as working memory. Your participation will help us understand this important mental process better. Please read the following instructions carefully.",
+#           "You are about to engage in the Sternberg working memory task. In each round, or \"trial,\" you will first see a set of items to memorize. After a brief pause, a single \"probe\" item will appear on the screen. Your job is to decide as quickly and accurately as possible whether this probe item was part of the set you just memorized.",
+#            "Get Ready: Each trial will start with a fixation point, like a cross or a dot, in the center of the screen. This is to help you focus your attention.",
+#            "bruh"]
+text_list = ["text 1", "text 2", "text 3", "text 4", "text 5"]
 # variables to move text
 loopcount_text_list = len(text_list) - 1
 # ensure it is initialized (bruh)
@@ -233,7 +233,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\04Ben\\github\\mstembci\\buttontest_lastrun.py',
+        originPath='C:\\Users\\04Ben\\github\\mstembci\\EEGSternberg.py',
         savePickle=True, saveWideText=False,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
