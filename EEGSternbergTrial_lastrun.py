@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on June 10, 2025, at 18:17
+    on June 12, 2025, at 12:15
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -76,13 +76,11 @@ stim_map = {"loop_iter": 0,
                 "iter_text_list": 0
                 }
 
-# instruction page initialization
-# initialize texts for instructions
-#text_list = ["This activity is designed to explore how we hold and use information in our minds, a key cognitive function known as working memory. Your participation will help us understand this important mental process better. Please read the following instructions carefully.",
-#           "You are about to engage in the Sternberg working memory task. In each round, or \"trial,\" you will first see a set of items to memorize. After a brief pause, a single \"probe\" item will appear on the screen. Your job is to decide as quickly and accurately as possible whether this probe item was part of the set you just memorized.",
-#            "Get Ready: Each trial will start with a fixation point, like a cross or a dot, in the center of the screen. This is to help you focus your attention.",
-#            "bruh"]
-text_list = ["text 1", "text 2", "text 3", "text 4", "text 5"]
+text_list = ["text 1", 
+             "text 2",
+             "text 3",
+             "text 4",
+             "text 5"]
 # variables to move text
 loopcount_text_list = len(text_list)
 # ensure it is initialized (bruh)
@@ -105,8 +103,6 @@ udp_map = {"fixation": bytes([1]),
 def matlab_send(stage):
     if stage in udp_map:
         sock.sendto(udp_map[stage], (UDP_IP, UDP_PORT))
-    else:
-        sock.sendto(bytes([99]), (UDP_IP, UDP_PORT))
 
 
 # return a character for response stimulus
@@ -167,7 +163,7 @@ or run the experiment with `--pilot` as an argument. To change what pilot
 PILOTING = core.setPilotModeFromArgs()
 # start off with values from experiment settings
 _fullScr = True
-_winSize = [1707, 1067]
+_winSize = [1920, 1080]
 # if in pilot mode, apply overrides according to preferences
 if PILOTING:
     # force windowed mode
@@ -233,12 +229,13 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\04Ben\\github\\mstembci\\EEGSternbergTrial_lastrun.py',
+        originPath='C:\\Users\\e203gtec\\Desktop\\mstembci\\EEGSternbergTrial_lastrun.py',
         savePickle=True, saveWideText=False,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
     thisExp.setPriority('thisRow.t', priority.CRITICAL)
     thisExp.setPriority('expName', priority.LOW)
+    thisExp.setPriority('', )
     # return experiment handler
     return thisExp
 
@@ -1507,6 +1504,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 timing_map["dFb"] = TIMEOUT_DURATION
                 fb_col = 'white'
                 stim_map["loop_iter"] -= 1
+                stim_map["loop_maxcount"] -= 1
                 stim_map["cross_en"] = False
             elif key_resp.corr:
                 fb_text = 'Correct!'
