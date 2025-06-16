@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on June 13, 2025, at 17:00
+    on June 16, 2025, at 13:47
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -85,11 +85,12 @@ stim_map = {"loop_iter": 0,
                 "p_loop_count": 2
                 }
 
-text_list = ["text 1", 
-             "text 2",
-             "text 3",
-             "text 4",
-             "text 5"]
+text_list = ["+", 
+             "b y g d f",
+             "",
+             "g",
+             "*feedback*",
+             "We will now begin the practice trial."]
 # variables to move text
 loopcount_text_list = len(text_list)
 # ensure it is initialized (bruh)
@@ -141,7 +142,7 @@ def input_val(validation, correct_key = 'period', incorrect_key = 'comma'):
 
 
 # make sure all text boxes are initialized!
-intro_disp_text = "Hello! Thank you for participating in the Sternberg Trial Test."
+intro_disp_text = "Hello! Thank you for participating in the Sternberg Working Memory Task."
 intro_small_text = "Please wait for the experimenter to continue."
 instruction_text = ""
 p_cross_text = "before each sequence of tests, you will be shown a cross for", timing_map["dCross"], "seconds."
@@ -245,7 +246,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\Ben\\gitfolder\\mstembci\\EEGSternbergTrial_lastrun.py',
+        originPath='C:\\Users\\04Ben\\github\\mstembci\\EEGSternbergTrial_lastrun.py',
         savePickle=True, saveWideText=False,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -535,7 +536,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     instruction = visual.TextStim(win=win, name='instruction',
         text='',
         font='Arial',
-        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), draggable=False, height=0.15, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -1613,7 +1614,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             # *p_timeout_block* updates
             
             # if p_timeout_block is starting this frame...
-            if p_timeout_block.status == NOT_STARTED and tThisFlip >= timing_map[p_"dFb"]-frameTolerance:
+            if p_timeout_block.status == NOT_STARTED and tThisFlip >= timing_map["p_dFb"]-frameTolerance:
                 # keep track of start time/frame for later
                 p_timeout_block.frameNStart = frameN  # exact frame index
                 p_timeout_block.tStart = t  # local t and not account for scr refresh
@@ -1704,7 +1705,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             if p_key_resp.keys == None:
                 # add timeout text, decrement loop, enable fixation
                 fb_text = 'please respond within a shorter time period.\nPress any key to continue.'
-                timing_map["dFb"] = TIMEOUT_DURATION
+                timing_map["p_dFb"] = TIMEOUT_DURATION
                 fb_col = 'white'
                 stim_map["loop_iter"] -= 1
                 stim_map["p_loop_maxcount"] -= 1
@@ -2201,6 +2202,11 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # update component parameters for each repeat
         # Run 'Begin Routine' code from code_loopvalue
         # initialize values in map
+        stim_map["loop_iter"] = 0
+        stim_map["loop_count"] = 0
+        stim_map["char_length"] = 3
+        
+        # reset prompt
         stim_map["string_prompt"] = sb_rand(stim_map["char_length"])
         stim_map["key_prompt"] = gen_key(stim_map["string_prompt"])
         stim_map["map_correct"] = input_val(sb_validate(stim_map["string_prompt"],
