@@ -5,8 +5,7 @@ This repository contains a PsychoPY implementation of the Sternberg Working Memo
 * Finalize prompting text for the participant
 * Add practice trial run 
 * Add timing synchronization
-* Add logging data for reaction time and Accuracy 
-
+* Add logging data for reaction time and accuracy [linked here](https://discourse.psychopy.org/t/how-to-calculate-average-response-time/5513)
 ## Mapping Headset
 This experiment uses the [g.tec Nautilus 8-Channel Dry EEG Headset](https://www.gtec.at/product/g-nautilus-research/?srsltid=AfmBOopZi8mVtdq8GTyisuGzCSdBA6f8W5MG8NtzNnF6aHY3dzxtEMB9).
 Prior to putting on the headset, ensure the channels are lined up like so:
