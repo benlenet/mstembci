@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on June 16, 2025, at 17:11
+    on June 18, 2025, at 12:12
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -48,6 +48,13 @@ CHARACTER_INCREMENT = 2
 DEFAULT_FEEDBACK = 1
 
 # timing of each stimulus (global variables)
+"""
+dCross: duration of cross stimulus
+dPrompt: duration of characters on screen
+dBlank: duration of blank screen after cross
+dResponse: duration of single character on screen (timeout)
+dFb: duration of feedback (correct/incorrect)
+"""
 timing_map = {"dCross": 2,
               "dBlank": 1,
               "dPrompt": 1,
@@ -1664,7 +1671,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 timing_map["p_dFb"] = TIMEOUT_DURATION
                 # adjust loop values
                 stim_map["loop_iter"] -= 1
-                currentLoop.abortCurrentTrial()
                 # reenable cross
                 stim_map["cross_en"] = False
             elif p_key_resp.corr:
@@ -1682,10 +1688,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if ((stim_map["char_length"] == 3) and (stim_map["loop_iter"] == 2)):
             p_timing_shift_text = "the stimulus will now speed up"
         
-        if stim_map["loop_iter"] == stim_map["p_loop_count"]:
-            stim_map["loop_iter"] = 0
-            stim_map["char_length"] += CHARACTER_INCREMENT
-            stim_map["cross_en"] = False
         p_fb_disp.setColor(fb_col, colorSpace='rgb')
         p_fb_disp.setText(fb_text)
         p_timing_shift_text_block.setText(p_timing_shift_text)
@@ -1865,18 +1867,25 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         print("loop_iter =", stim_map["loop_iter"], '\n',
               "p_loop_count =", stim_map["p_loop_count"], '\n')
         
-        # ensure that fb is reset to 1
+        # ensure that fb is reset to 1, clear prompting text
         timing_map["p_dFb"] = DEFAULT_FEEDBACK
         p_cross_text = ""
         p_string_prompt_text = ""
+        # set different timings after 
         if ((stim_map["char_length"] == 3) and (stim_map["loop_iter"] == 2)):
             timing_map["p_dCross"] = 5
             timing_map["p_dBlank"] = 2
             timing_map["p_dPrompt"] = 1
             timing_map["p_dResponse"] = 1
-            timing_map["p_dFb"] = 1
+            timing_map["p_dFb"] = 3
         
-        print("number of trials has increased to", currentLoop.nTotal, "\n")
+        # increment characters after specified loop count
+        if stim_map["loop_iter"] == stim_map["p_loop_count"]:
+            stim_map["loop_iter"] = 0
+            stim_map["char_length"] += CHARACTER_INCREMENT
+            stim_map["cross_en"] = False
+        
+        # print out trial information for debugging
         print("timing information is: \n")
         print("timing_map[\"p_dCross\"]:", timing_map["p_dCross"])
         print("timing_map[\"p_dBlank\"]:", timing_map["p_dBlank"])
@@ -1884,6 +1893,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         print("timing_map[\"p_dResponse\"]:", timing_map["p_dResponse"])
         print("timing_map[\"p_dFb\"]:", timing_map["p_dFb"])
         print("current loop that ended is:", currentLoop.thisTrial)
+        
+        # rewind trial to overwrite timeout data
+        if p_key_resp.keys == None:
+            currentLoop.rewindTrials()
         # the Routine "p_button_record" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         thisExp.nextEntry()
@@ -1916,6 +1929,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     continue_maintrial.keys = []
     continue_maintrial.rt = []
     _continue_maintrial_allKeys = []
+    # Run 'Begin Routine' code from code_clear_p
+    # reset values after practice
+    stim_map["loop_iter"] = 0
+    stim_map["char_length"] = 3
     # store start times for instruction_maintrial
     instruction_maintrial.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
     instruction_maintrial.tStart = globalClock.getTime(format='float')
@@ -2191,11 +2208,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         continueRoutine = True
         # update component parameters for each repeat
         # Run 'Begin Routine' code from code_loopvalue
-        # initialize values in map
-        stim_map["loop_iter"] = 0
-        stim_map["loop_count"] = 0
-        stim_map["char_length"] = 3
-        
         # reset prompt
         stim_map["string_prompt"] = sb_rand(stim_map["char_length"])
         stim_map["key_prompt"] = gen_key(stim_map["string_prompt"])
@@ -2736,9 +2748,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 fb_text = 'please respond within a shorter time period.\nPress any key to continue.'
                 timing_map["dFb"] = TIMEOUT_DURATION
                 fb_col = 'white'
-                
                 stim_map["loop_iter"] -= 1
-                currentLoop.thisN -= 1
                 stim_map["cross_en"] = False
             elif key_resp.corr:
                 fb_text = 'Correct!'
@@ -2748,17 +2758,12 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 fb_col = 'red'
                 
         except:
-            print('Make sure that you have:\n1. a routine with a keyboard component in it called "key_resp"\n 2. In the key_Resp component in the "data" tab select "Store Correct".\n in the "Correct answer" field use "$corrAns" (where corrAns is a column header in your conditions file indicating the correct key press')
+            print('ERROR: no key_resp keyboard component written.')
         
         
         # increment loop, enable cross if loop reaches max
         stim_map["loop_iter"] += 1
-        print("loop_iter =", stim_map["loop_iter"], '\n',
-              "loop_count =", stim_map["loop_count"], '\n')
-        if stim_map["loop_iter"] == stim_map["loop_count"]:
-            stim_map["loop_iter"] = 0
-            stim_map["char_length"] += CHARACTER_INCREMENT
-            stim_map["cross_en"] = False
+        
         fb_disp.setColor(fb_col, colorSpace='rgb')
         fb_disp.setText(fb_text)
         # create starting attributes for fb_keyboard_continue
@@ -2904,8 +2909,30 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         button_record.tStopRefresh = tThisFlipGlobal
         thisExp.addData('button_record.stopped', button_record.tStop)
         # Run 'End Routine' code from code_fb
+        # display loop information 
+        print("loop_iter =", stim_map["loop_iter"], '\n',
+              "loop_count =", stim_map["loop_count"], '\n')
+        
         # ensure that fb is reset to 1
         timing_map["dFb"] = DEFAULT_FEEDBACK
+        # increment characters after specified loop count
+        if stim_map["loop_iter"] == stim_map["loop_count"]:
+            stim_map["loop_iter"] = 0
+            stim_map["char_length"] += CHARACTER_INCREMENT
+            stim_map["cross_en"] = False
+        
+        # print out debugging information
+        print("timing information is: \n")
+        print("timing_map[\"dCross\"]:", timing_map["dCross"])
+        print("timing_map[\"dBlank\"]:", timing_map["dBlank"])
+        print("timing_map[\"dPrompt\"]:", timing_map["dPrompt"])
+        print("timing_map[\"dResponse\"]:", timing_map["dResponse"])
+        print("timing_map[\"dFb\"]:", timing_map["dFb"])
+        print("current loop that ended is:", currentLoop.thisTrial)
+        
+        # rewind trial to overwrite timeout data
+        if key_resp.keys == None:
+            currentLoop.rewindTrials()
         # the Routine "button_record" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         thisExp.nextEntry()
