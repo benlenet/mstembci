@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on June 18, 2025, at 16:40
+    on June 20, 2025, at 13:13
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -113,9 +113,11 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 # UDP int values, sent to MATLAB
 udp_map = {"f": bytes([1]),
            "e": bytes([2]),
-           "m": bytes([3]),
-           "r": bytes([4]),
-           "start": bytes([5])}
+           "m": bytes([4]),
+           "r": bytes([8]),
+           "fb": bytes([13]),
+           "start": bytes([21]),
+           "end": bytes([31])}
 
 # send value to UDP Port, mapped via udp_map
 def matlab_send(stage):
@@ -154,7 +156,12 @@ intro_disp_text = "Hello! Thank you for participating in the Sternberg Working M
 intro_small_text = "Please wait for the experimenter to continue."
 maintrial_text = "The main experiment will now begin. Please press any key to begin."
 
-# initialize logging function
+# record stats to give to participant upon finishing
+average_rt = 0
+average_accuracy = 0
+
+
+
 
 
 # --- Setup global variables (available in all functions) ---
@@ -251,7 +258,7 @@ def setupData(expInfo, dataDir=None):
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
         originPath='C:\\Users\\e203gtec\\Desktop\\mstembci\\TEST_UDP_SEND_lastrun.py',
-        savePickle=True, saveWideText=False,
+        savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
     thisExp.setPriority('thisRow.t', priority.CRITICAL)
@@ -402,6 +409,12 @@ def setupDevices(expInfo, thisExp, win):
         fb_keyboard_continue = deviceManager.addDevice(
             deviceClass='keyboard',
             deviceName='fb_keyboard_continue',
+        )
+    if deviceManager.getDevice('key_next') is None:
+        # initialise key_next
+        key_next = deviceManager.addDevice(
+            deviceClass='keyboard',
+            deviceName='key_next',
         )
     # return True if completed successfully
     return True
@@ -574,6 +587,16 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         depth=-1.0);
     fb_keyboard_continue = keyboard.Keyboard(deviceName='fb_keyboard_continue')
     
+    # --- Initialize components for Routine "end" ---
+    end_text_block = visual.TextStim(win=win, name='end_text_block',
+        text='',
+        font='Arial',
+        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=0.0);
+    key_next = keyboard.Keyboard(deviceName='key_next')
+    
     # create some handy timers
     
     # global clock to track the time since experiment started
@@ -616,6 +639,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     key_nex.keys = []
     key_nex.rt = []
     _key_nex_allKeys = []
+    # Run 'Begin Routine' code from code_initfunction
+    # send UDP signal indicating start to synchronize
+    # stimulus with MATLAB EEG signals
+    matlab_send("start")
     intro_small.setText(intro_small_text)
     # store start times for intro
     intro.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
@@ -793,8 +820,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         stim_map["key_prompt"] = gen_key(stim_map["string_prompt"])
         stim_map["map_correct"] = input_val(sb_validate(stim_map["string_prompt"],
                                               stim_map["key_prompt"]))
-        
-        
+        if currentLoop.thisN == 0:
+            RT_list = []
+            ACC_list = []
         print("string prompt is", stim_map["string_prompt"], "\n",
               "key prompt is", stim_map["key_prompt"], "\n",
               "button to indicate correct is", stim_map["map_correct"], "\n")
@@ -1410,7 +1438,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         continueRoutine = True
         # update component parameters for each repeat
         # Run 'Begin Routine' code from code_fb
-        
+        matlab_send("fb")
         
         # display feedback to log
         print(key_resp.keys,"was pressed\n")
@@ -1602,9 +1630,17 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         print("timing_map[\"dFb\"]:", timing_map["dFb"])
         print("current loop that ended is:", currentLoop.thisTrial)
         
+        # log reaction time and accuracy percentage
+        thisExp.addData('reactionTime', key_resp.rt)
+        thisExp.addData('accuracy', "correct" if (key_resp.corr == 1) else "incorrect")
+        
         # rewind trial to overwrite timeout data
         if key_resp.keys == None:
             currentLoop.rewindTrials()
+        else:
+            RT_list.append(key_resp.rt)
+            ACC_list.append(key_resp.corr)
+            
         # the Routine "button_record" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         thisExp.nextEntry()
@@ -1624,6 +1660,158 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         stimOut=params,
         dataOut=['n','all_mean','all_std', 'all_raw'])
     
+    # --- Prepare to start Routine "end" ---
+    # create an object to store info about Routine end
+    end = data.Routine(
+        name='end',
+        components=[end_text_block, key_next],
+    )
+    end.status = NOT_STARTED
+    continueRoutine = True
+    # update component parameters for each repeat
+    end_text_block.setText(end_text)
+    # create starting attributes for key_next
+    key_next.keys = []
+    key_next.rt = []
+    _key_next_allKeys = []
+    # Run 'Begin Routine' code from code
+    rt_arr = np.array(RT_list)
+    acc_arr = np.array(ACC_list)
+    
+    
+    disp_rt = rt_arr.mean() * 1000
+    disp_accuracy = acc_arr.mean() * 100
+    end_text = f"Thank you for your time! You had an average reaction time of {disp_rt} ms and an accuracy of {disp_accuracy}%."
+    # store start times for end
+    end.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
+    end.tStart = globalClock.getTime(format='float')
+    end.status = STARTED
+    thisExp.addData('end.started', end.tStart)
+    end.maxDuration = None
+    # keep track of which components have finished
+    endComponents = end.components
+    for thisComponent in end.components:
+        thisComponent.tStart = None
+        thisComponent.tStop = None
+        thisComponent.tStartRefresh = None
+        thisComponent.tStopRefresh = None
+        if hasattr(thisComponent, 'status'):
+            thisComponent.status = NOT_STARTED
+    # reset timers
+    t = 0
+    _timeToFirstFrame = win.getFutureFlipTime(clock="now")
+    frameN = -1
+    
+    # --- Run Routine "end" ---
+    end.forceEnded = routineForceEnded = not continueRoutine
+    while continueRoutine:
+        # get current time
+        t = routineTimer.getTime()
+        tThisFlip = win.getFutureFlipTime(clock=routineTimer)
+        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
+        
+        # *end_text_block* updates
+        
+        # if end_text_block is starting this frame...
+        if end_text_block.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            end_text_block.frameNStart = frameN  # exact frame index
+            end_text_block.tStart = t  # local t and not account for scr refresh
+            end_text_block.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(end_text_block, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'end_text_block.started')
+            # update status
+            end_text_block.status = STARTED
+            end_text_block.setAutoDraw(True)
+        
+        # if end_text_block is active this frame...
+        if end_text_block.status == STARTED:
+            # update params
+            pass
+        
+        # if end_text_block is stopping this frame...
+        if end_text_block.status == STARTED:
+            # is it time to stop? (based on global clock, using actual start)
+            if tThisFlipGlobal > end_text_block.tStartRefresh + 10-frameTolerance:
+                # keep track of stop time/frame for later
+                end_text_block.tStop = t  # not accounting for scr refresh
+                end_text_block.tStopRefresh = tThisFlipGlobal  # on global time
+                end_text_block.frameNStop = frameN  # exact frame index
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'end_text_block.stopped')
+                # update status
+                end_text_block.status = FINISHED
+                end_text_block.setAutoDraw(False)
+        
+        # *key_next* updates
+        
+        # if key_next is starting this frame...
+        if key_next.status == NOT_STARTED and t >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            key_next.frameNStart = frameN  # exact frame index
+            key_next.tStart = t  # local t and not account for scr refresh
+            key_next.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(key_next, 'tStartRefresh')  # time at next scr refresh
+            # update status
+            key_next.status = STARTED
+            # keyboard checking is just starting
+            key_next.clock.reset()  # now t=0
+        if key_next.status == STARTED:
+            theseKeys = key_next.getKeys(keyList=None, ignoreKeys=["escape"], waitRelease=False)
+            _key_next_allKeys.extend(theseKeys)
+            if len(_key_next_allKeys):
+                key_next.keys = _key_next_allKeys[-1].name  # just the last key pressed
+                key_next.rt = _key_next_allKeys[-1].rt
+                key_next.duration = _key_next_allKeys[-1].duration
+                # a response ends the routine
+                continueRoutine = False
+        
+        # check for quit (typically the Esc key)
+        if defaultKeyboard.getKeys(keyList=["escape"]):
+            thisExp.status = FINISHED
+        if thisExp.status == FINISHED or endExpNow:
+            endExperiment(thisExp, win=win)
+            return
+        # pause experiment here if requested
+        if thisExp.status == PAUSED:
+            pauseExperiment(
+                thisExp=thisExp, 
+                win=win, 
+                timers=[routineTimer], 
+                playbackComponents=[]
+            )
+            # skip the frame we paused on
+            continue
+        
+        # check if all components have finished
+        if not continueRoutine:  # a component has requested a forced-end of Routine
+            end.forceEnded = routineForceEnded = True
+            break
+        continueRoutine = False  # will revert to True if at least one component still running
+        for thisComponent in end.components:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
+        
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()
+    
+    # --- Ending Routine "end" ---
+    for thisComponent in end.components:
+        if hasattr(thisComponent, "setAutoDraw"):
+            thisComponent.setAutoDraw(False)
+    # store stop times for end
+    end.tStop = globalClock.getTime(format='float')
+    end.tStopRefresh = tThisFlipGlobal
+    thisExp.addData('end.stopped', end.tStop)
+    thisExp.nextEntry()
+    # the Routine "end" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset()
+    
     # mark experiment as finished
     endExperiment(thisExp, win=win)
     # end 'rush' mode
@@ -1642,6 +1830,7 @@ def saveData(thisExp):
     """
     filename = thisExp.dataFileName
     # these shouldn't be strictly necessary (should auto-save)
+    thisExp.saveAsWideText(filename + '.csv', delim='auto')
     thisExp.saveAsPickle(filename)
 
 
