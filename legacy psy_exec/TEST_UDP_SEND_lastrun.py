@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on June 23, 2025, at 11:51
+    on June 20, 2025, at 13:13
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -79,8 +79,8 @@ timing_map = {"dCross": 2,
 # cross_en: keep track of fixation period
 
 stim_map = {"loop_iter": 0,
-                "loop_count": 1,
-                "loop_maxcount": 3,
+                "loop_count": 3,
+                "loop_maxcount": 9,
                 "char_length": 3,
                 "string_prompt": "",
                 "key_prompt": "",
@@ -257,7 +257,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\Ben\\gitfolder\\mstembci\\TEST_UDP_SEND_lastrun.py',
+        originPath='C:\\Users\\e203gtec\\Desktop\\mstembci\\TEST_UDP_SEND_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -587,16 +587,12 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         depth=-1.0);
     fb_keyboard_continue = keyboard.Keyboard(deviceName='fb_keyboard_continue')
     
-    # --- Initialize components for Routine "calc_end_stat" ---
-    # Run 'Begin Experiment' code from code_end_block
-    end_text = ""
-    
     # --- Initialize components for Routine "end" ---
     end_text_block = visual.TextStim(win=win, name='end_text_block',
         text='',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
-        color=[1.0000, 1.0000, 1.0000], colorSpace='rgb', opacity=None, 
+        color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
     key_next = keyboard.Keyboard(deviceName='key_next')
@@ -1442,7 +1438,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         continueRoutine = True
         # update component parameters for each repeat
         # Run 'Begin Routine' code from code_fb
-        # send signal to SIMULINK
         matlab_send("fb")
         
         # display feedback to log
@@ -1638,8 +1633,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # log reaction time and accuracy percentage
         thisExp.addData('reactionTime', key_resp.rt)
         thisExp.addData('accuracy', "correct" if (key_resp.corr == 1) else "incorrect")
-        thisExp.addData('prompt', stim_map["string_prompt"])
-        thisExp.addData('character', stim_map["key_prompt"])
+        
         # rewind trial to overwrite timeout data
         if key_resp.keys == None:
             currentLoop.rewindTrials()
@@ -1666,96 +1660,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         stimOut=params,
         dataOut=['n','all_mean','all_std', 'all_raw'])
     
-    # --- Prepare to start Routine "calc_end_stat" ---
-    # create an object to store info about Routine calc_end_stat
-    calc_end_stat = data.Routine(
-        name='calc_end_stat',
-        components=[],
-    )
-    calc_end_stat.status = NOT_STARTED
-    continueRoutine = True
-    # update component parameters for each repeat
-    # Run 'Begin Routine' code from code_end_block
-    rt_arr = np.array(RT_list)
-    acc_arr = np.array(ACC_list)
-    
-    
-    disp_rt = rt_arr.mean() * 1000
-    disp_accuracy = acc_arr.mean() * 100
-    end_text = "Thank you for your time! You had an average reaction time of " + str(disp_rt) + " ms and an accuracy of " + str(disp_accuracy) + "."
-    # store start times for calc_end_stat
-    calc_end_stat.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
-    calc_end_stat.tStart = globalClock.getTime(format='float')
-    calc_end_stat.status = STARTED
-    thisExp.addData('calc_end_stat.started', calc_end_stat.tStart)
-    calc_end_stat.maxDuration = None
-    # keep track of which components have finished
-    calc_end_statComponents = calc_end_stat.components
-    for thisComponent in calc_end_stat.components:
-        thisComponent.tStart = None
-        thisComponent.tStop = None
-        thisComponent.tStartRefresh = None
-        thisComponent.tStopRefresh = None
-        if hasattr(thisComponent, 'status'):
-            thisComponent.status = NOT_STARTED
-    # reset timers
-    t = 0
-    _timeToFirstFrame = win.getFutureFlipTime(clock="now")
-    frameN = -1
-    
-    # --- Run Routine "calc_end_stat" ---
-    calc_end_stat.forceEnded = routineForceEnded = not continueRoutine
-    while continueRoutine:
-        # get current time
-        t = routineTimer.getTime()
-        tThisFlip = win.getFutureFlipTime(clock=routineTimer)
-        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
-        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
-        # update/draw components on each frame
-        
-        # check for quit (typically the Esc key)
-        if defaultKeyboard.getKeys(keyList=["escape"]):
-            thisExp.status = FINISHED
-        if thisExp.status == FINISHED or endExpNow:
-            endExperiment(thisExp, win=win)
-            return
-        # pause experiment here if requested
-        if thisExp.status == PAUSED:
-            pauseExperiment(
-                thisExp=thisExp, 
-                win=win, 
-                timers=[routineTimer], 
-                playbackComponents=[]
-            )
-            # skip the frame we paused on
-            continue
-        
-        # check if all components have finished
-        if not continueRoutine:  # a component has requested a forced-end of Routine
-            calc_end_stat.forceEnded = routineForceEnded = True
-            break
-        continueRoutine = False  # will revert to True if at least one component still running
-        for thisComponent in calc_end_stat.components:
-            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-                continueRoutine = True
-                break  # at least one component has not yet finished
-        
-        # refresh the screen
-        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-            win.flip()
-    
-    # --- Ending Routine "calc_end_stat" ---
-    for thisComponent in calc_end_stat.components:
-        if hasattr(thisComponent, "setAutoDraw"):
-            thisComponent.setAutoDraw(False)
-    # store stop times for calc_end_stat
-    calc_end_stat.tStop = globalClock.getTime(format='float')
-    calc_end_stat.tStopRefresh = tThisFlipGlobal
-    thisExp.addData('calc_end_stat.stopped', calc_end_stat.tStop)
-    thisExp.nextEntry()
-    # the Routine "calc_end_stat" was not non-slip safe, so reset the non-slip timer
-    routineTimer.reset()
-    
     # --- Prepare to start Routine "end" ---
     # create an object to store info about Routine end
     end = data.Routine(
@@ -1770,6 +1674,14 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     key_next.keys = []
     key_next.rt = []
     _key_next_allKeys = []
+    # Run 'Begin Routine' code from code
+    rt_arr = np.array(RT_list)
+    acc_arr = np.array(ACC_list)
+    
+    
+    disp_rt = rt_arr.mean() * 1000
+    disp_accuracy = acc_arr.mean() * 100
+    end_text = f"Thank you for your time! You had an average reaction time of {disp_rt} ms and an accuracy of {disp_accuracy}%."
     # store start times for end
     end.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
     end.tStart = globalClock.getTime(format='float')
@@ -1819,6 +1731,20 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if end_text_block.status == STARTED:
             # update params
             pass
+        
+        # if end_text_block is stopping this frame...
+        if end_text_block.status == STARTED:
+            # is it time to stop? (based on global clock, using actual start)
+            if tThisFlipGlobal > end_text_block.tStartRefresh + 10-frameTolerance:
+                # keep track of stop time/frame for later
+                end_text_block.tStop = t  # not accounting for scr refresh
+                end_text_block.tStopRefresh = tThisFlipGlobal  # on global time
+                end_text_block.frameNStop = frameN  # exact frame index
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'end_text_block.stopped')
+                # update status
+                end_text_block.status = FINISHED
+                end_text_block.setAutoDraw(False)
         
         # *key_next* updates
         
