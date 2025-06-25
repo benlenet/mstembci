@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on June 24, 2025, at 14:00
+    on June 25, 2025, at 11:31
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -45,15 +45,26 @@ import socket
 # constants declaration
 TIMEOUT_DURATION = 10
 CHARACTER_INCREMENT = 2
-DEFAULT_FEEDBACK = 1
+DEFAULT_FEEDBACK = 5
+
+# dBlank [3, 5] -- dITI [1.5, 3.5]
+dBlank_lowbound = 3
+dBlank_upbound = 5
+dITI_lowbound = 1.5
+dITI_upbound = 3.5
+
+# record stats to give to participant upon finishing
+average_rt = 0
+average_accuracy = 0
 
 # timing of each stimulus (global variables)
 """
-dCross: duration of cross stimulus
-dPrompt: duration of characters on screen
-dBlank: duration of blank screen after cross
-dResponse: duration of single character on screen (timeout)
-dFb: duration of feedback (correct/incorrect)
+dCross: duration of cross stimulus -- default 10
+dPrompt: duration of characters on screen -- default 3.5
+dBlank: duration of blank screen after cross -- default 4
+dResponse: duration of single character on screen (timeout) -- default 1.5
+dFb: duration of feedback (correct/incorrect) -- default 0.5
+dITI: duration of blank screen -- default 2.5
 """
 timing_map = {"dCross": 10,
               "dPrompt": 3.5,
@@ -69,6 +80,7 @@ timing_map = {"dCross": 10,
               "p_dResponse": 1,
               "p_dFb": 2
               }
+
 
 # stimulus text, feedback, and loop count
 # before each cycle, update each variable
@@ -159,13 +171,15 @@ intro_disp_text = "Hello! Thank you for participating in the Sternberg Working M
 intro_small_text = "Please wait for the experimenter to continue."
 maintrial_text = "The main experiment will now begin. Please press any key to begin."
 
-# record stats to give to participant upon finishing
-average_rt = 0
-average_accuracy = 0
 
 
 
 
+
+
+# Run 'Before Experiment' code from code_fb
+block_fb = ""
+fb_text = ""
 
 # --- Setup global variables (available in all functions) ---
 # create a device manager to handle hardware (keyboards, mice, mirophones, speakers, etc.)
@@ -260,7 +274,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\Ben\\gitfolder\\mstembci\\TEST_UDP_SEND_lastrun.py',
+        originPath='C:\\Users\\Ben\\gitfolder\\mstembci\\display_no_practice_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -545,7 +559,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # --- Initialize components for Routine "cross_fix" ---
     polygon = visual.ShapeStim(
         win=win, name='polygon', vertices='cross',
-        size=(0.2, 0.2),
+        size=(0.3, 0.3),
         ori=0.0, pos=(0, 0), draggable=False, anchor='center',
         lineWidth=1.0,
         colorSpace='rgb', lineColor='white', fillColor='white',
@@ -555,7 +569,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     string_prompt_disp = visual.TextStim(win=win, name='string_prompt_disp',
         text='',
         font='Arial',
-        pos=(0, 0), draggable=False, height=0.15, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), draggable=False, height=0.3, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -575,7 +589,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     key_response_disp = visual.TextStim(win=win, name='key_response_disp',
         text='',
         font='Arial',
-        pos=(0, 0), draggable=False, height=0.15, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), draggable=False, height=0.3, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-1.0);
@@ -584,18 +598,16 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     fb_disp = visual.TextStim(win=win, name='fb_disp',
         text='',
         font='Open Sans',
-        pos=(0, 0), draggable=False, height=0.1, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), draggable=False, height=0.15, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-1.0);
     fb_keyboard_continue = keyboard.Keyboard(deviceName='fb_keyboard_continue')
     
     # --- Initialize components for Routine "ITI" ---
-    # Run 'Begin Experiment' code from code_ITI
-    matlab_send("ITI")
     black_screen = visual.Rect(
         win=win, name='black_screen',
-        width=(1,1)[0], height=(1,1)[1],
+        width=(0.5,0.5)[0], height=(0.5,0.5)[1],
         ori=0.0, pos=(0, 0), draggable=False, anchor='center',
         lineWidth=1.0,
         colorSpace='rgb', lineColor=[-1.0000, -1.0000, -1.0000], fillColor=[-1.0000, -1.0000, -1.0000],
@@ -609,7 +621,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     end_text_block = visual.TextStim(win=win, name='end_text_block',
         text='',
         font='Arial',
-        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), draggable=False, height=0.15, wrapWidth=None, ori=0.0, 
         color=[1.0000, 1.0000, 1.0000], colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -844,8 +856,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             ACC_list = []
         
         # jitter values for blank and ITI
-        timing_map["dBlank"] = random.uniform(3, 5)
-        timing_map["dITI"] = random.uniform(1.5, 3.5)
+        timing_map["dBlank"] = random.uniform(dBlank_lowbound, dBlank_upbound)
+        timing_map["dITI"] = random.uniform(dITI_lowbound, dITI_upbound)
         
         # display prompt to terminal for debugging
         print("string prompt is", stim_map["string_prompt"], "\n",
@@ -1463,26 +1475,26 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         continueRoutine = True
         # update component parameters for each repeat
         # Run 'Begin Routine' code from code_fb
+        global block_fb
+        global fb_text
         # send signal to SIMULINK
         matlab_send("fb")
-        
         # display feedback to log
         print(key_resp.keys,"was pressed\n")
+        
         try:
             if key_resp.keys == None:
                 # add timeout text, decrement loop, enable fixation
                 fb_text = 'please respond within a shorter time period.\nPress any key to continue.'
                 timing_map["dFb"] = TIMEOUT_DURATION
-                fb_col = 'white'
                 stim_map["loop_iter"] -= 1
                 stim_map["cross_en"] = False
             elif key_resp.corr:
-                fb_text = u'\u2713'
-                fb_col = 'green'
+                timing_map["dFb"] = 0
+                block_fb += u'\u2713'
             else:
-                fb_text = 'X'
-                fb_col = 'red'
-                
+                timing_map["dFb"] = 0
+                block_fb += 'X' 
         except:
             print('ERROR: no key_resp keyboard component written.')
         
@@ -1490,7 +1502,19 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # increment loop, enable cross if loop reaches max
         stim_map["loop_iter"] += 1
         
-        fb_disp.setColor(fb_col, colorSpace='rgb')
+        # display loop information 
+        print("loop_iter =", stim_map["loop_iter"], '\n',
+              "loop_count =", stim_map["loop_count"], '\n')
+              
+        # increment characters after specified loop count
+        if stim_map["loop_iter"] == stim_map["loop_count"]:
+            stim_map["loop_iter"] = 0
+            stim_map["char_length"] += CHARACTER_INCREMENT
+            # reenable fixation
+            stim_map["cross_en"] = False
+            timing_map["dFb"] = DEFAULT_FEEDBACK
+            fb_text = block_fb
+        fb_disp.setColor([1.0000, 1.0000, 1.0000], colorSpace='rgb')
         fb_disp.setText(fb_text)
         # create starting attributes for fb_keyboard_continue
         fb_keyboard_continue.keys = []
@@ -1635,17 +1659,11 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         button_record.tStopRefresh = tThisFlipGlobal
         thisExp.addData('button_record.stopped', button_record.tStop)
         # Run 'End Routine' code from code_fb
-        # display loop information 
-        print("loop_iter =", stim_map["loop_iter"], '\n',
-              "loop_count =", stim_map["loop_count"], '\n')
         
-        # ensure that fb is reset to 1
-        timing_map["dFb"] = DEFAULT_FEEDBACK
-        # increment characters after specified loop count
-        if stim_map["loop_iter"] == stim_map["loop_count"]:
-            stim_map["loop_iter"] = 0
-            stim_map["char_length"] += CHARACTER_INCREMENT
-            stim_map["cross_en"] = False
+        # ensure that fb is reset to 0
+        timing_map["dFb"] = 0
+        if len(block_fb) >= stim_map["loop_count"]:
+            block_fb = ""
         
         # print out debugging information
         print("timing information is: \n")
@@ -1654,6 +1672,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         print("timing_map[\"dPrompt\"]:", timing_map["dPrompt"])
         print("timing_map[\"dResponse\"]:", timing_map["dResponse"])
         print("timing_map[\"dFb\"]:", timing_map["dFb"])
+        print("timing_map[\"dITI\"]:", timing_map["dITI"])
         print("current loop that ended is:", currentLoop.thisTrial)
         
         # log reaction time and accuracy percentage
@@ -1681,6 +1700,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         ITI.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
+        # Run 'Begin Routine' code from code_ITI
+        matlab_send("ITI")
         # store start times for ITI
         ITI.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         ITI.tStart = globalClock.getTime(format='float')
