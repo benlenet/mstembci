@@ -9,19 +9,15 @@ Prior to putting on the headset, ensure the channels are lined up like so:
 | Ch.1 | Ch.2 | Ch.3 | Ch.4 | Ch.5 | Ch.6 | Ch.7 | Ch.8 | Left Mastoid | Right Mastoid |
 
 ## Timing Information
-This implementation of the Sternberg Working Memory Task uses concurrent displays of a character stimulus. A fixation period 
-| Cross Fixation | Stimulus (Concurrent) | Retention (Encoding) | Response (Timeout Window) | Feedback | Inter-Trial Interval | 
+This implementation of the Sternberg Working Memory Task uses concurrent displays of a character stimulus. A fixation period is shown prior to the next increment of set size, or after a timeout response, in order to gather baseline EEG 
+signals.
+| Cross Fixation | Stimulus (Concurrent) | Retention (Encoding) | Response (Timeout Window) | Feedback | ITI | 
 |---|---|---|---|---|---|
-|10000 ms | 3500 ms | 3000 +- 1000 ms | 1500 ms |  | 2500 +- 1000 ms |  
+| 10000 ms | 3500 ms | 4000 +- 1000 ms | 1500 ms | 500 ms | 2500 +- 1000 ms |  
+
 ## TODO List
-* Add Matlab data (from UDP, add marker to sort data based on onset/offset)
-* Add logging data for reaction time and accuracy [linked here](https://discourse.psychopy.org/t/how-to-calculate-average-response-time/5513)
-
-
-
-## Today's Tasks
-* record average reaction time and response correctness in log file
-1. log each reaction time separately, and add a final data column at the end
+* do feedback at the end of 10 routines rather than at the end of each routine (SAD)
+ 
 
 ## Research on Free Time
 * look at sources for Sternberg EEG research (find comparisons)

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on June 23, 2025, at 11:51
+    on June 24, 2025, at 14:00
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -55,11 +55,12 @@ dBlank: duration of blank screen after cross
 dResponse: duration of single character on screen (timeout)
 dFb: duration of feedback (correct/incorrect)
 """
-timing_map = {"dCross": 2,
-              "dBlank": 1,
-              "dPrompt": 1,
-              "dResponse": 1,
-              "dFb": 1,
+timing_map = {"dCross": 10,
+              "dPrompt": 3.5,
+              "dBlank": 4,
+              "dResponse": 1.5,
+              "dFb": 0.5,
+              "dITI": 2.5,
               # start at high values of practice,
               # will change after 1st runtime
               "p_dCross": 5,
@@ -79,8 +80,8 @@ timing_map = {"dCross": 2,
 # cross_en: keep track of fixation period
 
 stim_map = {"loop_iter": 0,
-                "loop_count": 1,
-                "loop_maxcount": 3,
+                "loop_count": 10,
+                "loop_maxcount": 30,
                 "char_length": 3,
                 "string_prompt": "",
                 "key_prompt": "",
@@ -96,7 +97,7 @@ text_list = ["+",
              "b y g d f",
              "",
              "g",
-             "*feedback*",
+             "Corrrect/Incorrect",
              "We will now begin the practice trial."]
 # variables to move text
 loopcount_text_list = len(text_list)
@@ -117,7 +118,9 @@ udp_map = {"f": bytes([1]),
            "r": bytes([8]),
            "fb": bytes([13]),
            "start": bytes([21]),
-           "end": bytes([31])}
+           "end": bytes([31]),
+           "ITI": bytes([45]),
+           "NA": bytes([66])}
 
 # send value to UDP Port, mapped via udp_map
 def matlab_send(stage):
@@ -587,6 +590,17 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         depth=-1.0);
     fb_keyboard_continue = keyboard.Keyboard(deviceName='fb_keyboard_continue')
     
+    # --- Initialize components for Routine "ITI" ---
+    # Run 'Begin Experiment' code from code_ITI
+    matlab_send("ITI")
+    black_screen = visual.Rect(
+        win=win, name='black_screen',
+        width=(1,1)[0], height=(1,1)[1],
+        ori=0.0, pos=(0, 0), draggable=False, anchor='center',
+        lineWidth=1.0,
+        colorSpace='rgb', lineColor=[-1.0000, -1.0000, -1.0000], fillColor=[-1.0000, -1.0000, -1.0000],
+        opacity=None, depth=-1.0, interpolate=True)
+    
     # --- Initialize components for Routine "calc_end_stat" ---
     # Run 'Begin Experiment' code from code_end_block
     end_text = ""
@@ -819,14 +833,21 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         continueRoutine = True
         # update component parameters for each repeat
         # Run 'Begin Routine' code from code_loopvalue
-        # reset prompt
+        # reset prompt and key values
         stim_map["string_prompt"] = sb_rand(stim_map["char_length"])
         stim_map["key_prompt"] = gen_key(stim_map["string_prompt"])
         stim_map["map_correct"] = input_val(sb_validate(stim_map["string_prompt"],
                                               stim_map["key_prompt"]))
+        # initialize running average of RT and ACC
         if currentLoop.thisN == 0:
             RT_list = []
             ACC_list = []
+        
+        # jitter values for blank and ITI
+        timing_map["dBlank"] = random.uniform(3, 5)
+        timing_map["dITI"] = random.uniform(1.5, 3.5)
+        
+        # display prompt to terminal for debugging
         print("string prompt is", stim_map["string_prompt"], "\n",
               "key prompt is", stim_map["key_prompt"], "\n",
               "button to indicate correct is", stim_map["map_correct"], "\n")
@@ -1456,10 +1477,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 stim_map["loop_iter"] -= 1
                 stim_map["cross_en"] = False
             elif key_resp.corr:
-                fb_text = 'Correct!'
+                fb_text = u'\u2713'
                 fb_col = 'green'
             else:
-                fb_text = 'Incorrect'
+                fb_text = 'X'
                 fb_col = 'red'
                 
         except:
@@ -1640,6 +1661,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         thisExp.addData('accuracy', "correct" if (key_resp.corr == 1) else "incorrect")
         thisExp.addData('prompt', stim_map["string_prompt"])
         thisExp.addData('character', stim_map["key_prompt"])
+        
         # rewind trial to overwrite timeout data
         if key_resp.keys == None:
             currentLoop.rewindTrials()
@@ -1648,6 +1670,124 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             ACC_list.append(key_resp.corr)
             
         # the Routine "button_record" was not non-slip safe, so reset the non-slip timer
+        routineTimer.reset()
+        
+        # --- Prepare to start Routine "ITI" ---
+        # create an object to store info about Routine ITI
+        ITI = data.Routine(
+            name='ITI',
+            components=[black_screen],
+        )
+        ITI.status = NOT_STARTED
+        continueRoutine = True
+        # update component parameters for each repeat
+        # store start times for ITI
+        ITI.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
+        ITI.tStart = globalClock.getTime(format='float')
+        ITI.status = STARTED
+        thisExp.addData('ITI.started', ITI.tStart)
+        ITI.maxDuration = None
+        # keep track of which components have finished
+        ITIComponents = ITI.components
+        for thisComponent in ITI.components:
+            thisComponent.tStart = None
+            thisComponent.tStop = None
+            thisComponent.tStartRefresh = None
+            thisComponent.tStopRefresh = None
+            if hasattr(thisComponent, 'status'):
+                thisComponent.status = NOT_STARTED
+        # reset timers
+        t = 0
+        _timeToFirstFrame = win.getFutureFlipTime(clock="now")
+        frameN = -1
+        
+        # --- Run Routine "ITI" ---
+        # if trial has changed, end Routine now
+        if isinstance(loop_maintrial, data.TrialHandler2) and thisLoop_maintrial.thisN != loop_maintrial.thisTrial.thisN:
+            continueRoutine = False
+        ITI.forceEnded = routineForceEnded = not continueRoutine
+        while continueRoutine:
+            # get current time
+            t = routineTimer.getTime()
+            tThisFlip = win.getFutureFlipTime(clock=routineTimer)
+            tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+            frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+            # update/draw components on each frame
+            
+            # *black_screen* updates
+            
+            # if black_screen is starting this frame...
+            if black_screen.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                black_screen.frameNStart = frameN  # exact frame index
+                black_screen.tStart = t  # local t and not account for scr refresh
+                black_screen.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(black_screen, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'black_screen.started')
+                # update status
+                black_screen.status = STARTED
+                black_screen.setAutoDraw(True)
+            
+            # if black_screen is active this frame...
+            if black_screen.status == STARTED:
+                # update params
+                pass
+            
+            # if black_screen is stopping this frame...
+            if black_screen.status == STARTED:
+                # is it time to stop? (based on global clock, using actual start)
+                if tThisFlipGlobal > black_screen.tStartRefresh + timing_map["dITI"]-frameTolerance:
+                    # keep track of stop time/frame for later
+                    black_screen.tStop = t  # not accounting for scr refresh
+                    black_screen.tStopRefresh = tThisFlipGlobal  # on global time
+                    black_screen.frameNStop = frameN  # exact frame index
+                    # add timestamp to datafile
+                    thisExp.timestampOnFlip(win, 'black_screen.stopped')
+                    # update status
+                    black_screen.status = FINISHED
+                    black_screen.setAutoDraw(False)
+            
+            # check for quit (typically the Esc key)
+            if defaultKeyboard.getKeys(keyList=["escape"]):
+                thisExp.status = FINISHED
+            if thisExp.status == FINISHED or endExpNow:
+                endExperiment(thisExp, win=win)
+                return
+            # pause experiment here if requested
+            if thisExp.status == PAUSED:
+                pauseExperiment(
+                    thisExp=thisExp, 
+                    win=win, 
+                    timers=[routineTimer], 
+                    playbackComponents=[]
+                )
+                # skip the frame we paused on
+                continue
+            
+            # check if all components have finished
+            if not continueRoutine:  # a component has requested a forced-end of Routine
+                ITI.forceEnded = routineForceEnded = True
+                break
+            continueRoutine = False  # will revert to True if at least one component still running
+            for thisComponent in ITI.components:
+                if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                    continueRoutine = True
+                    break  # at least one component has not yet finished
+            
+            # refresh the screen
+            if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+                win.flip()
+        
+        # --- Ending Routine "ITI" ---
+        for thisComponent in ITI.components:
+            if hasattr(thisComponent, "setAutoDraw"):
+                thisComponent.setAutoDraw(False)
+        # store stop times for ITI
+        ITI.tStop = globalClock.getTime(format='float')
+        ITI.tStopRefresh = tThisFlipGlobal
+        thisExp.addData('ITI.stopped', ITI.tStop)
+        # the Routine "ITI" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         thisExp.nextEntry()
         
@@ -1676,13 +1816,16 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     continueRoutine = True
     # update component parameters for each repeat
     # Run 'Begin Routine' code from code_end_block
+    # demarcate MATLAB ending
+    matlab_send("end")
+    
+    # calculate running response time and accuracy
     rt_arr = np.array(RT_list)
     acc_arr = np.array(ACC_list)
+    disp_rt = int(rt_arr.mean() * 1000)
+    disp_accuracy = int(acc_arr.mean() * 100)
     
-    
-    disp_rt = rt_arr.mean() * 1000
-    disp_accuracy = acc_arr.mean() * 100
-    end_text = "Thank you for your time! You had an average reaction time of " + str(disp_rt) + " ms and an accuracy of " + str(disp_accuracy) + "."
+    end_text = "Thank you for your time! You had an average reaction time of " + str(disp_rt) + " ms and an accuracy of " + str(disp_accuracy) + "%."
     # store start times for calc_end_stat
     calc_end_stat.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
     calc_end_stat.tStart = globalClock.getTime(format='float')
