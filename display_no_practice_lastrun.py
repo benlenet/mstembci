@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on June 25, 2025, at 11:31
+    on June 26, 2025, at 11:33
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -274,7 +274,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\Ben\\gitfolder\\mstembci\\display_no_practice_lastrun.py',
+        originPath='C:\\Users\\e203gtec\\Desktop\\mstembci\\display_no_practice_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -347,7 +347,7 @@ def setupWindow(expInfo=None, win=None):
             monitor='testMonitor', color=[-1.0000, -1.0000, -1.0000], colorSpace='rgb',
             backgroundImage='', backgroundFit='fill',
             blendMode='avg', useFBO=True,
-            units='height',
+            units='norm',
             checkTiming=False  # we're going to do this ourselves in a moment
         )
     else:
@@ -356,7 +356,7 @@ def setupWindow(expInfo=None, win=None):
         win.colorSpace = 'rgb'
         win.backgroundImage = ''
         win.backgroundFit = 'fill'
-        win.units = 'height'
+        win.units = 'norm'
     if expInfo is not None:
         # get/measure frame rate if not already in expInfo
         if win._monitorFrameRate is None:
@@ -541,7 +541,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     intro_disp = visual.TextStim(win=win, name='intro_disp',
         text='',
         font='Arial',
-        pos=(0, 0), draggable=False, height=0.1, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), draggable=False, height=0.7, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -549,7 +549,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     intro_small = visual.TextStim(win=win, name='intro_small',
         text='',
         font='Arial',
-        pos=(0, -.3), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, -.3), draggable=False, height=0.4, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-3.0);
@@ -1477,8 +1477,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # Run 'Begin Routine' code from code_fb
         global block_fb
         global fb_text
-        # send signal to SIMULINK
-        matlab_send("fb")
+        
         # display feedback to log
         print(key_resp.keys,"was pressed\n")
         
@@ -1491,10 +1490,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 stim_map["cross_en"] = False
             elif key_resp.corr:
                 timing_map["dFb"] = 0
-                block_fb += u'\u2713'
+                block_fb += u'\u2713 '
             else:
                 timing_map["dFb"] = 0
-                block_fb += 'X' 
+                block_fb += 'X ' 
         except:
             print('ERROR: no key_resp keyboard component written.')
         
@@ -1514,6 +1513,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             stim_map["cross_en"] = False
             timing_map["dFb"] = DEFAULT_FEEDBACK
             fb_text = block_fb
+            # send signal to MATLAB showing it is a fb, ignore
+            matlab_send("fb")
+        else:
+            matlab_send("NA")
         fb_disp.setColor([1.0000, 1.0000, 1.0000], colorSpace='rgb')
         fb_disp.setText(fb_text)
         # create starting attributes for fb_keyboard_continue
