@@ -16,10 +16,15 @@ signals.
 | 10000 ms | 3500 ms | 4000 +- 1000 ms | 1500 ms | 500 ms | 2500 +- 1000 ms |  
 
 ## TODO List
-* adjust text sizes for fb, stimulus (must test first)
-* create standalone practice test 
+* create standalone practice test
+* setup remote connection for separate stimulus and monitoring [linked here](https://knowledge.civilgeo.com/configuring-windows-firewall-to-allow-or-block-ip-addresses/)
  
 
 ## Research on Free Time
 * look at sources for Sternberg EEG research (find comparisons)
 * Basic Sternberg Task modeled [here](https://pmc.ncbi.nlm.nih.gov/articles/PMC2853698/)
+
+# Week Progress (6/23/25 - 6/30/25)
+* Adjusted timing and sizing for final stimulus
+* Researched eye blinking artefact removal
+* Finished log information code
