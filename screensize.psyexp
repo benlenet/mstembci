@@ -107,7 +107,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.15" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="0.18" valType="num" updates="constant" name="letterHeight"/>
         <Param val="text" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -117,7 +117,7 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="1.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="3" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="a b c d e f g" valType="str" updates="constant" name="text"/>
         <Param val="height" valType="str" updates="None" name="units"/>
@@ -152,7 +152,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Arial" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.2" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="0.16" valType="num" updates="constant" name="letterHeight"/>
         <Param val="text_2" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -162,17 +162,17 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="5" valType="code" updates="constant" name="stopVal"/>
+        <Param val="3" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="$text_show" valType="str" updates="set every repeat" name="text"/>
+        <Param val="$display_text" valType="str" updates="set every repeat" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
       <CodeComponent name="code" plugin="None">
-        <Param val="text_show = &quot;&quot;" valType="extendedCode" updates="constant" name="Before Experiment"/>
-        <Param val="text_show = &quot;&quot;;&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="global text_show&amp;#10;for a in range(5):&amp;#10;    text_show += (u'\u2713 ' + &quot;X &quot;)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="text_show = &quot;&quot;&amp;#10;display_text = &quot;&quot;" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="text_show = &quot;&quot;;&amp;#10;display_text = &quot;&quot;;&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="global text_show&amp;#10;global display_text&amp;#10;for a in range(10):&amp;#10;    if (a % 2):&amp;#10;        text_show += (u'\u2713 ')&amp;#10;    else:&amp;#10;        text_show += ('X ')&amp;#10;    &amp;#10;display_text = text_show[:int(len(text_show)/2)] + '\n' + text_show[int(len(text_show)/2):]&amp;#10;&amp;#10;global block_fb&amp;#10;global fb_text&amp;#10;&amp;#10;# display feedback to log&amp;#10;print(key_resp.keys,&quot;was pressed\n&quot;)&amp;#10;&amp;#10;try:&amp;#10;    if key_resp.keys == None:&amp;#10;        # add timeout text, decrement loop, enable fixation&amp;#10;        fb_text = 'please respond within a shorter time period.\nPress any key to continue.'&amp;#10;        timing_map[&quot;dFb&quot;] = TIMEOUT_DURATION&amp;#10;        stim_map[&quot;loop_iter&quot;] -= 1&amp;#10;        stim_map[&quot;cross_en&quot;] = False&amp;#10;    elif key_resp.corr:&amp;#10;        timing_map[&quot;dFb&quot;] = 0&amp;#10;        block_fb += u'\u2713 '&amp;#10;    else:&amp;#10;        timing_map[&quot;dFb&quot;] = 0&amp;#10;        block_fb += 'X ' &amp;#10;except:&amp;#10;    print('ERROR: no key_resp keyboard component written.')&amp;#10;&amp;#10;&amp;#10;# increment loop, enable cross if loop reaches max&amp;#10;stim_map[&quot;loop_iter&quot;] += 1&amp;#10;&amp;#10;# display loop information &amp;#10;print(&quot;loop_iter =&quot;, stim_map[&quot;loop_iter&quot;], '\n',&amp;#10;      &quot;loop_count =&quot;, stim_map[&quot;loop_count&quot;], '\n')&amp;#10;      &amp;#10;# increment characters after specified loop count&amp;#10;if stim_map[&quot;loop_iter&quot;] == stim_map[&quot;loop_count&quot;]:&amp;#10;    stim_map[&quot;loop_iter&quot;] = 0&amp;#10;    stim_map[&quot;char_length&quot;] += CHARACTER_INCREMENT&amp;#10;    # reenable fixation&amp;#10;    stim_map[&quot;cross_en&quot;] = False&amp;#10;    timing_map[&quot;dFb&quot;] = DEFAULT_FEEDBACK&amp;#10;    # display text&amp;#10;    print(&quot;length of block_fb is &quot;, len(block_fb))&amp;#10;    fb_text = block_fb[:int(len(block_fb)/2)] + '\n' + block_fb[int(len(block_fb)/2):]&amp;#10;    print(&quot;fb text is &quot;, fb_text)&amp;#10;    # send signal to MATLAB showing it is a fb, ignore&amp;#10;    matlab_send(&quot;fb&quot;)&amp;#10;else:&amp;#10;    matlab_send(&quot;NA&quot;)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="/* Syntax Error: Fix Python code */" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>

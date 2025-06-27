@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on June 26, 2025, at 11:54
+    on June 26, 2025, at 16:50
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -35,6 +35,7 @@ from psychopy.hardware import keyboard
 
 # Run 'Before Experiment' code from code
 text_show = ""
+display_text = ""
 # --- Setup global variables (available in all functions) ---
 # create a device manager to handle hardware (keyboards, mice, mirophones, speakers, etc.)
 deviceManager = hardware.DeviceManager()
@@ -128,7 +129,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\e203gtec\\Desktop\\mstembci\\screensize_lastrun.py',
+        originPath='C:\\Users\\Ben\\gitfolder\\mstembci\\screensize_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -367,7 +368,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     text = visual.TextStim(win=win, name='text',
         text='a b c d e f g',
         font='Arial',
-        units='height', pos=(0, 0), draggable=False, height=0.15, wrapWidth=None, ori=0.0, 
+        units='height', pos=(0, 0), draggable=False, height=0.18, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -376,14 +377,20 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     text_2 = visual.TextStim(win=win, name='text_2',
         text='',
         font='Arial',
-        pos=(0, 0), draggable=False, height=0.2, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), draggable=False, height=0.16, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
     # Run 'Begin Experiment' code from code
     global text_show
-    for a in range(5):
-        text_show += (u'\u2713 ' + "X ")
+    global display_text
+    for a in range(10):
+        if (a % 2):
+            text_show += (u'\u2713 ')
+        else:
+            text_show += ('X ')
+        
+    display_text = text_show[:int(len(text_show)/2)] + '\n' + text_show[int(len(text_show)/2):]
     
     # create some handy timers
     
@@ -444,7 +451,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Run Routine "trial" ---
     trial.forceEnded = routineForceEnded = not continueRoutine
-    while continueRoutine and routineTimer.getTime() < 1.0:
+    while continueRoutine and routineTimer.getTime() < 3.0:
         # get current time
         t = routineTimer.getTime()
         tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -475,7 +482,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # if text is stopping this frame...
         if text.status == STARTED:
             # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > text.tStartRefresh + 1.0-frameTolerance:
+            if tThisFlipGlobal > text.tStartRefresh + 3-frameTolerance:
                 # keep track of stop time/frame for later
                 text.tStop = t  # not accounting for scr refresh
                 text.tStopRefresh = tThisFlipGlobal  # on global time
@@ -531,7 +538,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     elif trial.forceEnded:
         routineTimer.reset()
     else:
-        routineTimer.addTime(-1.000000)
+        routineTimer.addTime(-3.000000)
     thisExp.nextEntry()
     
     # --- Prepare to start Routine "ff" ---
@@ -543,7 +550,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     ff.status = NOT_STARTED
     continueRoutine = True
     # update component parameters for each repeat
-    text_2.setText(text_show)
+    text_2.setText(display_text)
     # store start times for ff
     ff.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
     ff.tStart = globalClock.getTime(format='float')
@@ -566,7 +573,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Run Routine "ff" ---
     ff.forceEnded = routineForceEnded = not continueRoutine
-    while continueRoutine and routineTimer.getTime() < 5.0:
+    while continueRoutine and routineTimer.getTime() < 3.0:
         # get current time
         t = routineTimer.getTime()
         tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -597,7 +604,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # if text_2 is stopping this frame...
         if text_2.status == STARTED:
             # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > text_2.tStartRefresh + 5-frameTolerance:
+            if tThisFlipGlobal > text_2.tStartRefresh + 3-frameTolerance:
                 # keep track of stop time/frame for later
                 text_2.tStop = t  # not accounting for scr refresh
                 text_2.tStopRefresh = tThisFlipGlobal  # on global time
@@ -653,7 +660,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     elif ff.forceEnded:
         routineTimer.reset()
     else:
-        routineTimer.addTime(-5.000000)
+        routineTimer.addTime(-3.000000)
     thisExp.nextEntry()
     
     # mark experiment as finished

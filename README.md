@@ -16,8 +16,10 @@ signals.
 | 10000 ms | 3500 ms | 4000 +- 1000 ms | 1500 ms | 500 ms | 2500 +- 1000 ms |  
 
 ## TODO List
-* do feedback at the end of 10 routines rather than at the end of each routine (SAD)
+* adjust text sizes for fb, stimulus (must test first)
+* create standalone practice test 
  
 
 ## Research on Free Time
 * look at sources for Sternberg EEG research (find comparisons)
+* Basic Sternberg Task modeled [here](https://pmc.ncbi.nlm.nih.gov/articles/PMC2853698/)

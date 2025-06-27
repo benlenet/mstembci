@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on June 26, 2025, at 11:33
+    on June 26, 2025, at 17:31
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -70,7 +70,7 @@ timing_map = {"dCross": 10,
               "dPrompt": 3.5,
               "dBlank": 4,
               "dResponse": 1.5,
-              "dFb": 0.5,
+              "dFb": TIMEOUT_DURATION,
               "dITI": 2.5,
               # start at high values of practice,
               # will change after 1st runtime
@@ -180,7 +180,7 @@ maintrial_text = "The main experiment will now begin. Please press any key to be
 # Run 'Before Experiment' code from code_fb
 block_fb = ""
 fb_text = ""
-
+fb_text_size = 0.13
 # --- Setup global variables (available in all functions) ---
 # create a device manager to handle hardware (keyboards, mice, mirophones, speakers, etc.)
 deviceManager = hardware.DeviceManager()
@@ -208,7 +208,7 @@ or run the experiment with `--pilot` as an argument. To change what pilot
 PILOTING = core.setPilotModeFromArgs()
 # start off with values from experiment settings
 _fullScr = True
-_winSize = [1920, 1080]
+_winSize = [2560, 1440]
 # if in pilot mode, apply overrides according to preferences
 if PILOTING:
     # force windowed mode
@@ -274,7 +274,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\e203gtec\\Desktop\\mstembci\\display_no_practice_lastrun.py',
+        originPath='C:\\Users\\Ben\\gitfolder\\mstembci\\display_no_practice_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -347,7 +347,7 @@ def setupWindow(expInfo=None, win=None):
             monitor='testMonitor', color=[-1.0000, -1.0000, -1.0000], colorSpace='rgb',
             backgroundImage='', backgroundFit='fill',
             blendMode='avg', useFBO=True,
-            units='norm',
+            units='height',
             checkTiming=False  # we're going to do this ourselves in a moment
         )
     else:
@@ -356,7 +356,7 @@ def setupWindow(expInfo=None, win=None):
         win.colorSpace = 'rgb'
         win.backgroundImage = ''
         win.backgroundFit = 'fill'
-        win.units = 'norm'
+        win.units = 'height'
     if expInfo is not None:
         # get/measure frame rate if not already in expInfo
         if win._monitorFrameRate is None:
@@ -540,16 +540,16 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # --- Initialize components for Routine "intro" ---
     intro_disp = visual.TextStim(win=win, name='intro_disp',
         text='',
-        font='Arial',
-        pos=(0, 0), draggable=False, height=0.7, wrapWidth=None, ori=0.0, 
+        font=' Noto Mono',
+        pos=(0, 0), draggable=False, height=0.1, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
     key_nex = keyboard.Keyboard(deviceName='key_nex')
     intro_small = visual.TextStim(win=win, name='intro_small',
         text='',
-        font='Arial',
-        pos=(0, -.3), draggable=False, height=0.4, wrapWidth=None, ori=0.0, 
+        font=' Noto Mono',
+        pos=(0, -.3), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-3.0);
@@ -557,19 +557,19 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # --- Initialize components for Routine "initcodevalues" ---
     
     # --- Initialize components for Routine "cross_fix" ---
-    polygon = visual.ShapeStim(
-        win=win, name='polygon', vertices='cross',
-        size=(0.3, 0.3),
-        ori=0.0, pos=(0, 0), draggable=False, anchor='center',
-        lineWidth=1.0,
-        colorSpace='rgb', lineColor='white', fillColor='white',
-        opacity=None, depth=0.0, interpolate=True)
+    text_cross = visual.TextStim(win=win, name='text_cross',
+        text='+',
+        font='Arial',
+        pos=(0, 0), draggable=False, height=0.3, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=-1.0);
     
     # --- Initialize components for Routine "prompt" ---
     string_prompt_disp = visual.TextStim(win=win, name='string_prompt_disp',
         text='',
-        font='Arial',
-        pos=(0, 0), draggable=False, height=0.3, wrapWidth=None, ori=0.0, 
+        font=' Noto Mono',
+        pos=(0, 0), draggable=False, height=0.17, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -588,8 +588,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     key_resp = keyboard.Keyboard(deviceName='key_resp')
     key_response_disp = visual.TextStim(win=win, name='key_response_disp',
         text='',
-        font='Arial',
-        pos=(0, 0), draggable=False, height=0.3, wrapWidth=None, ori=0.0, 
+        font=' Noto Mono',
+        pos=(0, 0), draggable=False, height=0.18, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-1.0);
@@ -597,8 +597,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # --- Initialize components for Routine "button_record" ---
     fb_disp = visual.TextStim(win=win, name='fb_disp',
         text='',
-        font='Open Sans',
-        pos=(0, 0), draggable=False, height=0.15, wrapWidth=None, ori=0.0, 
+        font=' Noto Mono',
+        pos=(0, 0), draggable=False, height=1.0, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-1.0);
@@ -620,8 +620,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # --- Initialize components for Routine "end" ---
     end_text_block = visual.TextStim(win=win, name='end_text_block',
         text='',
-        font='Arial',
-        pos=(0, 0), draggable=False, height=0.15, wrapWidth=None, ori=0.0, 
+        font=' Noto Mono',
+        pos=(0, 0), draggable=False, height=0.1, wrapWidth=None, ori=0.0, 
         color=[1.0000, 1.0000, 1.0000], colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -940,7 +940,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # create an object to store info about Routine cross_fix
         cross_fix = data.Routine(
             name='cross_fix',
-            components=[polygon],
+            components=[text_cross],
         )
         cross_fix.status = NOT_STARTED
         continueRoutine = True
@@ -983,39 +983,39 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
             # update/draw components on each frame
             
-            # *polygon* updates
+            # *text_cross* updates
             
-            # if polygon is starting this frame...
-            if polygon.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # if text_cross is starting this frame...
+            if text_cross.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
                 # keep track of start time/frame for later
-                polygon.frameNStart = frameN  # exact frame index
-                polygon.tStart = t  # local t and not account for scr refresh
-                polygon.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(polygon, 'tStartRefresh')  # time at next scr refresh
+                text_cross.frameNStart = frameN  # exact frame index
+                text_cross.tStart = t  # local t and not account for scr refresh
+                text_cross.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(text_cross, 'tStartRefresh')  # time at next scr refresh
                 # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'polygon.started')
+                thisExp.timestampOnFlip(win, 'text_cross.started')
                 # update status
-                polygon.status = STARTED
-                polygon.setAutoDraw(True)
+                text_cross.status = STARTED
+                text_cross.setAutoDraw(True)
             
-            # if polygon is active this frame...
-            if polygon.status == STARTED:
+            # if text_cross is active this frame...
+            if text_cross.status == STARTED:
                 # update params
                 pass
             
-            # if polygon is stopping this frame...
-            if polygon.status == STARTED:
+            # if text_cross is stopping this frame...
+            if text_cross.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > polygon.tStartRefresh + timing_map["dCross"]-frameTolerance:
+                if tThisFlipGlobal > text_cross.tStartRefresh + timing_map["dCross"]-frameTolerance:
                     # keep track of stop time/frame for later
-                    polygon.tStop = t  # not accounting for scr refresh
-                    polygon.tStopRefresh = tThisFlipGlobal  # on global time
-                    polygon.frameNStop = frameN  # exact frame index
+                    text_cross.tStop = t  # not accounting for scr refresh
+                    text_cross.tStopRefresh = tThisFlipGlobal  # on global time
+                    text_cross.frameNStop = frameN  # exact frame index
                     # add timestamp to datafile
-                    thisExp.timestampOnFlip(win, 'polygon.stopped')
+                    thisExp.timestampOnFlip(win, 'text_cross.stopped')
                     # update status
-                    polygon.status = FINISHED
-                    polygon.setAutoDraw(False)
+                    text_cross.status = FINISHED
+                    text_cross.setAutoDraw(False)
             
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1477,14 +1477,15 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # Run 'Begin Routine' code from code_fb
         global block_fb
         global fb_text
-        
+        global fb_text_size
         # display feedback to log
         print(key_resp.keys,"was pressed\n")
         
         try:
             if key_resp.keys == None:
                 # add timeout text, decrement loop, enable fixation
-                fb_text = 'please respond within a shorter time period.\nPress any key to continue.'
+                fb_text_size = 0.1
+                fb_text = 'Response took too long. Press any key to continue.'
                 timing_map["dFb"] = TIMEOUT_DURATION
                 stim_map["loop_iter"] -= 1
                 stim_map["cross_en"] = False
@@ -1512,13 +1513,17 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             # reenable fixation
             stim_map["cross_en"] = False
             timing_map["dFb"] = DEFAULT_FEEDBACK
-            fb_text = block_fb
+            # display text
+            print("length of block_fb is ", len(block_fb))
+            fb_text = block_fb[:int(len(block_fb)/2)] + '\n' + block_fb[int(len(block_fb)/2):]
+            print("fb text is ", fb_text)
             # send signal to MATLAB showing it is a fb, ignore
             matlab_send("fb")
         else:
             matlab_send("NA")
         fb_disp.setColor([1.0000, 1.0000, 1.0000], colorSpace='rgb')
         fb_disp.setText(fb_text)
+        fb_disp.setHeight(fb_text_size)
         # create starting attributes for fb_keyboard_continue
         fb_keyboard_continue.keys = []
         fb_keyboard_continue.rt = []
@@ -1665,7 +1670,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         
         # ensure that fb is reset to 0
         timing_map["dFb"] = 0
-        if len(block_fb) >= stim_map["loop_count"]:
+        fb_text_size = 0.16
+        if len(block_fb) >= (stim_map["loop_count"] * 2):
             block_fb = ""
         
         # print out debugging information
