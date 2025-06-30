@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on June 27, 2025, at 16:59
+    on June 30, 2025, at 11:11
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -70,7 +70,7 @@ timing_map = {"dCross": 10,
               "dPrompt": 3.5,
               "dBlank": 4,
               "dResponse": 1.5,
-              "dFb": TIMEOUT_DURATION,
+              "dFb": 2,
               "dITI": 2.5,
               }
 
@@ -100,7 +100,7 @@ text_list = ["+",
              "b y g d f",
              "",
              "g",
-             "Corrrect/Incorrect",
+             u'\u2713' + '/' + u'\u2715',
              "We will now begin the practice trial."]
 # variables to move text
 loopcount_text_list = len(text_list)
@@ -172,6 +172,7 @@ maintrial_text = "The main experiment will now begin. Please press any key to be
 block_fb = ""
 fb_text = ""
 fb_text_size = 0.13
+fb_color = 'white'
 # --- Setup global variables (available in all functions) ---
 # create a device manager to handle hardware (keyboards, mice, mirophones, speakers, etc.)
 deviceManager = hardware.DeviceManager()
@@ -179,7 +180,7 @@ deviceManager = hardware.DeviceManager()
 _thisDir = os.path.dirname(os.path.abspath(__file__))
 # store info about the experiment session
 psychopyVersion = '2024.2.4'
-expName = 'data_sternberg_trial_10x3-357'  # from the Builder filename that created this script
+expName = 'sternberg_practice_3x3'  # from the Builder filename that created this script
 # information about this experiment
 expInfo = {
     'participant': f"{randint(0, 999999):06.0f}",
@@ -555,7 +556,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     instruction = visual.TextStim(win=win, name='instruction',
         text='',
         font='Open Sans',
-        pos=(0, 0), draggable=False, height=0.15, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), draggable=False, height=0.17, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -565,7 +566,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     text_countdown = visual.TextStim(win=win, name='text_countdown',
         text='',
         font='Open Sans',
-        pos=(0, 0), draggable=False, height=0.1, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), draggable=False, height=0.2, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -1786,23 +1787,27 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         global block_fb
         global fb_text
         global fb_text_size
+        global fb_color
         # display feedback to log
         print(key_resp.keys,"was pressed\n")
         
         try:
             if key_resp.keys == None:
                 # add timeout text, decrement loop, enable fixation
+                fb_color = 'white'
                 fb_text_size = 0.1
                 fb_text = 'Response took too long. Press any key to continue.'
                 timing_map["dFb"] = TIMEOUT_DURATION
                 stim_map["loop_iter"] -= 1
                 stim_map["cross_en"] = False
             elif key_resp.corr:
-                timing_map["dFb"] = 0
+                fb_text = 'correct!'
+                fb_color = 'green'
                 block_fb += u'\u2713 '
             else:
-                timing_map["dFb"] = 0
-                block_fb += 'X ' 
+                fb_text = 'incorrect'
+                fb_color = 'red'
+                block_fb += u'\u2715 '
         except:
             print('ERROR: no key_resp keyboard component written.')
         
@@ -1822,14 +1827,15 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             stim_map["cross_en"] = False
             timing_map["dFb"] = DEFAULT_FEEDBACK
             # display text
+            fb_color = 'white'
             print("length of block_fb is ", len(block_fb))
-            fb_text = block_fb[:int(len(block_fb)/2)] + '\n' + block_fb[int(len(block_fb)/2):]
+            fb_text = block_fb
             print("fb text is ", fb_text)
             # send signal to MATLAB showing it is a fb, ignore
             matlab_send("fb")
         else:
             matlab_send("NA")
-        fb_disp.setColor([1.0000, 1.0000, 1.0000], colorSpace='rgb')
+        fb_disp.setColor(fb_color, colorSpace='rgb')
         fb_disp.setText(fb_text)
         fb_disp.setHeight(fb_text_size)
         # create starting attributes for fb_keyboard_continue
@@ -1976,8 +1982,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         thisExp.addData('button_record.stopped', button_record.tStop)
         # Run 'End Routine' code from code_fb
         
-        # ensure that fb is reset to 0
-        timing_map["dFb"] = 0
+        # ensure that fb is reset to 2
+        timing_map['dFb'] = 2
         fb_text_size = 0.16
         if len(block_fb) >= (stim_map["loop_count"] * 2):
             block_fb = ""
