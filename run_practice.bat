@@ -1,0 +1,1 @@
+& "C:\Program Files\PsychoPy\python.exe" practice_trial_lastrun.py
