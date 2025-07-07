@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on June 30, 2025, at 13:49
+    on July 03, 2025, at 16:36
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -45,7 +45,7 @@ import socket
 # constants declaration
 TIMEOUT_DURATION = 10
 CHARACTER_INCREMENT = 2
-DEFAULT_FEEDBACK = 5
+DEFAULT_FEEDBACK = 10
 
 # dBlank [3, 5] -- dITI [1.5, 3.5]
 dBlank_lowbound = 3
@@ -119,7 +119,7 @@ stim_map["instruction_text"] = text_list[stim_map["iter_text_list"]]
 
 
 # initialize udp connection to MATLAB
-UDP_IP = "127.0.0.1"
+UDP_IP = "10.68.17.253"
 UDP_PORT = 8000
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
@@ -180,6 +180,8 @@ maintrial_text = "The main experiment will now begin. Please press any key to be
 # Run 'Before Experiment' code from code_fb
 block_fb = ""
 fb_text = ""
+text_break = ""
+skip_break = True
 # --- Setup global variables (available in all functions) ---
 # create a device manager to handle hardware (keyboards, mice, mirophones, speakers, etc.)
 deviceManager = hardware.DeviceManager()
@@ -262,7 +264,7 @@ def setupData(expInfo, dataDir=None):
     # data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
     if dataDir is None:
         dataDir = _thisDir
-    filename = u'data/%s_%s_%s' % (expName, expInfo['date'], str(expInfo['birthday']))
+    filename = u'data/%s_%s_%s' % (str(expInfo['birthday']), expName, expInfo['date'])
     # make sure filename is relative to dataDir
     if os.path.isabs(filename):
         dataDir = os.path.commonprefix([dataDir, filename])
@@ -272,7 +274,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\04Ben\\github\\mstembci\\display_no_practice_lastrun.py',
+        originPath='C:\\Users\\benlenet\\mstembci\\display_no_practice_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -600,7 +602,23 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-1.0);
+    fb_break = visual.TextStim(win=win, name='fb_break',
+        text='',
+        font='Open Sans',
+        pos=(0, -0.3), draggable=False, height=0.1, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=-2.0);
     fb_keyboard_continue = keyboard.Keyboard(deviceName='fb_keyboard_continue')
+    
+    # --- Initialize components for Routine "countdown" ---
+    text_countdown = visual.TextStim(win=win, name='text_countdown',
+        text='',
+        font='Open Sans',
+        pos=(0, 0), draggable=False, height=0.1, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=0.0);
     
     # --- Initialize components for Routine "ITI" ---
     black_screen = visual.Rect(
@@ -1467,7 +1485,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # create an object to store info about Routine button_record
         button_record = data.Routine(
             name='button_record',
-            components=[fb_disp, fb_keyboard_continue],
+            components=[fb_disp, fb_break, fb_keyboard_continue],
         )
         button_record.status = NOT_STARTED
         continueRoutine = True
@@ -1475,6 +1493,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # Run 'Begin Routine' code from code_fb
         global block_fb
         global fb_text
+        global text_break
+        global skip_break
         # display feedback to log
         print(key_resp.keys,"was pressed\n")
         
@@ -1510,15 +1530,16 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             stim_map["cross_en"] = False
             timing_map["dFb"] = DEFAULT_FEEDBACK
             # display text
-            print("length of block_fb is ", len(block_fb))
             fb_text = 'feedback:\n' + block_fb[:int(len(block_fb)/2)] + '\n' + block_fb[int(len(block_fb)/2):]
-            print("fb text is ", fb_text)
+            text_break = "test will resume in 20 seconds"
+            skip_break = False
             # send signal to MATLAB showing it is a fb, ignore
             matlab_send("fb")
         else:
             matlab_send("NA")
         fb_disp.setColor([1.0000, 1.0000, 1.0000], colorSpace='rgb')
         fb_disp.setText(fb_text)
+        fb_break.setText(text_break)
         # create starting attributes for fb_keyboard_continue
         fb_keyboard_continue.keys = []
         fb_keyboard_continue.rt = []
@@ -1585,6 +1606,40 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     # update status
                     fb_disp.status = FINISHED
                     fb_disp.setAutoDraw(False)
+            
+            # *fb_break* updates
+            
+            # if fb_break is starting this frame...
+            if fb_break.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                fb_break.frameNStart = frameN  # exact frame index
+                fb_break.tStart = t  # local t and not account for scr refresh
+                fb_break.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(fb_break, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'fb_break.started')
+                # update status
+                fb_break.status = STARTED
+                fb_break.setAutoDraw(True)
+            
+            # if fb_break is active this frame...
+            if fb_break.status == STARTED:
+                # update params
+                pass
+            
+            # if fb_break is stopping this frame...
+            if fb_break.status == STARTED:
+                # is it time to stop? (based on global clock, using actual start)
+                if tThisFlipGlobal > fb_break.tStartRefresh + timing_map["dFb"]-frameTolerance:
+                    # keep track of stop time/frame for later
+                    fb_break.tStop = t  # not accounting for scr refresh
+                    fb_break.tStopRefresh = tThisFlipGlobal  # on global time
+                    fb_break.frameNStop = frameN  # exact frame index
+                    # add timestamp to datafile
+                    thisExp.timestampOnFlip(win, 'fb_break.stopped')
+                    # update status
+                    fb_break.status = FINISHED
+                    fb_break.setAutoDraw(False)
             
             # *fb_keyboard_continue* updates
             
@@ -1668,6 +1723,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         fb_text_size = 0.16
         if len(block_fb) >= (stim_map["loop_count"] * 2):
             block_fb = ""
+            text_break = ""
         
         # print out debugging information
         print("timing information is: \n")
@@ -1694,6 +1750,134 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             
         # the Routine "button_record" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
+        
+        # --- Prepare to start Routine "countdown" ---
+        # create an object to store info about Routine countdown
+        countdown = data.Routine(
+            name='countdown',
+            components=[text_countdown],
+        )
+        countdown.status = NOT_STARTED
+        continueRoutine = True
+        # update component parameters for each repeat
+        # store start times for countdown
+        countdown.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
+        countdown.tStart = globalClock.getTime(format='float')
+        countdown.status = STARTED
+        thisExp.addData('countdown.started', countdown.tStart)
+        countdown.maxDuration = None
+        # skip Routine countdown if its 'Skip if' condition is True
+        countdown.skipped = continueRoutine and not (skip_break)
+        continueRoutine = countdown.skipped
+        # keep track of which components have finished
+        countdownComponents = countdown.components
+        for thisComponent in countdown.components:
+            thisComponent.tStart = None
+            thisComponent.tStop = None
+            thisComponent.tStartRefresh = None
+            thisComponent.tStopRefresh = None
+            if hasattr(thisComponent, 'status'):
+                thisComponent.status = NOT_STARTED
+        # reset timers
+        t = 0
+        _timeToFirstFrame = win.getFutureFlipTime(clock="now")
+        frameN = -1
+        
+        # --- Run Routine "countdown" ---
+        # if trial has changed, end Routine now
+        if isinstance(loop_maintrial, data.TrialHandler2) and thisLoop_maintrial.thisN != loop_maintrial.thisTrial.thisN:
+            continueRoutine = False
+        countdown.forceEnded = routineForceEnded = not continueRoutine
+        while continueRoutine and routineTimer.getTime() < 10.0:
+            # get current time
+            t = routineTimer.getTime()
+            tThisFlip = win.getFutureFlipTime(clock=routineTimer)
+            tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+            frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+            # update/draw components on each frame
+            
+            # *text_countdown* updates
+            
+            # if text_countdown is starting this frame...
+            if text_countdown.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                text_countdown.frameNStart = frameN  # exact frame index
+                text_countdown.tStart = t  # local t and not account for scr refresh
+                text_countdown.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(text_countdown, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'text_countdown.started')
+                # update status
+                text_countdown.status = STARTED
+                text_countdown.setAutoDraw(True)
+            
+            # if text_countdown is active this frame...
+            if text_countdown.status == STARTED:
+                # update params
+                text_countdown.setText(str(10-int(t)), log=False)
+            
+            # if text_countdown is stopping this frame...
+            if text_countdown.status == STARTED:
+                # is it time to stop? (based on global clock, using actual start)
+                if tThisFlipGlobal > text_countdown.tStartRefresh + 10-frameTolerance:
+                    # keep track of stop time/frame for later
+                    text_countdown.tStop = t  # not accounting for scr refresh
+                    text_countdown.tStopRefresh = tThisFlipGlobal  # on global time
+                    text_countdown.frameNStop = frameN  # exact frame index
+                    # add timestamp to datafile
+                    thisExp.timestampOnFlip(win, 'text_countdown.stopped')
+                    # update status
+                    text_countdown.status = FINISHED
+                    text_countdown.setAutoDraw(False)
+            
+            # check for quit (typically the Esc key)
+            if defaultKeyboard.getKeys(keyList=["escape"]):
+                thisExp.status = FINISHED
+            if thisExp.status == FINISHED or endExpNow:
+                endExperiment(thisExp, win=win)
+                return
+            # pause experiment here if requested
+            if thisExp.status == PAUSED:
+                pauseExperiment(
+                    thisExp=thisExp, 
+                    win=win, 
+                    timers=[routineTimer], 
+                    playbackComponents=[]
+                )
+                # skip the frame we paused on
+                continue
+            
+            # check if all components have finished
+            if not continueRoutine:  # a component has requested a forced-end of Routine
+                countdown.forceEnded = routineForceEnded = True
+                break
+            continueRoutine = False  # will revert to True if at least one component still running
+            for thisComponent in countdown.components:
+                if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                    continueRoutine = True
+                    break  # at least one component has not yet finished
+            
+            # refresh the screen
+            if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+                win.flip()
+        
+        # --- Ending Routine "countdown" ---
+        for thisComponent in countdown.components:
+            if hasattr(thisComponent, "setAutoDraw"):
+                thisComponent.setAutoDraw(False)
+        # store stop times for countdown
+        countdown.tStop = globalClock.getTime(format='float')
+        countdown.tStopRefresh = tThisFlipGlobal
+        thisExp.addData('countdown.stopped', countdown.tStop)
+        # Run 'End Routine' code from code
+        skip_break = True
+        # using non-slip timing so subtract the expected duration of this Routine (unless ended on request)
+        if countdown.maxDurationReached:
+            routineTimer.addTime(-countdown.maxDuration)
+        elif countdown.forceEnded:
+            routineTimer.reset()
+        else:
+            routineTimer.addTime(-10.000000)
         
         # --- Prepare to start Routine "ITI" ---
         # create an object to store info about Routine ITI

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on June 30, 2025, at 11:11
+    on July 01, 2025, at 14:20
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -200,7 +200,7 @@ or run the experiment with `--pilot` as an argument. To change what pilot
 PILOTING = core.setPilotModeFromArgs()
 # start off with values from experiment settings
 _fullScr = True
-_winSize = [2560, 1440]
+_winSize = [1707, 1067]
 # if in pilot mode, apply overrides according to preferences
 if PILOTING:
     # force windowed mode
@@ -256,7 +256,7 @@ def setupData(expInfo, dataDir=None):
     # data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
     if dataDir is None:
         dataDir = _thisDir
-    filename = u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])
+    filename = u'practice__ignore'
     # make sure filename is relative to dataDir
     if os.path.isabs(filename):
         dataDir = os.path.commonprefix([dataDir, filename])
@@ -266,8 +266,8 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\Ben\\gitfolder\\mstembci\\practice_trial_lastrun.py',
-        savePickle=True, saveWideText=True,
+        originPath='C:\\Users\\benlenet\\mstembci\\practice_trial_lastrun.py',
+        savePickle=True, saveWideText=False,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
     thisExp.setPriority('thisRow.t', priority.CRITICAL)
@@ -298,18 +298,6 @@ def setupLogging(filename):
         )
     else:
         logging.console.setLevel('warning')
-    # save a log file for detail verbose info
-    logFile = logging.LogFile(filename+'.log')
-    if PILOTING:
-        logFile.setLevel(
-            prefs.piloting['pilotLoggingLevel']
-        )
-    else:
-        logFile.setLevel(
-            logging.getLevel('info')
-        )
-    
-    return logFile
 
 
 def setupWindow(expInfo=None, win=None):
@@ -2140,15 +2128,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     if thisSession is not None:
         # if running in a Session with a Liaison client, send data up to now
         thisSession.sendExperimentData()
-    # get names of stimulus parameters
-    if loop_maintrial.trialList in ([], [None], None):
-        params = []
-    else:
-        params = loop_maintrial.trialList[0].keys()
-    # save data for this loop
-    loop_maintrial.saveAsExcel(filename + '.xlsx', sheetName='loop_maintrial',
-        stimOut=params,
-        dataOut=['n','all_mean','all_std', 'all_raw'])
     
     # --- Prepare to start Routine "calc_end_stat" ---
     # create an object to store info about Routine calc_end_stat
@@ -2391,7 +2370,6 @@ def saveData(thisExp):
     """
     filename = thisExp.dataFileName
     # these shouldn't be strictly necessary (should auto-save)
-    thisExp.saveAsWideText(filename + '.csv', delim='auto')
     thisExp.saveAsPickle(filename)
 
 
@@ -2419,7 +2397,6 @@ def endExperiment(thisExp, win=None):
     logging.console.setLevel(logging.WARNING)
     # mark experiment handler as finished
     thisExp.status = FINISHED
-    logging.flush()
 
 
 def quit(thisExp, win=None, thisSession=None):
@@ -2440,7 +2417,6 @@ def quit(thisExp, win=None, thisSession=None):
         # and win.timeOnFlip() tasks get executed before quitting
         win.flip()
         win.close()
-    logging.flush()
     if thisSession is not None:
         thisSession.stop()
     # terminate Python process

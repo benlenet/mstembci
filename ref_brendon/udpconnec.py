@@ -3,6 +3,8 @@ import keyboard
 
 # marker send to MATLAB
 # # 🔹 UDP Setup
+ALT_IP = "10.68.17.253"
+ALT_PORT = 5005
 UDP_IP = "127.0.0.1"
 UDP_PORT = 8000
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -18,7 +20,7 @@ while(1):
     except:
         print("cannot cast", userval, "as int\n")
         continue
-    sock.sendto(eegbytes, (UDP_IP, UDP_PORT))
+    sock.sendto(eegbytes, (ALT_IP, ALT_PORT))
     print("sent to udp value:", eegbytes, '\n')
 
 # retrieve frame of PsychoPy  
