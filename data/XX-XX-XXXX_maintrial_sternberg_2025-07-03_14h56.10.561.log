@@ -1,0 +1,445 @@
+10.3370 	DEBUG 	Fullscreen settings ignored as running in pilot mode.
+10.3380 	INFO 	Loaded monitor calibration from ['2025_06_30 14:54']
+11.1250 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, autoLog=True, backendConf=UNKNOWN, backgroundFit=<method-wrapper '__getattribute__' of attributeSetter object at 0x000002457C4220E0>, backgroundImage=<method-wrapper '__getattribute__' of attributeSetter object at 0x000002457C422080>, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([-1., -1., -1.]), colorSpace='rgb', depthBits=8, fullscr=False, gamma=None, gammaErrorPolicy='raise', infoMsg=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x00000245000E79A0>, multiSample=False, name='window1', numSamples=2, pos=[560.0, 240.0], screen=0, size=array([800, 600]), stencilBits=0, stereo=False, title='PsychoPy', units='height', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+11.1252 	EXP 	window1: backgroundImage = ''
+11.1252 	EXP 	window1: backgroundFit = 'fill'
+11.1443 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.1459 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.1473 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.1487 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.1497 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.1510 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.1531 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.1534 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.1538 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.1546 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.1559 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.1569 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.1580 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.1588 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.1592 	DEBUG 	Uploading Texture Font fontname to graphics card
+11.1655 	DEBUG 	Upload of Texture Font fontname complete
+11.1825 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.1855 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.1882 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.1908 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.1920 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.1925 	DEBUG 	Uploading Texture Font fontname to graphics card
+11.1945 	DEBUG 	Upload of Texture Font fontname complete
+11.1971 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+11.1972 	EXP 	window1: recordFrameIntervals = False
+11.3793 	EXP 	window1: recordFrameIntervals = True
+11.5627 	EXP 	Screen (0) actual frame rate measured at 60.06Hz
+11.5628 	EXP 	window1: recordFrameIntervals = False
+11.5788 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.5802 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.5825 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.5854 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.5880 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.5898 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.5907 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.5922 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.5937 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.5963 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.5993 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.6029 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.6063 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.6097 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.6127 	DEBUG 	TextBox2 loaded 1 chars with 0 blanks and 1 valid
+11.6135 	DEBUG 	Uploading Texture Font fontname to graphics card
+11.6150 	DEBUG 	Upload of Texture Font fontname complete
+11.6343 	WARNING 	launchHubServer: If using the iohub mouse or eyetracker devices, fullScr should be True.
+13.5517 	INFO 	keyboard.Keyboard is using iohub backend.
+13.5518 	INFO 	keyboard.Keyboard is using iohub backend.
+13.5518 	INFO 	keyboard.Keyboard is using iohub backend.
+13.5519 	INFO 	keyboard.Keyboard is using iohub backend.
+13.5519 	INFO 	keyboard.Keyboard is using iohub backend.
+13.5519 	EXP 	maintrial_sternberg: status = STARTED
+13.5877 	EXP 	Created intro_disp = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font=' Noto Mono', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='intro_disp', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+13.5909 	EXP 	Created intro_small = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-3.0, draggable=False, flipHoriz=False, flipVert=False, font=' Noto Mono', fontFiles=[], height=0.05, italic=False, languageStyle='LTR', name='intro_small', opacity=1, ori=0.0, pos=array([ 0. , -0.3]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+13.6271 	EXP 	Created text_cross = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, draggable=False, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.3, italic=False, languageStyle='LTR', name='text_cross', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='+', units='height', win=Window(...), wrapWidth=1)
+13.6283 	EXP 	Created string_prompt_disp = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font=' Noto Mono', fontFiles=[], height=0.17, italic=False, languageStyle='LTR', name='string_prompt_disp', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+13.6300 	EXP 	Created blank_screen = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([-1., -1., -1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, image=None, interpolate=True, mask=None, maskParams=None, name='blank_screen', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), texRes=128.0, units='height', win=Window(...))
+13.6311 	EXP 	Created key_response_disp = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, draggable=False, flipHoriz=False, flipVert=False, font=' Noto Mono', fontFiles=[], height=0.18, italic=False, languageStyle='LTR', name='key_response_disp', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+13.6319 	EXP 	Created fb_disp = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-1.0, draggable=False, flipHoriz=False, flipVert=False, font=' Noto Mono', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='fb_disp', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+13.6330 	EXP 	Created fb_break = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=-2.0, draggable=False, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='fb_break', opacity=1, ori=0.0, pos=array([ 0. , -0.3]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+13.6338 	EXP 	Created text_countdown = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font='Open Sans', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='text_countdown', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+13.6349 	EXP 	Created black_screen = Rect(__class__=<class 'psychopy.visual.rect.Rect'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-1.0, draggable=False, fillColor=array([-1., -1., -1.]), fillColorSpace='rgb', fillRGB=array([-1., -1., -1.]), interpolate=True, lineColor=array([-1., -1., -1.]), lineColorSpace='rgb', lineRGB=array([-1., -1., -1.]), lineWidth=1.0, name='black_screen', opacity=1, ori=0.0, pos=array([0., 0.]), size=array([0.5, 0.5]), units='height', vertices=ndarray(...), win=Window(...))
+13.6355 	EXP 	Created end_text_block = TextStim(__class__=<class 'psychopy.visual.text.TextStim'>, alignHoriz=method-wrapper(...), alignText='center', alignVert=method-wrapper(...), anchorHoriz='center', anchorVert='center', antialias=True, autoDraw=False, autoLog=True, bold=False, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0.0, draggable=False, flipHoriz=False, flipVert=False, font=' Noto Mono', fontFiles=[], height=0.1, italic=False, languageStyle='LTR', name='end_text_block', opacity=1, ori=0.0, pos=array([0., 0.]), rgb=UNKNOWN, text='', units='height', win=Window(...), wrapWidth=1)
+0.0740 	EXP 	intro_disp: height = 0.1
+0.0740 	EXP 	intro_disp: height = 0.1
+0.0740 	EXP 	intro_disp: height = 0.1
+0.0740 	EXP 	intro_disp: text = 'Hello! Thank you for participating in the Sternberg Working Memory Task.'
+0.0740 	EXP 	intro_small: height = 0.05
+0.0740 	EXP 	intro_small: height = 0.05
+0.0740 	EXP 	intro_small: height = 0.05
+0.0740 	EXP 	intro_small: text = 'Please wait for the experimenter to continue.'
+0.0740 	EXP 	intro_disp: autoDraw = True
+0.0740 	EXP 	intro_small: autoDraw = True
+1.4520 	EXP 	New trial (rep=0, index=0): <Trial 0 (0 in rep 0) data={'thisN': 0, 'thisTrialN': 0, 'thisRepN': 0}>
+1.4549 	DATA 	Keypress: period
+1.4747 	EXP 	intro_disp: autoDraw = False
+1.4747 	EXP 	intro_small: autoDraw = False
+1.4747 	EXP 	text_cross: autoDraw = True
+11.4765 	EXP 	text_cross: autoDraw = False
+11.4765 	EXP 	text_cross: autoDraw = False
+11.4765 	EXP 	string_prompt_disp: height = 0.17
+11.4765 	EXP 	string_prompt_disp: height = 0.17
+11.4765 	EXP 	string_prompt_disp: height = 0.17
+11.4765 	EXP 	string_prompt_disp: text = 'm k o'
+11.4765 	EXP 	string_prompt_disp: autoDraw = True
+14.9767 	EXP 	string_prompt_disp: autoDraw = False
+14.9767 	EXP 	string_prompt_disp: autoDraw = False
+14.9767 	EXP 	blank_screen: autoDraw = True
+18.2436 	INFO 	Keyboard events cleared
+18.2431 	EXP 	blank_screen: autoDraw = False
+18.2431 	EXP 	blank_screen: autoDraw = False
+18.2431 	EXP 	key_response_disp: height = 0.18
+18.2431 	EXP 	key_response_disp: height = 0.18
+18.2431 	EXP 	key_response_disp: height = 0.18
+18.2431 	EXP 	key_response_disp: text = 'j'
+18.2431 	EXP 	key_response_disp: autoDraw = True
+18.7990 	INFO 	Keyboard events cleared
+18.8017 	DATA 	Keypress: comma
+18.8101 	EXP 	key_response_disp: autoDraw = False
+18.8101 	EXP 	fb_disp: foreColor = <psychopy.colors.Color: white, alpha=1.0>
+18.8101 	EXP 	fb_disp: text = ''
+18.8101 	EXP 	fb_break: text = ''
+18.8101 	EXP 	fb_disp: autoDraw = True
+18.8101 	EXP 	fb_disp: autoDraw = False
+18.8101 	EXP 	fb_break: autoDraw = True
+18.8101 	EXP 	fb_break: autoDraw = False
+18.8101 	EXP 	fb_disp: autoDraw = False
+18.8101 	EXP 	fb_break: autoDraw = False
+18.8101 	EXP 	text_countdown: autoDraw = False
+18.8101 	EXP 	black_screen: autoDraw = True
+21.5318 	EXP 	New trial (rep=1, index=0): <Trial 1 (0 in rep 1) data={'thisN': 1, 'thisTrialN': 0, 'thisRepN': 1}>
+21.5586 	EXP 	black_screen: autoDraw = False
+21.5586 	EXP 	black_screen: autoDraw = False
+21.5586 	EXP 	text_cross: autoDraw = False
+21.5586 	EXP 	string_prompt_disp: height = 0.17
+21.5586 	EXP 	string_prompt_disp: height = 0.17
+21.5586 	EXP 	string_prompt_disp: height = 0.17
+21.5586 	EXP 	string_prompt_disp: text = 'w k t'
+21.5586 	EXP 	string_prompt_disp: autoDraw = True
+25.0601 	EXP 	string_prompt_disp: autoDraw = False
+25.0601 	EXP 	string_prompt_disp: autoDraw = False
+25.0601 	EXP 	blank_screen: autoDraw = True
+28.1105 	INFO 	Keyboard events cleared
+28.1100 	EXP 	blank_screen: autoDraw = False
+28.1100 	EXP 	blank_screen: autoDraw = False
+28.1100 	EXP 	key_response_disp: height = 0.18
+28.1100 	EXP 	key_response_disp: height = 0.18
+28.1100 	EXP 	key_response_disp: height = 0.18
+28.1100 	EXP 	key_response_disp: text = 'e'
+28.1100 	EXP 	key_response_disp: autoDraw = True
+28.6197 	INFO 	Keyboard events cleared
+28.6231 	DATA 	Keypress: comma
+28.6418 	EXP 	key_response_disp: autoDraw = False
+28.6418 	EXP 	fb_disp: foreColor = <psychopy.colors.Color: white, alpha=1.0>
+28.6418 	EXP 	fb_disp: text = ''
+28.6418 	EXP 	fb_break: text = ''
+28.6418 	EXP 	fb_disp: autoDraw = True
+28.6418 	EXP 	fb_disp: autoDraw = False
+28.6418 	EXP 	fb_break: autoDraw = True
+28.6418 	EXP 	fb_break: autoDraw = False
+28.6418 	EXP 	fb_disp: autoDraw = False
+28.6418 	EXP 	fb_break: autoDraw = False
+28.6418 	EXP 	text_countdown: autoDraw = False
+28.6418 	EXP 	black_screen: autoDraw = True
+30.1833 	EXP 	New trial (rep=2, index=0): <Trial 2 (0 in rep 2) data={'thisN': 2, 'thisTrialN': 0, 'thisRepN': 2}>
+30.2082 	EXP 	black_screen: autoDraw = False
+30.2082 	EXP 	black_screen: autoDraw = False
+30.2082 	EXP 	text_cross: autoDraw = False
+30.2082 	EXP 	string_prompt_disp: height = 0.17
+30.2082 	EXP 	string_prompt_disp: height = 0.17
+30.2082 	EXP 	string_prompt_disp: height = 0.17
+30.2082 	EXP 	string_prompt_disp: text = 'z d l'
+30.2082 	EXP 	string_prompt_disp: autoDraw = True
+33.7104 	EXP 	string_prompt_disp: autoDraw = False
+33.7104 	EXP 	string_prompt_disp: autoDraw = False
+33.7104 	EXP 	blank_screen: autoDraw = True
+37.9925 	INFO 	Keyboard events cleared
+37.9919 	EXP 	blank_screen: autoDraw = False
+37.9919 	EXP 	blank_screen: autoDraw = False
+37.9919 	EXP 	key_response_disp: height = 0.18
+37.9919 	EXP 	key_response_disp: height = 0.18
+37.9919 	EXP 	key_response_disp: height = 0.18
+37.9919 	EXP 	key_response_disp: text = 'l'
+37.9919 	EXP 	key_response_disp: autoDraw = True
+38.4697 	INFO 	Keyboard events cleared
+38.4732 	DATA 	Keypress: period
+38.4920 	EXP 	key_response_disp: autoDraw = False
+38.4920 	EXP 	fb_disp: foreColor = <psychopy.colors.Color: white, alpha=1.0>
+38.4920 	EXP 	fb_disp: text = ''
+38.4920 	EXP 	fb_break: text = ''
+38.4920 	EXP 	fb_disp: autoDraw = True
+38.4920 	EXP 	fb_disp: autoDraw = False
+38.4920 	EXP 	fb_break: autoDraw = True
+38.4920 	EXP 	fb_break: autoDraw = False
+38.4920 	EXP 	fb_disp: autoDraw = False
+38.4920 	EXP 	fb_break: autoDraw = False
+38.4920 	EXP 	text_countdown: autoDraw = False
+38.4920 	EXP 	black_screen: autoDraw = True
+41.4811 	EXP 	New trial (rep=3, index=0): <Trial 3 (0 in rep 3) data={'thisN': 3, 'thisTrialN': 0, 'thisRepN': 3}>
+41.5084 	EXP 	black_screen: autoDraw = False
+41.5084 	EXP 	black_screen: autoDraw = False
+41.5084 	EXP 	text_cross: autoDraw = False
+41.5084 	EXP 	string_prompt_disp: height = 0.17
+41.5084 	EXP 	string_prompt_disp: height = 0.17
+41.5084 	EXP 	string_prompt_disp: height = 0.17
+41.5084 	EXP 	string_prompt_disp: text = 'd u o'
+41.5084 	EXP 	string_prompt_disp: autoDraw = True
+45.0103 	EXP 	string_prompt_disp: autoDraw = False
+45.0103 	EXP 	string_prompt_disp: autoDraw = False
+45.0103 	EXP 	blank_screen: autoDraw = True
+48.8093 	INFO 	Keyboard events cleared
+48.8086 	EXP 	blank_screen: autoDraw = False
+48.8086 	EXP 	blank_screen: autoDraw = False
+48.8086 	EXP 	key_response_disp: height = 0.18
+48.8086 	EXP 	key_response_disp: height = 0.18
+48.8086 	EXP 	key_response_disp: height = 0.18
+48.8086 	EXP 	key_response_disp: text = 'x'
+48.8086 	EXP 	key_response_disp: autoDraw = True
+49.3030 	INFO 	Keyboard events cleared
+49.3060 	DATA 	Keypress: comma
+49.3253 	EXP 	key_response_disp: autoDraw = False
+49.3253 	EXP 	fb_disp: foreColor = <psychopy.colors.Color: white, alpha=1.0>
+49.3253 	EXP 	fb_disp: text = ''
+49.3253 	EXP 	fb_break: text = ''
+49.3253 	EXP 	fb_disp: autoDraw = True
+49.3253 	EXP 	fb_disp: autoDraw = False
+49.3253 	EXP 	fb_break: autoDraw = True
+49.3253 	EXP 	fb_break: autoDraw = False
+49.3253 	EXP 	fb_disp: autoDraw = False
+49.3253 	EXP 	fb_break: autoDraw = False
+49.3253 	EXP 	text_countdown: autoDraw = False
+49.3253 	EXP 	black_screen: autoDraw = True
+51.6837 	EXP 	New trial (rep=4, index=0): <Trial 4 (0 in rep 4) data={'thisN': 4, 'thisTrialN': 0, 'thisRepN': 4}>
+51.7084 	EXP 	black_screen: autoDraw = False
+51.7084 	EXP 	black_screen: autoDraw = False
+51.7084 	EXP 	text_cross: autoDraw = False
+51.7084 	EXP 	string_prompt_disp: height = 0.17
+51.7084 	EXP 	string_prompt_disp: height = 0.17
+51.7084 	EXP 	string_prompt_disp: height = 0.17
+51.7084 	EXP 	string_prompt_disp: text = 'e z k'
+51.7084 	EXP 	string_prompt_disp: autoDraw = True
+55.2106 	EXP 	string_prompt_disp: autoDraw = False
+55.2106 	EXP 	string_prompt_disp: autoDraw = False
+55.2106 	EXP 	blank_screen: autoDraw = True
+59.1611 	INFO 	Keyboard events cleared
+59.1605 	EXP 	blank_screen: autoDraw = False
+59.1605 	EXP 	blank_screen: autoDraw = False
+59.1605 	EXP 	key_response_disp: height = 0.18
+59.1605 	EXP 	key_response_disp: height = 0.18
+59.1605 	EXP 	key_response_disp: height = 0.18
+59.1605 	EXP 	key_response_disp: text = 'z'
+59.1605 	EXP 	key_response_disp: autoDraw = True
+59.5509 	INFO 	Keyboard events cleared
+59.5534 	DATA 	Keypress: period
+59.5606 	EXP 	key_response_disp: autoDraw = False
+59.5606 	EXP 	fb_disp: foreColor = <psychopy.colors.Color: white, alpha=1.0>
+59.5606 	EXP 	fb_disp: text = ''
+59.5606 	EXP 	fb_break: text = ''
+59.5606 	EXP 	fb_disp: autoDraw = True
+59.5606 	EXP 	fb_disp: autoDraw = False
+59.5606 	EXP 	fb_break: autoDraw = True
+59.5606 	EXP 	fb_break: autoDraw = False
+59.5606 	EXP 	fb_disp: autoDraw = False
+59.5606 	EXP 	fb_break: autoDraw = False
+59.5606 	EXP 	text_countdown: autoDraw = False
+59.5606 	EXP 	black_screen: autoDraw = True
+61.4845 	EXP 	New trial (rep=5, index=0): <Trial 5 (0 in rep 5) data={'thisN': 5, 'thisTrialN': 0, 'thisRepN': 5}>
+61.5087 	EXP 	black_screen: autoDraw = False
+61.5087 	EXP 	black_screen: autoDraw = False
+61.5087 	EXP 	text_cross: autoDraw = False
+61.5087 	EXP 	string_prompt_disp: height = 0.17
+61.5087 	EXP 	string_prompt_disp: height = 0.17
+61.5087 	EXP 	string_prompt_disp: height = 0.17
+61.5087 	EXP 	string_prompt_disp: text = 'n t e'
+61.5087 	EXP 	string_prompt_disp: autoDraw = True
+65.0106 	EXP 	string_prompt_disp: autoDraw = False
+65.0106 	EXP 	string_prompt_disp: autoDraw = False
+65.0106 	EXP 	blank_screen: autoDraw = True
+68.1945 	INFO 	Keyboard events cleared
+68.1939 	EXP 	blank_screen: autoDraw = False
+68.1939 	EXP 	blank_screen: autoDraw = False
+68.1939 	EXP 	key_response_disp: height = 0.18
+68.1939 	EXP 	key_response_disp: height = 0.18
+68.1939 	EXP 	key_response_disp: height = 0.18
+68.1939 	EXP 	key_response_disp: text = 'm'
+68.1939 	EXP 	key_response_disp: autoDraw = True
+68.8528 	INFO 	Keyboard events cleared
+68.8568 	DATA 	Keypress: comma
+68.8822 	EXP 	key_response_disp: autoDraw = False
+68.8822 	EXP 	fb_disp: foreColor = <psychopy.colors.Color: white, alpha=1.0>
+68.8822 	EXP 	fb_disp: text = ''
+68.8822 	EXP 	fb_break: text = ''
+68.8822 	EXP 	fb_disp: autoDraw = True
+68.8822 	EXP 	fb_disp: autoDraw = False
+68.8822 	EXP 	fb_break: autoDraw = True
+68.8822 	EXP 	fb_break: autoDraw = False
+68.8822 	EXP 	fb_disp: autoDraw = False
+68.8822 	EXP 	fb_break: autoDraw = False
+68.8822 	EXP 	text_countdown: autoDraw = False
+68.8822 	EXP 	black_screen: autoDraw = True
+71.3518 	EXP 	New trial (rep=6, index=0): <Trial 6 (0 in rep 6) data={'thisN': 6, 'thisTrialN': 0, 'thisRepN': 6}>
+71.3755 	EXP 	black_screen: autoDraw = False
+71.3755 	EXP 	black_screen: autoDraw = False
+71.3755 	EXP 	text_cross: autoDraw = False
+71.3755 	EXP 	string_prompt_disp: height = 0.17
+71.3755 	EXP 	string_prompt_disp: height = 0.17
+71.3755 	EXP 	string_prompt_disp: height = 0.17
+71.3755 	EXP 	string_prompt_disp: text = 'z c g'
+71.3755 	EXP 	string_prompt_disp: autoDraw = True
+74.8775 	EXP 	string_prompt_disp: autoDraw = False
+74.8775 	EXP 	string_prompt_disp: autoDraw = False
+74.8775 	EXP 	blank_screen: autoDraw = True
+78.6262 	INFO 	Keyboard events cleared
+78.6255 	EXP 	blank_screen: autoDraw = False
+78.6255 	EXP 	blank_screen: autoDraw = False
+78.6255 	EXP 	key_response_disp: height = 0.18
+78.6255 	EXP 	key_response_disp: height = 0.18
+78.6255 	EXP 	key_response_disp: height = 0.18
+78.6255 	EXP 	key_response_disp: text = 'g'
+78.6255 	EXP 	key_response_disp: autoDraw = True
+79.1016 	DATA 	Keypress: comma
+79.1200 	INFO 	Keyboard events cleared
+79.1423 	EXP 	key_response_disp: autoDraw = False
+79.1423 	EXP 	fb_disp: foreColor = <psychopy.colors.Color: white, alpha=1.0>
+79.1423 	EXP 	fb_disp: text = ''
+79.1423 	EXP 	fb_break: text = ''
+79.1423 	EXP 	fb_disp: autoDraw = True
+79.1423 	EXP 	fb_disp: autoDraw = False
+79.1423 	EXP 	fb_break: autoDraw = True
+79.1423 	EXP 	fb_break: autoDraw = False
+79.1423 	EXP 	fb_disp: autoDraw = False
+79.1423 	EXP 	fb_break: autoDraw = False
+79.1423 	EXP 	text_countdown: autoDraw = False
+79.1423 	EXP 	black_screen: autoDraw = True
+81.8843 	EXP 	New trial (rep=7, index=0): <Trial 7 (0 in rep 7) data={'thisN': 7, 'thisTrialN': 0, 'thisRepN': 7}>
+81.9157 	EXP 	black_screen: autoDraw = False
+81.9157 	EXP 	black_screen: autoDraw = False
+81.9157 	EXP 	text_cross: autoDraw = False
+81.9157 	EXP 	string_prompt_disp: height = 0.17
+81.9157 	EXP 	string_prompt_disp: height = 0.17
+81.9157 	EXP 	string_prompt_disp: height = 0.17
+81.9157 	EXP 	string_prompt_disp: text = 'p i z'
+81.9157 	EXP 	string_prompt_disp: autoDraw = True
+85.4275 	EXP 	string_prompt_disp: autoDraw = False
+85.4275 	EXP 	string_prompt_disp: autoDraw = False
+85.4275 	EXP 	blank_screen: autoDraw = True
+90.2279 	INFO 	Keyboard events cleared
+90.2274 	EXP 	blank_screen: autoDraw = False
+90.2274 	EXP 	blank_screen: autoDraw = False
+90.2274 	EXP 	key_response_disp: height = 0.18
+90.2274 	EXP 	key_response_disp: height = 0.18
+90.2274 	EXP 	key_response_disp: height = 0.18
+90.2274 	EXP 	key_response_disp: text = 'w'
+90.2274 	EXP 	key_response_disp: autoDraw = True
+90.7183 	INFO 	Keyboard events cleared
+90.7208 	DATA 	Keypress: comma
+90.7277 	EXP 	key_response_disp: autoDraw = False
+90.7277 	EXP 	fb_disp: foreColor = <psychopy.colors.Color: white, alpha=1.0>
+90.7277 	EXP 	fb_disp: text = ''
+90.7277 	EXP 	fb_break: text = ''
+90.7277 	EXP 	fb_disp: autoDraw = True
+90.7277 	EXP 	fb_disp: autoDraw = False
+90.7277 	EXP 	fb_break: autoDraw = True
+90.7277 	EXP 	fb_break: autoDraw = False
+90.7277 	EXP 	fb_disp: autoDraw = False
+90.7277 	EXP 	fb_break: autoDraw = False
+90.7277 	EXP 	text_countdown: autoDraw = False
+90.7277 	EXP 	black_screen: autoDraw = True
+94.0315 	EXP 	New trial (rep=8, index=0): <Trial 8 (0 in rep 8) data={'thisN': 8, 'thisTrialN': 0, 'thisRepN': 8}>
+94.0441 	EXP 	black_screen: autoDraw = False
+94.0441 	EXP 	black_screen: autoDraw = False
+94.0441 	EXP 	text_cross: autoDraw = False
+94.0441 	EXP 	string_prompt_disp: height = 0.17
+94.0441 	EXP 	string_prompt_disp: height = 0.17
+94.0441 	EXP 	string_prompt_disp: height = 0.17
+94.0441 	EXP 	string_prompt_disp: text = 'e r n'
+94.0441 	EXP 	string_prompt_disp: autoDraw = True
+97.5443 	EXP 	string_prompt_disp: autoDraw = False
+97.5443 	EXP 	string_prompt_disp: autoDraw = False
+97.5443 	EXP 	blank_screen: autoDraw = True
+101.9116 	INFO 	Keyboard events cleared
+101.9110 	EXP 	blank_screen: autoDraw = False
+101.9110 	EXP 	blank_screen: autoDraw = False
+101.9110 	EXP 	key_response_disp: height = 0.18
+101.9110 	EXP 	key_response_disp: height = 0.18
+101.9110 	EXP 	key_response_disp: height = 0.18
+101.9110 	EXP 	key_response_disp: text = 'n'
+101.9110 	EXP 	key_response_disp: autoDraw = True
+102.3188 	INFO 	Keyboard events cleared
+102.3214 	DATA 	Keypress: period
+102.3277 	EXP 	key_response_disp: autoDraw = False
+102.3277 	EXP 	fb_disp: foreColor = <psychopy.colors.Color: white, alpha=1.0>
+102.3277 	EXP 	fb_disp: text = ''
+102.3277 	EXP 	fb_break: text = ''
+102.3277 	EXP 	fb_disp: autoDraw = True
+102.3277 	EXP 	fb_disp: autoDraw = False
+102.3277 	EXP 	fb_break: autoDraw = True
+102.3277 	EXP 	fb_break: autoDraw = False
+102.3277 	EXP 	fb_disp: autoDraw = False
+102.3277 	EXP 	fb_break: autoDraw = False
+102.3277 	EXP 	text_countdown: autoDraw = False
+102.3277 	EXP 	black_screen: autoDraw = True
+104.4830 	EXP 	New trial (rep=9, index=0): <Trial 9 (0 in rep 9) data={'thisN': 9, 'thisTrialN': 0, 'thisRepN': 9}>
+104.5092 	EXP 	black_screen: autoDraw = False
+104.5092 	EXP 	black_screen: autoDraw = False
+104.5092 	EXP 	text_cross: autoDraw = False
+104.5092 	EXP 	string_prompt_disp: height = 0.17
+104.5092 	EXP 	string_prompt_disp: height = 0.17
+104.5092 	EXP 	string_prompt_disp: height = 0.17
+104.5092 	EXP 	string_prompt_disp: text = 'x g d'
+104.5092 	EXP 	string_prompt_disp: autoDraw = True
+108.0112 	EXP 	string_prompt_disp: autoDraw = False
+108.0112 	EXP 	string_prompt_disp: autoDraw = False
+108.0112 	EXP 	blank_screen: autoDraw = True
+111.2096 	INFO 	Keyboard events cleared
+111.2091 	EXP 	blank_screen: autoDraw = False
+111.2091 	EXP 	blank_screen: autoDraw = False
+111.2091 	EXP 	key_response_disp: height = 0.18
+111.2091 	EXP 	key_response_disp: height = 0.18
+111.2091 	EXP 	key_response_disp: height = 0.18
+111.2091 	EXP 	key_response_disp: text = 'f'
+111.2091 	EXP 	key_response_disp: autoDraw = True
+111.8060 	INFO 	Keyboard events cleared
+111.8088 	DATA 	Keypress: comma
+111.8258 	EXP 	key_response_disp: autoDraw = False
+111.8258 	EXP 	fb_disp: foreColor = <psychopy.colors.Color: white, alpha=1.0>
+111.8258 	EXP 	fb_disp: height = 0.1
+111.8258 	EXP 	fb_disp: height = 0.1
+111.8258 	EXP 	fb_disp: height = 0.1
+111.8258 	EXP 	fb_disp: text = 'feedback:\n✓ ✓ ✓ ✓ ✓ \n✓ ✕ ✓ ✓ ✓ '
+111.8258 	EXP 	fb_break: height = 0.1
+111.8258 	EXP 	fb_break: height = 0.1
+111.8258 	EXP 	fb_break: height = 0.1
+111.8258 	EXP 	fb_break: text = 'test will resume in 20 seconds'
+111.8258 	EXP 	fb_disp: autoDraw = True
+111.8258 	EXP 	fb_break: autoDraw = True
+116.8279 	EXP 	fb_disp: autoDraw = False
+116.8279 	EXP 	fb_break: autoDraw = False
+116.8279 	EXP 	fb_disp: autoDraw = False
+116.8279 	EXP 	fb_break: autoDraw = False
+116.8279 	EXP 	text_countdown: autoDraw = False
+116.8279 	EXP 	black_screen: autoDraw = True
+119.4180 	EXP 	New trial (rep=10, index=0): <Trial 10 (0 in rep 10) data={'thisN': 10, 'thisTrialN': 0, 'thisRepN': 10}>
+119.4280 	EXP 	black_screen: autoDraw = False
+119.4280 	EXP 	black_screen: autoDraw = False
+119.4280 	EXP 	text_cross: autoDraw = True
+129.4423 	EXP 	text_cross: autoDraw = False
+129.4423 	EXP 	text_cross: autoDraw = False
+129.4423 	EXP 	string_prompt_disp: height = 0.17
+129.4423 	EXP 	string_prompt_disp: height = 0.17
+129.4423 	EXP 	string_prompt_disp: height = 0.17
+129.4423 	EXP 	string_prompt_disp: text = 'g a t x p'
+129.4423 	EXP 	string_prompt_disp: autoDraw = True
+131.2695 	DATA 	Keypress: escape
+131.3342 	EXP 	maintrial_sternberg: status = STOPPED
+131.3446 	EXP 	string_prompt_disp: autoDraw = False
+131.3502 	EXP 	maintrial_sternberg: status = STOPPED
+131.3808 	INFO 	saved data to 'C:\\Users\\benlenet\\mstembci\\data/XX-XX-XXXX_maintrial_sternberg_2025-07-03_14h56.10.561.csv'
+131.3827 	INFO 	saved data to C:\Users\benlenet\mstembci\data/XX-XX-XXXX_maintrial_sternberg_2025-07-03_14h56.10.561.psydat
+132.0431 	DEBUG 	Saving data for maintrial_sternberg ExperimentHandler

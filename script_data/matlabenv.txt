@@ -1,0 +1,9 @@
+h5py @ file:///C:/b/abs_29off2a8q5/croot/h5py_1750863017528/work
+mkl-service==2.4.0
+mkl_fft @ file:///C:/Users/dev-admin/mkl/mkl_fft_1730824198951/work
+mkl_random @ file:///C:/Users/dev-admin/mkl/mkl_random_1730824302834/work
+mpi4py @ file:///C:/b/abs_2c72fs0pz9/croot/mpi4py_1749458512296/work
+numpy @ file:///C:/b/abs_958d_utj4g/croot/numpy_and_numpy_base_1750883811830/work/dist/numpy-2.3.1-cp313-cp313-win_amd64.whl#sha256=a5427a7212475edd8f7de263059ae980c79c778992c6f3404e31619b5a37c706
+scipy @ file:///C:/b/abs_71q96u23a4/croot/scipy_1747238057723/work/dist/scipy-1.15.3-cp313-cp313-win_amd64.whl#sha256=b5f3085bbab24a89daa9159000ae3a3fa1590d993aa2bf0d27f4db68d724271c
+setuptools==72.1.0
+wheel==0.45.1
