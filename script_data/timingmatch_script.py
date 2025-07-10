@@ -10,12 +10,14 @@ data_variable_name = 'y'
 initial_sync_trigger = 21
 
 parser = argparse.ArgumentParser(description="Process EEG data from a .mat file, synchronize time, and save blocks by epoch transitions.")
-parser.add_argument('mat_file_path', type=str, default='data.mat', help='Path to the .mat file containing EEG data.')
-parser.add_argument('output_directory', type=str, default='epoch_output_files', help='Path to the output directory for saving epoch files.')
+parser.add_argument('mat_file_path', type=str, help='Path to the .mat file containing EEG data.')
+parser.add_argument('output_directory', type=str, help='Path to the output directory for saving epoch files.')
 args = parser.parse_args()
-
 mat_file_path = args.mat_file_path
 output_directory = args.output_directory
+
+# mat_file_path = 'ben_mstem_16_channel.mat'  # Path to the .mat file containing EEG data
+# output_directory = 'epoch_output_files'  # Path to the output directory for saving epoch files
 
 # map int values to epoch names (optional, for clarity)
 epoch_names = {
@@ -51,6 +53,11 @@ except (OSError, KeyError):
         print(f"Error: Could not load the MAT file. Please check the path and variable name.")
         print(f"Details: {e}")
         exit()
+
+# ---  Create Output Directory ---
+if not os.path.exists(output_directory):
+    os.makedirs(output_directory)
+    print(f"\nCreated output directory: '{output_directory}'")
 
 # --- 3. Perform Initial Time Synchronization (New Section) ---
 print(f"\nPerforming initial time synchronization based on trigger value: {initial_sync_trigger}...")
@@ -91,10 +98,7 @@ except IndexError:
 change_indices = np.where(epoch_row[1:] != epoch_row[:-1])[0] + 1
 block_start_indices = np.concatenate(([0], change_indices))
 
-# --- 5. Create Output Directory ---
-if not os.path.exists(output_directory):
-    os.makedirs(output_directory)
-    print(f"\nCreated output directory: '{output_directory}'")
+
 
 # --- 6. Loop Through Blocks, Name by Transition, and Save ---
 # A dictionary to count instances of each unique transition (e.g., 23 -> 43).
@@ -129,7 +133,7 @@ for i, start_index in enumerate(block_start_indices):
     # Define the new filename based on the transition.
     output_filename = os.path.join(
         output_directory, 
-        f'{epoch_names[previous_epoch_val]}->{epoch_names[current_epoch_val]}_instance_{instance_num}.mat'
+        f'{epoch_names[previous_epoch_val]}_to_{epoch_names[current_epoch_val]}_instance_{instance_num}.mat'
     )
     
     # Create a dictionary to save in the new .mat file.
