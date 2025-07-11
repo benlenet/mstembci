@@ -19,6 +19,15 @@ output_directory = args.output_directory
 # mat_file_path = 'ben_mstem_16_channel.mat'  # Path to the .mat file containing EEG data
 # output_directory = 'epoch_output_files'  # Path to the output directory for saving epoch files
 
+# Each memory aspect should follow this guideline:
+# Encoding (1 -> 2), (45 -> 66 -> 2)
+# Maintenance (2 -> 4)
+# Retrieval (4 -> 8)
+
+# Unimportant epoches are:
+# BeforeExperiment (start -> 0)
+# 
+
 # map int values to epoch names (optional, for clarity)
 epoch_names = {
     0: "BeforeExperiment",
@@ -27,6 +36,7 @@ epoch_names = {
     4: "maintenance",
     8: "retrieval",
     13: "feedback",
+    81: "fb_false",
     21: "start",
     31: "end",
     45: "ITI",

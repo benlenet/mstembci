@@ -24,7 +24,7 @@ signals.
 ## TODO List
 * figure out how to analyze EEG signals via MATLAB
 * gather more participants and data
-* 
+* CHANGE KEYBOARD RESPONSE TO MOUSE CLICK RESPONSE
  
 
 ## Research on Free Time

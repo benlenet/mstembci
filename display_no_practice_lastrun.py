@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on July 03, 2025, at 16:36
+    on July 11, 2025, at 16:31
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -46,7 +46,7 @@ import socket
 TIMEOUT_DURATION = 10
 CHARACTER_INCREMENT = 2
 DEFAULT_FEEDBACK = 10
-
+MAX_CHARACTERS = 7
 # dBlank [3, 5] -- dITI [1.5, 3.5]
 dBlank_lowbound = 3
 dBlank_upbound = 5
@@ -69,7 +69,7 @@ dITI: duration of blank screen -- default 2.5
 timing_map = {"dCross": 10,
               "dPrompt": 3.5,
               "dBlank": 4,
-              "dResponse": 1.5,
+              "dResponse": 3,
               "dFb": TIMEOUT_DURATION,
               "dITI": 2.5,
               # start at high values of practice,
@@ -101,20 +101,7 @@ stim_map = {"loop_iter": 0,
                 "cross_en": False,
                 "instruction_text": "",
                 "iter_text_list": 0,
-                "p_loop_maxcount": 6,
-                "p_loop_count": 2
                 }
-
-text_list = ["+", 
-             "b y g d f",
-             "",
-             "g",
-             "Corrrect/Incorrect",
-             "We will now begin the practice trial."]
-# variables to move text
-loopcount_text_list = len(text_list)
-# ensure it is initialized (bruh)
-stim_map["instruction_text"] = text_list[stim_map["iter_text_list"]]
 
 
 
@@ -132,7 +119,8 @@ udp_map = {"f": bytes([1]),
            "start": bytes([21]),
            "end": bytes([31]),
            "ITI": bytes([45]),
-           "NA": bytes([66])}
+           "NA": bytes([66]),
+           "timeout": bytes([81])}
 
 # send value to UDP Port, mapped via udp_map
 def matlab_send(stage):
@@ -142,18 +130,20 @@ def matlab_send(stage):
 
 # return a character for response stimulus
 def gen_key(string_prompt, correct_rate = 0.5):
+    consonants = "bcdfghjklmnpqrstvwxyz"
     trunc_chars = str.maketrans('', '', string_prompt)
-    trunc_string = string.ascii_lowercase.translate(trunc_chars)
+    trunc_string = consonants.translate(trunc_chars)
     valid_string = string_prompt.replace(" ", "")
     return random.choice(trunc_string) if correct_rate < random.random() else random.choice(valid_string)
     
 
 # generate list of characters for encoding, must be stored for checking validity in sb_validate
 def sb_rand(num_letters = 4):
+    consonants = "bcdfghjklmnpqrstvwxyz"
     if num_letters > 26:
         return "Error: num_letters must be less than or equal to 26"
     else:
-        return " ".join(random.sample(string.ascii_lowercase, num_letters))
+        return " ".join(random.sample(consonants, num_letters))
 
 # supply string_prompt and char_key to check if the key is valid
 def sb_validate(string_prompt, char_key):
@@ -694,6 +684,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     intro.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
     intro.tStart = globalClock.getTime(format='float')
     intro.status = STARTED
+    thisExp.addData('intro.started', intro.tStart)
     intro.maxDuration = None
     # keep track of which components have finished
     introComponents = intro.components
@@ -816,6 +807,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # store stop times for intro
     intro.tStop = globalClock.getTime(format='float')
     intro.tStopRefresh = tThisFlipGlobal
+    thisExp.addData('intro.stopped', intro.tStop)
     thisExp.nextEntry()
     # the Routine "intro" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
@@ -962,7 +954,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         continueRoutine = True
         # update component parameters for each repeat
         # Run 'Begin Routine' code from code_crossen
-        matlab_send("f")
+        if not stim_map["cross_en"]:
+            matlab_send("f")
+        
         # store start times for cross_fix
         cross_fix.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         cross_fix.tStart = globalClock.getTime(format='float')
@@ -1505,6 +1499,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 timing_map["dFb"] = TIMEOUT_DURATION
                 stim_map["loop_iter"] -= 1
                 stim_map["cross_en"] = False
+                matlab_send("timeout")
             elif key_resp.corr:
                 timing_map["dFb"] = 0
                 block_fb += u'\u2713 '
@@ -1524,19 +1519,23 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
               
         # increment characters after specified loop count
         if stim_map["loop_iter"] == stim_map["loop_count"]:
+            # display countdown
+            if stim_map["char_length"] == MAX_CHARACTERS:
+                skip_break = True
+            else:
+                skip_break = False
+            # adjust variables for looping scheduler
             stim_map["loop_iter"] = 0
             stim_map["char_length"] += CHARACTER_INCREMENT
             # reenable fixation
             stim_map["cross_en"] = False
             timing_map["dFb"] = DEFAULT_FEEDBACK
-            # display text
+            # display text during break
             fb_text = 'feedback:\n' + block_fb[:int(len(block_fb)/2)] + '\n' + block_fb[int(len(block_fb)/2):]
             text_break = "test will resume in 20 seconds"
-            skip_break = False
+            
             # send signal to MATLAB showing it is a fb, ignore
             matlab_send("fb")
-        else:
-            matlab_send("NA")
         fb_disp.setColor([1.0000, 1.0000, 1.0000], colorSpace='rgb')
         fb_disp.setText(fb_text)
         fb_break.setText(text_break)
@@ -1889,7 +1888,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         continueRoutine = True
         # update component parameters for each repeat
         # Run 'Begin Routine' code from code_ITI
-        matlab_send("ITI")
+        if key_resp.keys:
+            matlab_send("ITI")
         # store start times for ITI
         ITI.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         ITI.tStart = globalClock.getTime(format='float')

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on July 08, 2025, at 13:32
+    on July 11, 2025, at 15:39
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -69,7 +69,7 @@ dITI: duration of blank screen -- default 2.5
 timing_map = {"dCross": 10,
               "dPrompt": 3.5,
               "dBlank": 4,
-              "dResponse": 1.5,
+              "dResponse": 3,
               "dFb": TIMEOUT_DURATION,
               "dITI": 2.5,
               # start at high values of practice,
@@ -105,17 +105,6 @@ stim_map = {"loop_iter": 0,
                 "p_loop_count": 2
                 }
 
-text_list = ["+", 
-             "b y g d f",
-             "",
-             "g",
-             "Corrrect/Incorrect",
-             "We will now begin the practice trial."]
-# variables to move text
-loopcount_text_list = len(text_list)
-# ensure it is initialized (bruh)
-stim_map["instruction_text"] = text_list[stim_map["iter_text_list"]]
-
 
 
 # initialize udp connection to MATLAB
@@ -132,7 +121,8 @@ udp_map = {"f": bytes([1]),
            "start": bytes([21]),
            "end": bytes([31]),
            "ITI": bytes([45]),
-           "NA": bytes([66])}
+           "NA": bytes([66]),
+           "false_f": bytes([81])}
 
 # send value to UDP Port, mapped via udp_map
 def matlab_send(stage):
@@ -142,18 +132,20 @@ def matlab_send(stage):
 
 # return a character for response stimulus
 def gen_key(string_prompt, correct_rate = 0.5):
+    consonants = "bcdfghjklmnpqrstvwxyz"
     trunc_chars = str.maketrans('', '', string_prompt)
-    trunc_string = string.ascii_lowercase.translate(trunc_chars)
+    trunc_string = consonants.translate(trunc_chars)
     valid_string = string_prompt.replace(" ", "")
     return random.choice(trunc_string) if correct_rate < random.random() else random.choice(valid_string)
     
 
 # generate list of characters for encoding, must be stored for checking validity in sb_validate
 def sb_rand(num_letters = 4):
+    consonants = "bcdfghjklmnpqrstvwxyz"
     if num_letters > 26:
         return "Error: num_letters must be less than or equal to 26"
     else:
-        return " ".join(random.sample(string.ascii_lowercase, num_letters))
+        return " ".join(random.sample(consonants, num_letters))
 
 # supply string_prompt and char_key to check if the key is valid
 def sb_validate(string_prompt, char_key):
@@ -964,7 +956,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         continueRoutine = True
         # update component parameters for each repeat
         # Run 'Begin Routine' code from code_crossen
-        matlab_send("f")
+        if not stim_map["cross_en"]:
+            matlab_send("f")
+        else:
+            matlab_send("")
         # store start times for cross_fix
         cross_fix.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         cross_fix.tStart = globalClock.getTime(format='float')
