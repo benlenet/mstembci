@@ -25,7 +25,7 @@ signals.
 * figure out how to analyze EEG signals via MATLAB
 * gather more participants and data
 * CHANGE KEYBOARD RESPONSE TO MOUSE CLICK RESPONSE
- 
+* Finish poster
 
 ## Research on Free Time
 * look at sources for Sternberg EEG research (find comparisons)
