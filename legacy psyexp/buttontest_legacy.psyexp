@@ -97,26 +97,6 @@
         <Param val="timing_map[&quot;dResponse&quot;]" valType="code" updates="constant" name="stopVal"/>
         <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
       </RoutineSettingsComponent>
-      <KeyboardComponent name="key_resp" plugin="None">
-        <Param val="'comma','period'" valType="list" updates="constant" name="allowedKeys"/>
-        <Param val="$stim_map[&quot;map_correct&quot;]" valType="str" updates="constant" name="correctAns"/>
-        <Param val="" valType="str" updates="None" name="deviceLabel"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
-        <Param val="key_resp" valType="code" updates="None" name="name"/>
-        <Param val="press" valType="str" updates="constant" name="registerOn"/>
-        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="0.0" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="" valType="code" updates="constant" name="stopVal"/>
-        <Param val="last key" valType="str" updates="constant" name="store"/>
-        <Param val="True" valType="bool" updates="constant" name="storeCorrect"/>
-        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
-      </KeyboardComponent>
       <TextComponent name="key_response_disp" plugin="None">
         <Param val="white" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
@@ -144,6 +124,26 @@
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
+      <MouseComponent name="mouse" plugin="None">
+        <Param val="" valType="list" updates="constant" name="clickable"/>
+        <Param val="" valType="list" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="any click" valType="str" updates="constant" name="forceEndRoutineOnPress"/>
+        <Param val="mouse" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="constant" name="newClicksOnly"/>
+        <Param val="on click" valType="str" updates="None" name="saveMouseState"/>
+        <Param val="" valType="list" updates="constant" name="saveParamsClickable"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="False" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="mouse onset" valType="str" updates="constant" name="timeRelativeTo"/>
+      </MouseComponent>
     </Routine>
     <Routine name="button_record">
       <RoutineSettingsComponent name="button_record" plugin="None">
@@ -167,11 +167,11 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="console.log(key_resp.keys, &quot;was pressed\n&quot;);&amp;#10;try {&amp;#10;    if ((key_resp.keys === null)) {&amp;#10;        fb_text = &quot;please respond within a shorter time period.\nPress any key to continue.&quot;;&amp;#10;        timing_map[&quot;dFb&quot;] = TIMEOUT_DURATION;&amp;#10;        fb_col = &quot;white&quot;;&amp;#10;        stim_map[&quot;loop_iter&quot;] -= 1;&amp;#10;        stim_map[&quot;cross_en&quot;] = false;&amp;#10;    } else {&amp;#10;        if (key_resp.corr) {&amp;#10;            fb_text = &quot;Correct!&quot;;&amp;#10;            fb_col = &quot;green&quot;;&amp;#10;        } else {&amp;#10;            fb_text = &quot;Incorrect&quot;;&amp;#10;            fb_col = &quot;red&quot;;&amp;#10;        }&amp;#10;    }&amp;#10;} catch(e) {&amp;#10;    console.log(&quot;Make sure that you have:\n1. a routine with a keyboard component in it called \&quot;key_resp\&quot;\n 2. In the key_Resp component in the \&quot;data\&quot; tab select \&quot;Store Correct\&quot;.\n in the \&quot;Correct answer\&quot; field use \&quot;$corrAns\&quot; (where corrAns is a column header in your conditions file indicating the correct key press&quot;);&amp;#10;}&amp;#10;stim_map[&quot;loop_iter&quot;] += 1;&amp;#10;if ((stim_map[&quot;loop_iter&quot;] === stim_map[&quot;loop_count&quot;])) {&amp;#10;    stim_map[&quot;loop_iter&quot;] = 0;&amp;#10;    stim_map[&quot;char_length&quot;] += CHARACTER_INCREMENT;&amp;#10;    stim_map[&quot;cross_en&quot;] = false;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="&amp;#10;&amp;#10;# display feedback to log&amp;#10;print(key_resp.keys,&quot;was pressed\n&quot;)&amp;#10;try:&amp;#10;    if key_resp.keys == None:&amp;#10;        # add timeout text, decrement loop, enable fixation&amp;#10;        fb_text = 'please respond within a shorter time period.\nPress any key to continue.'&amp;#10;        timing_map[&quot;dFb&quot;] = TIMEOUT_DURATION&amp;#10;        fb_col = 'white'&amp;#10;        stim_map[&quot;loop_iter&quot;] -= 1&amp;#10;        stim_map[&quot;cross_en&quot;] = False&amp;#10;    elif key_resp.corr:&amp;#10;        fb_text = 'Correct!'&amp;#10;        fb_col = 'green'&amp;#10;    else:&amp;#10;        fb_text = 'Incorrect'&amp;#10;        fb_col = 'red'&amp;#10;        &amp;#10;except:&amp;#10;    print('Make sure that you have:\n1. a routine with a keyboard component in it called &quot;key_resp&quot;\n 2. In the key_Resp component in the &quot;data&quot; tab select &quot;Store Correct&quot;.\n in the &quot;Correct answer&quot; field use &quot;$corrAns&quot; (where corrAns is a column header in your conditions file indicating the correct key press')&amp;#10;&amp;#10;&amp;#10;# increment loop, enable cross if loop reaches max&amp;#10;stim_map[&quot;loop_iter&quot;] += 1&amp;#10;if stim_map[&quot;loop_iter&quot;] == stim_map[&quot;loop_count&quot;]:&amp;#10;    stim_map[&quot;loop_iter&quot;] = 0&amp;#10;    stim_map[&quot;char_length&quot;] += CHARACTER_INCREMENT&amp;#10;    stim_map[&quot;cross_en&quot;] = False" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="console.log(mouse.getPressed(), &quot;was pressed\n&quot;);&amp;#10;try {&amp;#10;    if ((mouse.getPressed() === mouse_map[&quot;none&quot;])) {&amp;#10;        fb_text = &quot;please respond within a shorter time period.\nPress any key to continue.&quot;;&amp;#10;        timing_map[&quot;dFb&quot;] = TIMEOUT_DURATION;&amp;#10;        fb_col = &quot;white&quot;;&amp;#10;        stim_map[&quot;loop_iter&quot;] -= 1;&amp;#10;        stim_map[&quot;cross_en&quot;] = false;&amp;#10;    } else {&amp;#10;        if ((mouse.getPressed() === stim_map[&quot;map_correct&quot;])) {&amp;#10;            fb_text = ((&quot;Correct!&quot; + &quot;w/ rt of &quot;) + mouse.time.slice((- 1))[0].toString());&amp;#10;            fb_col = &quot;green&quot;;&amp;#10;        } else {&amp;#10;            fb_text = &quot;Incorrect&quot;;&amp;#10;            fb_col = &quot;red&quot;;&amp;#10;        }&amp;#10;    }&amp;#10;} catch(e) {&amp;#10;    console.log(e);&amp;#10;}&amp;#10;stim_map[&quot;loop_iter&quot;] += 1;&amp;#10;if ((stim_map[&quot;loop_iter&quot;] === stim_map[&quot;loop_count&quot;])) {&amp;#10;    stim_map[&quot;loop_iter&quot;] = 0;&amp;#10;    stim_map[&quot;char_length&quot;] += CHARACTER_INCREMENT;&amp;#10;    stim_map[&quot;cross_en&quot;] = false;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="&amp;#10;&amp;#10;# display feedback to log&amp;#10;print(mouse.getPressed(),&quot;was pressed\n&quot;)&amp;#10;&amp;#10;&amp;#10;try:&amp;#10;    if mouse.getPressed() == mouse_map[&quot;none&quot;]:&amp;#10;        # add timeout text, decrement loop, enable fixation&amp;#10;        fb_text = 'please respond within a shorter time period.\nPress any key to continue.'&amp;#10;        timing_map[&quot;dFb&quot;] = TIMEOUT_DURATION&amp;#10;        fb_col = 'white'&amp;#10;        stim_map[&quot;loop_iter&quot;] -= 1&amp;#10;        stim_map[&quot;cross_en&quot;] = False&amp;#10;    elif mouse.getPressed() == stim_map[&quot;map_correct&quot;]:&amp;#10;        fb_text = 'Correct!' + &quot;w/ rt of &quot;+ str(mouse.time[-1])&amp;#10;        fb_col = 'green'&amp;#10;    else:&amp;#10;        fb_text = 'Incorrect'&amp;#10;        fb_col = 'red'&amp;#10;        &amp;#10;except Exception as e:&amp;#10;    print(e)&amp;#10;&amp;#10;&amp;#10;# increment loop, enable cross if loop reaches max&amp;#10;stim_map[&quot;loop_iter&quot;] += 1&amp;#10;if stim_map[&quot;loop_iter&quot;] == stim_map[&quot;loop_count&quot;]:&amp;#10;    stim_map[&quot;loop_iter&quot;] = 0&amp;#10;    stim_map[&quot;char_length&quot;] += CHARACTER_INCREMENT&amp;#10;    stim_map[&quot;cross_en&quot;] = False" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="if mouse_fb.getPressed() == mouse_map[&quot;middle&quot;]:&amp;#10;    continueRoutine = False&amp;#10;    break" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="if ((mouse_fb.getPressed() === mouse_map[&quot;middle&quot;])) {&amp;#10;    continueRoutine = false;&amp;#10;    break;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
         <Param val="timing_map[&quot;dFb&quot;] = DEFAULT_FEEDBACK;&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
@@ -235,26 +235,26 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
       </ImageComponent>
-      <KeyboardComponent name="fb_keyboard_continue" plugin="None">
-        <Param val="" valType="list" updates="constant" name="allowedKeys"/>
-        <Param val="" valType="str" updates="constant" name="correctAns"/>
-        <Param val="" valType="str" updates="None" name="deviceLabel"/>
+      <MouseComponent name="mouse_fb" plugin="None">
+        <Param val="" valType="list" updates="constant" name="clickable"/>
+        <Param val="" valType="list" updates="constant" name="correctAns"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
-        <Param val="fb_keyboard_continue" valType="code" updates="None" name="name"/>
-        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="never" valType="str" updates="constant" name="forceEndRoutineOnPress"/>
+        <Param val="mouse_fb" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="constant" name="newClicksOnly"/>
+        <Param val="on click" valType="str" updates="None" name="saveMouseState"/>
+        <Param val="name," valType="list" updates="constant" name="saveParamsClickable"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="timing_map[&quot;dFb&quot;]" valType="code" updates="constant" name="stopVal"/>
-        <Param val="nothing" valType="str" updates="constant" name="store"/>
         <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
-        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
-      </KeyboardComponent>
+        <Param val="False" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="mouse onset" valType="str" updates="constant" name="timeRelativeTo"/>
+      </MouseComponent>
     </Routine>
     <Routine name="prompt">
       <RoutineSettingsComponent name="prompt" plugin="None">
@@ -374,36 +374,16 @@
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <KeyboardComponent name="key_nex" plugin="None">
-        <Param val="" valType="list" updates="constant" name="allowedKeys"/>
-        <Param val="" valType="str" updates="constant" name="correctAns"/>
-        <Param val="" valType="str" updates="None" name="deviceLabel"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="bool" updates="constant" name="discard previous"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
-        <Param val="key_nex" valType="code" updates="None" name="name"/>
-        <Param val="press" valType="str" updates="constant" name="registerOn"/>
-        <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="0.0" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="" valType="code" updates="constant" name="stopVal"/>
-        <Param val="nothing" valType="str" updates="constant" name="store"/>
-        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
-        <Param val="False" valType="bool" updates="constant" name="syncScreenRefresh"/>
-      </KeyboardComponent>
       <CodeComponent name="code_initfunction" plugin="None">
-        <Param val="import random&amp;#10;import string&amp;#10;import socket&amp;#10;&amp;#10;# constants declaration&amp;#10;TIMEOUT_DURATION = 10&amp;#10;CHARACTER_INCREMENT = 2&amp;#10;DEFAULT_FEEDBACK = 1&amp;#10;&amp;#10;# timing of each stimulus (global variables)&amp;#10;timing_map = {&quot;dCross&quot;: 2,&amp;#10;              &quot;dBlank&quot;: 1,&amp;#10;              &quot;dPrompt&quot;: 1,&amp;#10;              &quot;dResponse&quot;: 1,&amp;#10;              &quot;dButton&quot;: 1,&amp;#10;              &quot;dFb&quot;: 1}&amp;#10;&amp;#10;# stimulus text, feedback, and loop count&amp;#10;# before each cycle, update each variable&amp;#10;# string_prompt: stimulus display&amp;#10;# key_prompt: key selected to display&amp;#10;# map_correct: button press validation&amp;#10;# loop_iter: used to keep track of loops&amp;#10;# loop_count: set max loop count&amp;#10;# cross_en: keep track of fixation period&amp;#10;&amp;#10;stim_map = {&quot;loop_iter&quot;: 0,&amp;#10;                &quot;loop_count&quot;: 3,&amp;#10;                &quot;loop_maxcount&quot;: 9,&amp;#10;                &quot;char_length&quot;: 3,&amp;#10;                &quot;string_prompt&quot;: &quot;&quot;,&amp;#10;                &quot;key_prompt&quot;: &quot;&quot;,&amp;#10;                &quot;map_correct&quot;: None,&amp;#10;                &quot;cross_en&quot;: False,&amp;#10;                &quot;instruction_text&quot;: &quot;&quot;,&amp;#10;                &quot;iter_text_list&quot;: 0&amp;#10;                }&amp;#10;&amp;#10;# instruction page initialization&amp;#10;# initialize texts for instructions&amp;#10;#text_list = [&quot;This activity is designed to explore how we hold and use information in our minds, a key cognitive function known as working memory. Your participation will help us understand this important mental process better. Please read the following instructions carefully.&quot;,&amp;#10;#           &quot;You are about to engage in the Sternberg working memory task. In each round, or \&quot;trial,\&quot; you will first see a set of items to memorize. After a brief pause, a single \&quot;probe\&quot; item will appear on the screen. Your job is to decide as quickly and accurately as possible whether this probe item was part of the set you just memorized.&quot;,&amp;#10;#            &quot;Get Ready: Each trial will start with a fixation point, like a cross or a dot, in the center of the screen. This is to help you focus your attention.&quot;,&amp;#10;#            &quot;bruh&quot;]&amp;#10;text_list = [&quot;text 1&quot;, &quot;text 2&quot;, &quot;text 3&quot;, &quot;text 4&quot;, &quot;text 5&quot;]&amp;#10;# variables to move text&amp;#10;loopcount_text_list = len(text_list) - 1&amp;#10;# ensure it is initialized (bruh)&amp;#10;stim_map[&quot;instruction_text&quot;] = text_list[stim_map[&quot;iter_text_list&quot;]]&amp;#10;&amp;#10;&amp;#10;&amp;#10;# initialize udp connection to MATLAB&amp;#10;UDP_IP = &quot;127.0.0.1&quot;&amp;#10;UDP_PORT = 8000&amp;#10;sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)&amp;#10;&amp;#10;# UDP int values, sent to MATLAB&amp;#10;udp_map = {&quot;fixation&quot;: bytes([1]),&amp;#10;           &quot;encoding&quot;: bytes([2]),&amp;#10;           &quot;maintenance&quot;: bytes([3]),&amp;#10;           &quot;retrieval&quot;: bytes([4])}&amp;#10;&amp;#10;# send value to UDP Port, mapped via udp_map&amp;#10;def matlab_send(stage):&amp;#10;    if stage in udp_map:&amp;#10;        sock.sendto(udp_map[stage], (UDP_IP, UDP_PORT))&amp;#10;    else:&amp;#10;        sock.sendto(bytes([99]), (UDP_IP, UDP_PORT))&amp;#10;&amp;#10;&amp;#10;# return a character for response stimulus&amp;#10;def gen_key(string_prompt, correct_rate = 0.5):&amp;#10;    trunc_chars = str.maketrans('', '', string_prompt)&amp;#10;    trunc_string = string.ascii_lowercase.translate(trunc_chars)&amp;#10;    valid_string = string_prompt.replace(&quot; &quot;, &quot;&quot;)&amp;#10;    return random.choice(trunc_string) if correct_rate &lt; random.random() else random.choice(valid_string)&amp;#10;    &amp;#10;&amp;#10;# generate list of characters for encoding, must be stored for checking validity in sb_validate&amp;#10;def sb_rand(num_letters = 4):&amp;#10;    if num_letters &gt; 26:&amp;#10;        return &quot;Error: num_letters must be less than or equal to 26&quot;&amp;#10;    else:&amp;#10;        return &quot; &quot;.join(random.sample(string.ascii_lowercase, num_letters))&amp;#10;&amp;#10;# supply string_prompt and char_key to check if the key is valid&amp;#10;def sb_validate(string_prompt, char_key):&amp;#10;    return char_key in string_prompt&amp;#10;&amp;#10;# after supplying sb_rand to the stimulus, run gen_key to generate a key.&amp;#10;# then run sb_validate to check if the key is valid. If sb_validate returns True,&amp;#10;# use bool response to display correct/incorrect response.&amp;#10;def input_val(validation, correct_key = 'period', incorrect_key = 'comma'):&amp;#10;        return correct_key if validation else incorrect_key&amp;#10;&amp;#10;&amp;#10;# make sure all text boxes are initialized!&amp;#10;intro_disp_text = &quot;Hello! Thank you for participating in the Sternberg Trial Test.&quot;&amp;#10;intro_small_text = &quot;Please wait for the experimenter to continue.&quot;&amp;#10;instruction_text = &quot;&quot;&amp;#10;" valType="extendedCode" updates="constant" name="Before Experiment"/>
-        <Param val="import * as random from 'random';&amp;#10;import * as string from 'string';&amp;#10;import * as socket from 'socket';&amp;#10;function _pj_snippets(container) {&amp;#10;    function in_es6(left, right) {&amp;#10;        if (((right instanceof Array) || ((typeof right) === &quot;string&quot;))) {&amp;#10;            return (right.indexOf(left) &gt; (- 1));&amp;#10;        } else {&amp;#10;            if (((right instanceof Map) || (right instanceof Set) || (right instanceof WeakMap) || (right instanceof WeakSet))) {&amp;#10;                return right.has(left);&amp;#10;            } else {&amp;#10;                return (left in right);&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;    container[&quot;in_es6&quot;] = in_es6;&amp;#10;    return container;&amp;#10;}&amp;#10;_pj = {};&amp;#10;_pj_snippets(_pj);&amp;#10;TIMEOUT_DURATION = 10;&amp;#10;CHARACTER_INCREMENT = 2;&amp;#10;DEFAULT_FEEDBACK = 1;&amp;#10;timing_map = {&quot;dCross&quot;: 2, &quot;dBlank&quot;: 1, &quot;dPrompt&quot;: 1, &quot;dResponse&quot;: 1, &quot;dButton&quot;: 1, &quot;dFb&quot;: 1};&amp;#10;stim_map = {&quot;loop_iter&quot;: 0, &quot;loop_count&quot;: 3, &quot;loop_maxcount&quot;: 9, &quot;char_length&quot;: 3, &quot;string_prompt&quot;: &quot;&quot;, &quot;key_prompt&quot;: &quot;&quot;, &quot;map_correct&quot;: null, &quot;cross_en&quot;: false, &quot;instruction_text&quot;: &quot;&quot;, &quot;iter_text_list&quot;: 0};&amp;#10;text_list = [&quot;text 1&quot;, &quot;text 2&quot;, &quot;text 3&quot;, &quot;text 4&quot;, &quot;text 5&quot;];&amp;#10;loopcount_text_list = (text_list.length - 1);&amp;#10;stim_map[&quot;instruction_text&quot;] = text_list[stim_map[&quot;iter_text_list&quot;]];&amp;#10;UDP_IP = &quot;127.0.0.1&quot;;&amp;#10;UDP_PORT = 8000;&amp;#10;sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM);&amp;#10;udp_map = {&quot;fixation&quot;: bytes([1]), &quot;encoding&quot;: bytes([2]), &quot;maintenance&quot;: bytes([3]), &quot;retrieval&quot;: bytes([4])};&amp;#10;function matlab_send(stage) {&amp;#10;    if (_pj.in_es6(stage, udp_map)) {&amp;#10;        sock.sendto(udp_map[stage], [UDP_IP, UDP_PORT]);&amp;#10;    } else {&amp;#10;        sock.sendto(bytes([99]), [UDP_IP, UDP_PORT]);&amp;#10;    }&amp;#10;}&amp;#10;function gen_key(string_prompt, correct_rate = 0.5) {&amp;#10;    var trunc_chars, trunc_string, valid_string;&amp;#10;    trunc_chars = str.maketrans(&quot;&quot;, &quot;&quot;, string_prompt);&amp;#10;    trunc_string = string.ascii_lowercase.translate(trunc_chars);&amp;#10;    valid_string = string_prompt.replace(&quot; &quot;, &quot;&quot;);&amp;#10;    return ((correct_rate &lt; Math.random.random()) ? Math.random.choice(trunc_string) : Math.random.choice(valid_string));&amp;#10;}&amp;#10;function sb_rand(num_letters = 4) {&amp;#10;    if ((num_letters &gt; 26)) {&amp;#10;        return &quot;Error: num_letters must be less than or equal to 26&quot;;&amp;#10;    } else {&amp;#10;        return Math.random.sample(string.ascii_lowercase, num_letters).join(&quot; &quot;);&amp;#10;    }&amp;#10;}&amp;#10;function sb_validate(string_prompt, char_key) {&amp;#10;    return _pj.in_es6(char_key, string_prompt);&amp;#10;}&amp;#10;function input_val(validation, correct_key = &quot;period&quot;, incorrect_key = &quot;comma&quot;) {&amp;#10;    return (validation ? correct_key : incorrect_key);&amp;#10;}&amp;#10;intro_disp_text = &quot;Hello! Thank you for participating in the Sternberg Trial Test.&quot;;&amp;#10;intro_small_text = &quot;Please wait for the experimenter to continue.&quot;;&amp;#10;instruction_text = &quot;&quot;;&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="import random&amp;#10;import string&amp;#10;import socket&amp;#10;&amp;#10;# constants declaration&amp;#10;TIMEOUT_DURATION = 10&amp;#10;CHARACTER_INCREMENT = 2&amp;#10;DEFAULT_FEEDBACK = 1&amp;#10;&amp;#10;# timing of each stimulus (global variables)&amp;#10;timing_map = {&quot;dCross&quot;: 2,&amp;#10;              &quot;dBlank&quot;: 1,&amp;#10;              &quot;dPrompt&quot;: 1,&amp;#10;              &quot;dResponse&quot;: 1,&amp;#10;              &quot;dButton&quot;: 1,&amp;#10;              &quot;dFb&quot;: 1}&amp;#10;intro_disp_text = &quot;testing environment&quot;&amp;#10;intro_small_text = &quot;mouse exp&quot;&amp;#10;# stimulus text, feedback, and loop count&amp;#10;# before each cycle, update each variable&amp;#10;# string_prompt: stimulus display&amp;#10;# key_prompt: key selected to display&amp;#10;# map_correct: button press validation&amp;#10;# loop_iter: used to keep track of loops&amp;#10;# loop_count: set max loop count&amp;#10;# cross_en: keep track of fixation period&amp;#10;&amp;#10;stim_map = {&quot;loop_iter&quot;: 0,&amp;#10;                &quot;loop_count&quot;: 3,&amp;#10;                &quot;loop_maxcount&quot;: 9,&amp;#10;                &quot;char_length&quot;: 3,&amp;#10;                &quot;string_prompt&quot;: &quot;&quot;,&amp;#10;                &quot;key_prompt&quot;: &quot;&quot;,&amp;#10;                &quot;map_correct&quot;: None,&amp;#10;                &quot;cross_en&quot;: False,&amp;#10;                &quot;instruction_text&quot;: &quot;&quot;,&amp;#10;                &quot;iter_text_list&quot;: 0&amp;#10;                }&amp;#10;&amp;#10;mouse_map = {&quot;left&quot;:  [1, 0, 0],&amp;#10;             &quot;right&quot;: [0, 0, 1],&amp;#10;             &quot;middle&quot;: [0, 1, 0],&amp;#10;             &quot;none&quot;: [0, 0, 0]}&amp;#10;'''&amp;#10;# initialize udp connection to MATLAB&amp;#10;UDP_IP = &quot;127.0.0.1&quot;&amp;#10;UDP_PORT = 8000&amp;#10;sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)&amp;#10;&amp;#10;# UDP int values, sent to MATLAB&amp;#10;udp_map = {&quot;fixation&quot;: bytes([1]),&amp;#10;           &quot;encoding&quot;: bytes([2]),&amp;#10;           &quot;maintenance&quot;: bytes([3]),&amp;#10;           &quot;retrieval&quot;: bytes([4])}&amp;#10;&amp;#10;# send value to UDP Port, mapped via udp_map&amp;#10;def matlab_send(stage):&amp;#10;    if stage in udp_map:&amp;#10;        sock.sendto(udp_map[stage], (UDP_IP, UDP_PORT))&amp;#10;    else:&amp;#10;        sock.sendto(bytes([99]), (UDP_IP, UDP_PORT))&amp;#10;'''&amp;#10;&amp;#10;# return a character for response stimulus&amp;#10;def gen_key(string_prompt, correct_rate = 0.5):&amp;#10;    trunc_chars = str.maketrans('', '', string_prompt)&amp;#10;    trunc_string = string.ascii_lowercase.translate(trunc_chars)&amp;#10;    valid_string = string_prompt.replace(&quot; &quot;, &quot;&quot;)&amp;#10;    return random.choice(trunc_string) if correct_rate &lt; random.random() else random.choice(valid_string)&amp;#10;    &amp;#10;&amp;#10;# generate list of characters for encoding, must be stored for checking validity in sb_validate&amp;#10;def sb_rand(num_letters = 4):&amp;#10;    if num_letters &gt; 26:&amp;#10;        return &quot;Error: num_letters must be less than or equal to 26&quot;&amp;#10;    else:&amp;#10;        return &quot; &quot;.join(random.sample(string.ascii_lowercase, num_letters))&amp;#10;&amp;#10;# supply string_prompt and char_key to check if the key is valid&amp;#10;def sb_validate(string_prompt, char_key):&amp;#10;    return char_key in string_prompt&amp;#10;&amp;#10;# after supplying sb_rand to the stimulus, run gen_key to generate a key.&amp;#10;# then run sb_validate to check if the key is valid. If sb_validate returns True,&amp;#10;# use bool response to display correct/incorrect response.&amp;#10;def input_val(validation, correct_key = [1, 0, 0], incorrect_key = [0, 0, 1]):&amp;#10;        return correct_key if validation else incorrect_key&amp;#10;&amp;#10;&amp;#10;" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="import * as random from 'random';&amp;#10;import * as string from 'string';&amp;#10;import * as socket from 'socket';&amp;#10;function _pj_snippets(container) {&amp;#10;    function in_es6(left, right) {&amp;#10;        if (((right instanceof Array) || ((typeof right) === &quot;string&quot;))) {&amp;#10;            return (right.indexOf(left) &gt; (- 1));&amp;#10;        } else {&amp;#10;            if (((right instanceof Map) || (right instanceof Set) || (right instanceof WeakMap) || (right instanceof WeakSet))) {&amp;#10;                return right.has(left);&amp;#10;            } else {&amp;#10;                return (left in right);&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;    container[&quot;in_es6&quot;] = in_es6;&amp;#10;    return container;&amp;#10;}&amp;#10;_pj = {};&amp;#10;_pj_snippets(_pj);&amp;#10;TIMEOUT_DURATION = 10;&amp;#10;CHARACTER_INCREMENT = 2;&amp;#10;DEFAULT_FEEDBACK = 1;&amp;#10;timing_map = {&quot;dCross&quot;: 2, &quot;dBlank&quot;: 1, &quot;dPrompt&quot;: 1, &quot;dResponse&quot;: 1, &quot;dButton&quot;: 1, &quot;dFb&quot;: 1};&amp;#10;intro_disp_text = &quot;testing environment&quot;;&amp;#10;intro_small_text = &quot;mouse exp&quot;;&amp;#10;stim_map = {&quot;loop_iter&quot;: 0, &quot;loop_count&quot;: 3, &quot;loop_maxcount&quot;: 9, &quot;char_length&quot;: 3, &quot;string_prompt&quot;: &quot;&quot;, &quot;key_prompt&quot;: &quot;&quot;, &quot;map_correct&quot;: null, &quot;cross_en&quot;: false, &quot;instruction_text&quot;: &quot;&quot;, &quot;iter_text_list&quot;: 0};&amp;#10;mouse_map = {&quot;left&quot;: [1, 0, 0], &quot;right&quot;: [0, 0, 1], &quot;middle&quot;: [0, 1, 0], &quot;none&quot;: [0, 0, 0]};&amp;#10;/*&amp;#10;# initialize udp connection to MATLAB&amp;#10;UDP_IP = &quot;127.0.0.1&quot;&amp;#10;UDP_PORT = 8000&amp;#10;sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)&amp;#10;&amp;#10;# UDP int values, sent to MATLAB&amp;#10;udp_map = {&quot;fixation&quot;: bytes([1]),&amp;#10;&quot;encoding&quot;: bytes([2]),&amp;#10;&quot;maintenance&quot;: bytes([3]),&amp;#10;&quot;retrieval&quot;: bytes([4])}&amp;#10;&amp;#10;# send value to UDP Port, mapped via udp_map&amp;#10;def matlab_send(stage):&amp;#10;if stage in udp_map:&amp;#10;sock.sendto(udp_map[stage], (UDP_IP, UDP_PORT))&amp;#10;else:&amp;#10;sock.sendto(bytes([99]), (UDP_IP, UDP_PORT))*/&amp;#10;function gen_key(string_prompt, correct_rate = 0.5) {&amp;#10;    var trunc_chars, trunc_string, valid_string;&amp;#10;    trunc_chars = str.maketrans(&quot;&quot;, &quot;&quot;, string_prompt);&amp;#10;    trunc_string = string.ascii_lowercase.translate(trunc_chars);&amp;#10;    valid_string = string_prompt.replace(&quot; &quot;, &quot;&quot;);&amp;#10;    return ((correct_rate &lt; Math.random.random()) ? Math.random.choice(trunc_string) : Math.random.choice(valid_string));&amp;#10;}&amp;#10;function sb_rand(num_letters = 4) {&amp;#10;    if ((num_letters &gt; 26)) {&amp;#10;        return &quot;Error: num_letters must be less than or equal to 26&quot;;&amp;#10;    } else {&amp;#10;        return Math.random.sample(string.ascii_lowercase, num_letters).join(&quot; &quot;);&amp;#10;    }&amp;#10;}&amp;#10;function sb_validate(string_prompt, char_key) {&amp;#10;    return _pj.in_es6(char_key, string_prompt);&amp;#10;}&amp;#10;function input_val(validation, correct_key = [1, 0, 0], incorrect_key = [0, 0, 1]) {&amp;#10;    return (validation ? correct_key : incorrect_key);&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="&amp;#10;&amp;#10;&amp;#10;&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="# continue on middle mouse press&amp;#10;if mouse_intro.getPressed() == mouse_map[&quot;middle&quot;]:&amp;#10;    continueRoutine = False&amp;#10;    break" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="if ((mouse_intro.getPressed() === mouse_map[&quot;middle&quot;])) {&amp;#10;    continueRoutine = false;&amp;#10;    break;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
@@ -438,6 +418,26 @@
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
+      <MouseComponent name="mouse_intro" plugin="None">
+        <Param val="" valType="list" updates="constant" name="clickable"/>
+        <Param val="" valType="list" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="never" valType="str" updates="constant" name="forceEndRoutineOnPress"/>
+        <Param val="mouse_intro" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="constant" name="newClicksOnly"/>
+        <Param val="on click" valType="str" updates="None" name="saveMouseState"/>
+        <Param val="name," valType="list" updates="constant" name="saveParamsClickable"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="False" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="mouse onset" valType="str" updates="constant" name="timeRelativeTo"/>
+      </MouseComponent>
     </Routine>
     <Routine name="cross_fix">
       <RoutineSettingsComponent name="cross_fix" plugin="None">
@@ -898,22 +898,71 @@
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
     </Routine>
+    <Routine name="routine">
+      <RoutineSettingsComponent name="routine" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
+        <Param val="routine" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <CodeComponent name="rt_fb_code2" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="fb_text = &quot;no mouse component found - look at the Std out window for info&quot;;&amp;#10;try {&amp;#10;    fb_text = ((&quot;RT: &quot; + (util.round((mouse.time.slice((- 1))[0] * 1000)) / 1000).toString()) + &quot; seconds&quot;);&amp;#10;} catch(e) {&amp;#10;    console.log(&quot;Make sure that you have:\n1. a routine with a mouse component in it called \&quot;mouse\&quot;\n2. that data is set to store \&quot;on click\&quot;&quot;);&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="# Provide feedback on the response time of a mouse/touch response&amp;#10;# This routine will need to follow another routine with a &amp;#10;# mouse response component in it called &quot;mouse&quot; &amp;#10; &amp;#10;# If your experiment is missing that you will &amp;#10;# not receive feedback and an error message will be displayed.&amp;#10;&amp;#10;# If a mouse component has been added and feedback is functioning.&amp;#10;# 1. remove lines 12, 13, 15, 17 and 18.&amp;#10;# 2. dedent line 16&amp;#10;&amp;#10;fb_text = 'no mouse component found - look at the Std out window for info'&amp;#10;&amp;#10;&amp;#10;try:&amp;#10;    fb_text = 'RT: ' + str(round(mouse.time[-1]*1000)/1000) + ' seconds'#multiplying and dividing by 1000 for online compatibility (Math.Round in JS rounds to the nearest integer rather than rounding floats to a decimal place)&amp;#10;except:&amp;#10;    print('Make sure that you have:\n1. a routine with a mouse component in it called &quot;mouse&quot;\n2. that data is set to store &quot;on click&quot;')&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="rt_fb_code2" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <TextComponent name="rt_fb2" plugin="None">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.1" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="rt_fb2" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="1.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="$fb_text" valType="str" updates="set every repeat" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="code" updates="None" name="validator"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+    </Routine>
   </Routines>
   <Flow>
     <Routine name="intro"/>
-    <LoopInitiator loopType="TrialHandler" name="loop_instruction">
-      <Param name="Selected rows" updates="None" val="" valType="str"/>
-      <Param name="conditions" updates="None" val="None" valType="str"/>
-      <Param name="conditionsFile" updates="None" val="" valType="file"/>
-      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
-      <Param name="isTrials" updates="None" val="False" valType="bool"/>
-      <Param name="loopType" updates="None" val="sequential" valType="str"/>
-      <Param name="nReps" updates="None" val="loopcount_text_list" valType="num"/>
-      <Param name="name" updates="None" val="loop_instruction" valType="code"/>
-      <Param name="random seed" updates="None" val="" valType="code"/>
-    </LoopInitiator>
-    <Routine name="instruction_page"/>
-    <LoopTerminator name="loop_instruction"/>
     <LoopInitiator loopType="TrialHandler" name="loop_maintrial">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
       <Param name="conditions" updates="None" val="[{'dCross': 1, 'dBlank': 1, 'dPrompt': 1, 'dResponse': 1, 'dButton': 1, 'dFb': 1}]" valType="str"/>

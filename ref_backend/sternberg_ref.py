@@ -84,7 +84,6 @@ def matlab_send(stage):
     if stage in udp_map:
         sock.sendto(udp_map[stage], (UDP_IP, UDP_PORT))
 
-
 # return a character for response stimulus
 def gen_key(string_prompt, correct_rate = 0.5):
     trunc_chars = str.maketrans('', '', string_prompt)
@@ -110,6 +109,38 @@ def sb_validate(string_prompt, char_key):
 def input_val(validation, correct_key = 'period', incorrect_key = 'comma'):
         return correct_key if validation else incorrect_key
 
+"""
+these changes are made to switch from a button press to a mouse click
+"""
+mouse_map = {"left":  [1, 0, 0],
+             "right": [0, 0, 1],
+             "middle": [0, 1, 0],
+             "none": [0, 0, 0]}
+
+def input_val(validation, correct_key = [1, 0, 0], incorrect_key = [0, 0, 1]):
+        return correct_key if validation else incorrect_key
+try:
+    if mouse.getPressed() == mouse_map["none"]:
+        # add timeout text, decrement loop, enable fixation
+        fb_text = 'please respond within a shorter time period.\nPress any key to continue.'
+        timing_map["dFb"] = TIMEOUT_DURATION
+        fb_col = 'white'
+        stim_map["loop_iter"] -= 1
+        stim_map["cross_en"] = False
+    elif mouse.getPressed() == stim_map["map_correct"]:
+        fb_text = 'Correct!'
+        fb_col = 'green'
+    else:
+        fb_text = 'Incorrect'
+        fb_col = 'red'
+except:
+    print("fb not accurately recorded.")
+
+# located in eachframe for button_record and intro
+if mouse_fb.getPressed() == mouse_map["middle"]:
+    continueRoutine = False
+    break
+# remember to add mouse_fb, mouse_intro, and mouse to button_record, intro, and response  
 
 # make sure all text boxes are initialized!
 intro_disp_text = "Hello! Thank you for participating in the Sternberg Working Memory Task."
