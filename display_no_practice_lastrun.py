@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on July 14, 2025, at 19:23
+    on July 15, 2025, at 12:57
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -269,7 +269,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\Ben\\gitfolder\\mstembci\\display_no_practice_lastrun.py',
+        originPath='C:\\Users\\04Ben\\github\\mstembci\\display_no_practice_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -1498,7 +1498,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # increment characters after specified loop count
         if stim_map["loop_iter"] == stim_map["loop_count"]:
             # display countdown
-            skip_break = stim_map["char_length"] == MAX_CHARACTERS
+            skip_break = False
             # adjust variables for looping scheduler
             stim_map["loop_iter"] = 0
             stim_map["char_length"] += CHARACTER_INCREMENT
@@ -1718,11 +1718,13 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         print("timing_map[\"dITI\"]:", timing_map["dITI"])
         
         print(mouse_rawval, "was pressed")
-        print("Reaction Time is", mouse.time[-1])
         print("current loop that ended is:", currentLoop.thisTrial)
         
         # log reaction time and accuracy percentage
-        thisExp.addData('reactionTime', mouse.time[-1])
+        try:
+            thisExp.addData('reactionTime', mouse.time[-1])
+        except:
+            thisExp.addData('reactionTime', "timmed out")
         thisExp.addData('accuracy', "correct" if mouse_correct else "incorrect")
         thisExp.addData('prompt', stim_map["string_prompt"])
         thisExp.addData('character', stim_map["key_prompt"])
@@ -1882,7 +1884,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         continueRoutine = True
         # update component parameters for each repeat
         # Run 'Begin Routine' code from code_ITI
-        if mouse:
+        if mouse.getPressed() == mouse_map["none"]:
             matlab_send("ITI")
         # store start times for ITI
         ITI.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
