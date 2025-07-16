@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on July 08, 2025, at 11:33
+    on July 15, 2025, at 17:34
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -69,11 +69,15 @@ dITI: duration of blank screen -- default 2.5
 timing_map = {"dCross": 10,
               "dPrompt": 3.5,
               "dBlank": 4,
-              "dResponse": 1.5,
+              "dResponse": 3,
               "dFb": 2,
               "dITI": 2.5,
               }
-
+             
+mouse_map = {"left":  [1, 0, 0],
+             "right": [0, 0, 1],
+             "middle": [0, 1, 0],
+             "none": [0, 0, 0]}
 
 # stimulus text, feedback, and loop count
 # before each cycle, update each variable
@@ -133,18 +137,20 @@ def matlab_send(stage):
 
 # return a character for response stimulus
 def gen_key(string_prompt, correct_rate = 0.5):
+    consonants = "bcdfghjklmnpqrstvwxyz"
     trunc_chars = str.maketrans('', '', string_prompt)
-    trunc_string = string.ascii_lowercase.translate(trunc_chars)
+    trunc_string = consonants.translate(trunc_chars)
     valid_string = string_prompt.replace(" ", "")
     return random.choice(trunc_string) if correct_rate < random.random() else random.choice(valid_string)
     
 
 # generate list of characters for encoding, must be stored for checking validity in sb_validate
 def sb_rand(num_letters = 4):
+    consonants = "bcdfghjklmnpqrstvwxyz"
     if num_letters > 26:
         return "Error: num_letters must be less than or equal to 26"
     else:
-        return " ".join(random.sample(string.ascii_lowercase, num_letters))
+        return " ".join(random.sample(consonants, num_letters))
 
 # supply string_prompt and char_key to check if the key is valid
 def sb_validate(string_prompt, char_key):
@@ -153,7 +159,7 @@ def sb_validate(string_prompt, char_key):
 # after supplying sb_rand to the stimulus, run gen_key to generate a key.
 # then run sb_validate to check if the key is valid. If sb_validate returns True,
 # use bool response to display correct/incorrect response.
-def input_val(validation, correct_key = 'period', incorrect_key = 'comma'):
+def input_val(validation, correct_key = [1,0,0], incorrect_key = [0,0,1]):
         return correct_key if validation else incorrect_key
 
 
@@ -168,6 +174,8 @@ maintrial_text = "The main experiment will now begin. Please press any key to be
 
 
 
+# Run 'Before Experiment' code from code_textshift
+middle_button_down = False
 # Run 'Before Experiment' code from code_fb
 block_fb = ""
 fb_text = ""
@@ -389,36 +397,6 @@ def setupDevices(expInfo, thisExp, win):
         deviceManager.addDevice(
             deviceClass='keyboard', deviceName='defaultKeyboard', backend='iohub'
         )
-    if deviceManager.getDevice('key_nex') is None:
-        # initialise key_nex
-        key_nex = deviceManager.addDevice(
-            deviceClass='keyboard',
-            deviceName='key_nex',
-        )
-    if deviceManager.getDevice('key_resp_instruction') is None:
-        # initialise key_resp_instruction
-        key_resp_instruction = deviceManager.addDevice(
-            deviceClass='keyboard',
-            deviceName='key_resp_instruction',
-        )
-    if deviceManager.getDevice('key_resp') is None:
-        # initialise key_resp
-        key_resp = deviceManager.addDevice(
-            deviceClass='keyboard',
-            deviceName='key_resp',
-        )
-    if deviceManager.getDevice('fb_keyboard_continue') is None:
-        # initialise fb_keyboard_continue
-        fb_keyboard_continue = deviceManager.addDevice(
-            deviceClass='keyboard',
-            deviceName='fb_keyboard_continue',
-        )
-    if deviceManager.getDevice('key_next') is None:
-        # initialise key_next
-        key_next = deviceManager.addDevice(
-            deviceClass='keyboard',
-            deviceName='key_next',
-        )
     # return True if completed successfully
     return True
 
@@ -531,14 +509,16 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
-    key_nex = keyboard.Keyboard(deviceName='key_nex')
     intro_small = visual.TextStim(win=win, name='intro_small',
         text='',
         font='Open Sans',
         pos=(0, -.3), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
-        depth=-3.0);
+        depth=-2.0);
+    mouse_intro = event.Mouse(win=win)
+    x, y = [None, None]
+    mouse_intro.mouseClock = core.Clock()
     
     # --- Initialize components for Routine "instruction_page" ---
     instruction = visual.TextStim(win=win, name='instruction',
@@ -548,7 +528,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
-    key_resp_instruction = keyboard.Keyboard(deviceName='key_resp_instruction')
+    mouse_instruction = event.Mouse(win=win)
+    x, y = [None, None]
+    mouse_instruction.mouseClock = core.Clock()
     
     # --- Initialize components for Routine "countdown" ---
     text_countdown = visual.TextStim(win=win, name='text_countdown',
@@ -590,14 +572,16 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         texRes=128.0, interpolate=True, depth=0.0)
     
     # --- Initialize components for Routine "response" ---
-    key_resp = keyboard.Keyboard(deviceName='key_resp')
     key_response_disp = visual.TextStim(win=win, name='key_response_disp',
         text='',
         font='Open Sans',
         pos=(0, 0), draggable=False, height=0.18, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
-        depth=-1.0);
+        depth=0.0);
+    mouse = event.Mouse(win=win)
+    x, y = [None, None]
+    mouse.mouseClock = core.Clock()
     
     # --- Initialize components for Routine "button_record" ---
     fb_disp = visual.TextStim(win=win, name='fb_disp',
@@ -607,7 +591,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-1.0);
-    fb_keyboard_continue = keyboard.Keyboard(deviceName='fb_keyboard_continue')
+    mouse_fb = event.Mouse(win=win)
+    x, y = [None, None]
+    mouse_fb.mouseClock = core.Clock()
     
     # --- Initialize components for Routine "ITI" ---
     black_screen = visual.Rect(
@@ -630,7 +616,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         color=[1.0000, 1.0000, 1.0000], colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
-    key_next = keyboard.Keyboard(deviceName='key_next')
+    mouse_end = event.Mouse(win=win)
+    x, y = [None, None]
+    mouse_end.mouseClock = core.Clock()
     
     # create some handy timers
     
@@ -664,21 +652,19 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # create an object to store info about Routine intro
     intro = data.Routine(
         name='intro',
-        components=[intro_disp, key_nex, intro_small],
+        components=[intro_disp, intro_small, mouse_intro],
     )
     intro.status = NOT_STARTED
     continueRoutine = True
     # update component parameters for each repeat
     intro_disp.setText(intro_disp_text)
-    # create starting attributes for key_nex
-    key_nex.keys = []
-    key_nex.rt = []
-    _key_nex_allKeys = []
     # Run 'Begin Routine' code from code_initfunction
     # send UDP signal indicating start to synchronize
     # stimulus with MATLAB EEG signals
     matlab_send("start")
     intro_small.setText(intro_small_text)
+    # setup some python lists for storing info about the mouse_intro
+    gotValidClick = False  # until a click is received
     # store start times for intro
     intro.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
     intro.tStart = globalClock.getTime(format='float')
@@ -725,29 +711,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if intro_disp.status == STARTED:
             # update params
             pass
-        
-        # *key_nex* updates
-        
-        # if key_nex is starting this frame...
-        if key_nex.status == NOT_STARTED and t >= 0.0-frameTolerance:
-            # keep track of start time/frame for later
-            key_nex.frameNStart = frameN  # exact frame index
-            key_nex.tStart = t  # local t and not account for scr refresh
-            key_nex.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(key_nex, 'tStartRefresh')  # time at next scr refresh
-            # update status
-            key_nex.status = STARTED
-            # keyboard checking is just starting
-            key_nex.clock.reset()  # now t=0
-        if key_nex.status == STARTED:
-            theseKeys = key_nex.getKeys(keyList=None, ignoreKeys=["escape"], waitRelease=False)
-            _key_nex_allKeys.extend(theseKeys)
-            if len(_key_nex_allKeys):
-                key_nex.keys = _key_nex_allKeys[-1].name  # just the last key pressed
-                key_nex.rt = _key_nex_allKeys[-1].rt
-                key_nex.duration = _key_nex_allKeys[-1].duration
-                # a response ends the routine
-                continueRoutine = False
+        # Run 'Each Frame' code from code_initfunction
+        if mouse_intro.getPressed() == mouse_map["middle"]:
+            continueRoutine = False
+            break
         
         # *intro_small* updates
         
@@ -766,6 +733,19 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if intro_small.status == STARTED:
             # update params
             pass
+        # *mouse_intro* updates
+        
+        # if mouse_intro is starting this frame...
+        if mouse_intro.status == NOT_STARTED and t >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            mouse_intro.frameNStart = frameN  # exact frame index
+            mouse_intro.tStart = t  # local t and not account for scr refresh
+            mouse_intro.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(mouse_intro, 'tStartRefresh')  # time at next scr refresh
+            # update status
+            mouse_intro.status = STARTED
+            mouse_intro.mouseClock.reset()
+            prevButtonState = mouse_intro.getPressed()  # if button is down already this ISN'T a new click
         
         # check for quit (typically the Esc key)
         if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -805,6 +785,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # store stop times for intro
     intro.tStop = globalClock.getTime(format='float')
     intro.tStopRefresh = tThisFlipGlobal
+    # store data for thisExp (ExperimentHandler)
     thisExp.nextEntry()
     # the Routine "intro" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
@@ -838,16 +819,16 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # create an object to store info about Routine instruction_page
         instruction_page = data.Routine(
             name='instruction_page',
-            components=[instruction, key_resp_instruction],
+            components=[instruction, mouse_instruction],
         )
         instruction_page.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
         instruction.setText(stim_map["instruction_text"])
-        # create starting attributes for key_resp_instruction
-        key_resp_instruction.keys = []
-        key_resp_instruction.rt = []
-        _key_resp_instruction_allKeys = []
+        # Run 'Begin Routine' code from code_textshift
+        global middle_button_down
+        # setup some python lists for storing info about the mouse_instruction
+        gotValidClick = False  # until a click is received
         # store start times for instruction_page
         instruction_page.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         instruction_page.tStart = globalClock.getTime(format='float')
@@ -897,30 +878,31 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             if instruction.status == STARTED:
                 # update params
                 pass
+            # Run 'Each Frame' code from code_textshift
+            # Get the current state of the mouse buttons
+            buttons = mouse_instruction.getPressed()
             
-            # *key_resp_instruction* updates
+            # Check for a NEW middle button press
+            if buttons[1] and not middle_button_down:
+                middle_button_down = True  # Set the flag to true, so this won't run again until release
+                continueRoutine = False    # End the current routine
             
-            # if key_resp_instruction is starting this frame...
-            if key_resp_instruction.status == NOT_STARTED and t >= 0.0-frameTolerance:
+            # Check if the button has been released to reset the flag
+            elif not buttons[1]:
+                middle_button_down = False # Reset the flag, re-arming it for the next press
+            # *mouse_instruction* updates
+            
+            # if mouse_instruction is starting this frame...
+            if mouse_instruction.status == NOT_STARTED and t >= 0.0-frameTolerance:
                 # keep track of start time/frame for later
-                key_resp_instruction.frameNStart = frameN  # exact frame index
-                key_resp_instruction.tStart = t  # local t and not account for scr refresh
-                key_resp_instruction.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(key_resp_instruction, 'tStartRefresh')  # time at next scr refresh
+                mouse_instruction.frameNStart = frameN  # exact frame index
+                mouse_instruction.tStart = t  # local t and not account for scr refresh
+                mouse_instruction.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(mouse_instruction, 'tStartRefresh')  # time at next scr refresh
                 # update status
-                key_resp_instruction.status = STARTED
-                # keyboard checking is just starting
-                key_resp_instruction.clock.reset()  # now t=0
-                key_resp_instruction.clearEvents(eventType='keyboard')
-            if key_resp_instruction.status == STARTED:
-                theseKeys = key_resp_instruction.getKeys(keyList=None, ignoreKeys=["escape"], waitRelease=False)
-                _key_resp_instruction_allKeys.extend(theseKeys)
-                if len(_key_resp_instruction_allKeys):
-                    key_resp_instruction.keys = _key_resp_instruction_allKeys[-1].name  # just the last key pressed
-                    key_resp_instruction.rt = _key_resp_instruction_allKeys[-1].rt
-                    key_resp_instruction.duration = _key_resp_instruction_allKeys[-1].duration
-                    # a response ends the routine
-                    continueRoutine = False
+                mouse_instruction.status = STARTED
+                mouse_instruction.mouseClock.reset()
+                prevButtonState = mouse_instruction.getPressed()  # if button is down already this ISN'T a new click
             
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -968,13 +950,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             print("now on text", stim_map["iter_text_list"], "\n")
             stim_map["instruction_text"] = text_list[stim_map["iter_text_list"]]
         
-        # check responses
-        if key_resp_instruction.keys in ['', [], None]:  # No response was made
-            key_resp_instruction.keys = None
-        loop_instruction.addData('key_resp_instruction.keys',key_resp_instruction.keys)
-        if key_resp_instruction.keys != None:  # we had a response
-            loop_instruction.addData('key_resp_instruction.rt', key_resp_instruction.rt)
-            loop_instruction.addData('key_resp_instruction.duration', key_resp_instruction.duration)
+        # store data for loop_instruction (TrialHandler)
         # the Routine "instruction_page" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
     # completed len(text_list) repeats of 'loop_instruction'
@@ -1604,18 +1580,22 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # create an object to store info about Routine response
         response = data.Routine(
             name='response',
-            components=[key_resp, key_response_disp],
+            components=[key_response_disp, mouse],
         )
         response.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
-        # create starting attributes for key_resp
-        key_resp.keys = []
-        key_resp.rt = []
-        _key_resp_allKeys = []
         key_response_disp.setText(stim_map["key_prompt"])
         # Run 'Begin Routine' code from code_matlab_r
         matlab_send("r")
+        # setup some python lists for storing info about the mouse
+        mouse.x = []
+        mouse.y = []
+        mouse.leftButton = []
+        mouse.midButton = []
+        mouse.rightButton = []
+        mouse.time = []
+        gotValidClick = False  # until a click is received
         # store start times for response
         response.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         response.tStart = globalClock.getTime(format='float')
@@ -1653,39 +1633,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 response.maxDurationReached = True
                 continueRoutine = False
             
-            # *key_resp* updates
-            waitOnFlip = False
-            
-            # if key_resp is starting this frame...
-            if key_resp.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-                # keep track of start time/frame for later
-                key_resp.frameNStart = frameN  # exact frame index
-                key_resp.tStart = t  # local t and not account for scr refresh
-                key_resp.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(key_resp, 'tStartRefresh')  # time at next scr refresh
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'key_resp.started')
-                # update status
-                key_resp.status = STARTED
-                # keyboard checking is just starting
-                waitOnFlip = True
-                win.callOnFlip(key_resp.clock.reset)  # t=0 on next screen flip
-                win.callOnFlip(key_resp.clearEvents, eventType='keyboard')  # clear events on next screen flip
-            if key_resp.status == STARTED and not waitOnFlip:
-                theseKeys = key_resp.getKeys(keyList=['comma','period'], ignoreKeys=["escape"], waitRelease=False)
-                _key_resp_allKeys.extend(theseKeys)
-                if len(_key_resp_allKeys):
-                    key_resp.keys = _key_resp_allKeys[-1].name  # just the last key pressed
-                    key_resp.rt = _key_resp_allKeys[-1].rt
-                    key_resp.duration = _key_resp_allKeys[-1].duration
-                    # was this correct?
-                    if (key_resp.keys == str(stim_map["map_correct"])) or (key_resp.keys == stim_map["map_correct"]):
-                        key_resp.corr = 1
-                    else:
-                        key_resp.corr = 0
-                    # a response ends the routine
-                    continueRoutine = False
-            
             # *key_response_disp* updates
             
             # if key_response_disp is starting this frame...
@@ -1705,6 +1652,35 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             if key_response_disp.status == STARTED:
                 # update params
                 pass
+            # *mouse* updates
+            
+            # if mouse is starting this frame...
+            if mouse.status == NOT_STARTED and t >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                mouse.frameNStart = frameN  # exact frame index
+                mouse.tStart = t  # local t and not account for scr refresh
+                mouse.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(mouse, 'tStartRefresh')  # time at next scr refresh
+                # update status
+                mouse.status = STARTED
+                mouse.mouseClock.reset()
+                prevButtonState = mouse.getPressed()  # if button is down already this ISN'T a new click
+            if mouse.status == STARTED:  # only update if started and not finished!
+                buttons = mouse.getPressed()
+                if buttons != prevButtonState:  # button state changed?
+                    prevButtonState = buttons
+                    if sum(buttons) > 0:  # state changed to a new click
+                        pass
+                        x, y = mouse.getPos()
+                        mouse.x.append(x)
+                        mouse.y.append(y)
+                        buttons = mouse.getPressed()
+                        mouse.leftButton.append(buttons[0])
+                        mouse.midButton.append(buttons[1])
+                        mouse.rightButton.append(buttons[2])
+                        mouse.time.append(mouse.mouseClock.getTime())
+                        
+                        continueRoutine = False  # end routine on response
             
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1745,20 +1721,13 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         response.tStop = globalClock.getTime(format='float')
         response.tStopRefresh = tThisFlipGlobal
         thisExp.addData('response.stopped', response.tStop)
-        # check responses
-        if key_resp.keys in ['', [], None]:  # No response was made
-            key_resp.keys = None
-            # was no response the correct answer?!
-            if str(stim_map["map_correct"]).lower() == 'none':
-               key_resp.corr = 1;  # correct non-response
-            else:
-               key_resp.corr = 0;  # failed to respond (incorrectly)
         # store data for loop_maintrial (TrialHandler)
-        loop_maintrial.addData('key_resp.keys',key_resp.keys)
-        loop_maintrial.addData('key_resp.corr', key_resp.corr)
-        if key_resp.keys != None:  # we had a response
-            loop_maintrial.addData('key_resp.rt', key_resp.rt)
-            loop_maintrial.addData('key_resp.duration', key_resp.duration)
+        loop_maintrial.addData('mouse.x', mouse.x)
+        loop_maintrial.addData('mouse.y', mouse.y)
+        loop_maintrial.addData('mouse.leftButton', mouse.leftButton)
+        loop_maintrial.addData('mouse.midButton', mouse.midButton)
+        loop_maintrial.addData('mouse.rightButton', mouse.rightButton)
+        loop_maintrial.addData('mouse.time', mouse.time)
         # the Routine "response" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         
@@ -1766,7 +1735,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # create an object to store info about Routine button_record
         button_record = data.Routine(
             name='button_record',
-            components=[fb_disp, fb_keyboard_continue],
+            components=[fb_disp, mouse_fb],
         )
         button_record.status = NOT_STARTED
         continueRoutine = True
@@ -1777,18 +1746,20 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         global fb_text_size
         global fb_color
         # display feedback to log
-        print(key_resp.keys,"was pressed\n")
+        mouse_rawval = mouse.getPressed()
+        mouse_correct = int(mouse_rawval == stim_map["map_correct"])
+        print(mouse_rawval,"was pressed\n")
         
         try:
-            if key_resp.keys == None:
+            if mouse_rawval == mouse_map["none"]:
                 # add timeout text, decrement loop, enable fixation
                 fb_color = 'white'
                 fb_text_size = 0.1
-                fb_text = 'Response took too long. Press any key to continue.'
+                fb_text = 'Response took too long. Press middle mouse button to continue.'
                 timing_map["dFb"] = TIMEOUT_DURATION
                 stim_map["loop_iter"] -= 1
                 stim_map["cross_en"] = False
-            elif key_resp.corr:
+            elif mouse_rawval == stim_map["map_correct"]:
                 fb_text = 'correct!'
                 fb_color = 'green'
                 block_fb += u'\u2713 '
@@ -1826,10 +1797,14 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         fb_disp.setColor(fb_color, colorSpace='rgb')
         fb_disp.setText(fb_text)
         fb_disp.setHeight(fb_text_size)
-        # create starting attributes for fb_keyboard_continue
-        fb_keyboard_continue.keys = []
-        fb_keyboard_continue.rt = []
-        _fb_keyboard_continue_allKeys = []
+        # setup some python lists for storing info about the mouse_fb
+        mouse_fb.x = []
+        mouse_fb.y = []
+        mouse_fb.leftButton = []
+        mouse_fb.midButton = []
+        mouse_fb.rightButton = []
+        mouse_fb.time = []
+        gotValidClick = False  # until a click is received
         # store start times for button_record
         button_record.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         button_record.tStart = globalClock.getTime(format='float')
@@ -1862,6 +1837,10 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             tThisFlipGlobal = win.getFutureFlipTime(clock=None)
             frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
             # update/draw components on each frame
+            # Run 'Each Frame' code from code_fb
+            if mouse_fb.getPressed() == mouse_map["middle"]:
+                continueRoutine = False
+                break
             
             # *fb_disp* updates
             
@@ -1892,42 +1871,44 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     # update status
                     fb_disp.status = FINISHED
                     fb_disp.setAutoDraw(False)
+            # *mouse_fb* updates
             
-            # *fb_keyboard_continue* updates
-            
-            # if fb_keyboard_continue is starting this frame...
-            if fb_keyboard_continue.status == NOT_STARTED and t >= 0.0-frameTolerance:
+            # if mouse_fb is starting this frame...
+            if mouse_fb.status == NOT_STARTED and t >= 0.0-frameTolerance:
                 # keep track of start time/frame for later
-                fb_keyboard_continue.frameNStart = frameN  # exact frame index
-                fb_keyboard_continue.tStart = t  # local t and not account for scr refresh
-                fb_keyboard_continue.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(fb_keyboard_continue, 'tStartRefresh')  # time at next scr refresh
+                mouse_fb.frameNStart = frameN  # exact frame index
+                mouse_fb.tStart = t  # local t and not account for scr refresh
+                mouse_fb.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(mouse_fb, 'tStartRefresh')  # time at next scr refresh
                 # update status
-                fb_keyboard_continue.status = STARTED
-                # keyboard checking is just starting
-                fb_keyboard_continue.clock.reset()  # now t=0
-                fb_keyboard_continue.clearEvents(eventType='keyboard')
+                mouse_fb.status = STARTED
+                mouse_fb.mouseClock.reset()
+                prevButtonState = mouse_fb.getPressed()  # if button is down already this ISN'T a new click
             
-            # if fb_keyboard_continue is stopping this frame...
-            if fb_keyboard_continue.status == STARTED:
+            # if mouse_fb is stopping this frame...
+            if mouse_fb.status == STARTED:
                 # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > fb_keyboard_continue.tStartRefresh + timing_map["dFb"]-frameTolerance:
+                if tThisFlipGlobal > mouse_fb.tStartRefresh + timing_map["dFb"]-frameTolerance:
                     # keep track of stop time/frame for later
-                    fb_keyboard_continue.tStop = t  # not accounting for scr refresh
-                    fb_keyboard_continue.tStopRefresh = tThisFlipGlobal  # on global time
-                    fb_keyboard_continue.frameNStop = frameN  # exact frame index
+                    mouse_fb.tStop = t  # not accounting for scr refresh
+                    mouse_fb.tStopRefresh = tThisFlipGlobal  # on global time
+                    mouse_fb.frameNStop = frameN  # exact frame index
                     # update status
-                    fb_keyboard_continue.status = FINISHED
-                    fb_keyboard_continue.status = FINISHED
-            if fb_keyboard_continue.status == STARTED:
-                theseKeys = fb_keyboard_continue.getKeys(keyList=None, ignoreKeys=["escape"], waitRelease=False)
-                _fb_keyboard_continue_allKeys.extend(theseKeys)
-                if len(_fb_keyboard_continue_allKeys):
-                    fb_keyboard_continue.keys = _fb_keyboard_continue_allKeys[-1].name  # just the last key pressed
-                    fb_keyboard_continue.rt = _fb_keyboard_continue_allKeys[-1].rt
-                    fb_keyboard_continue.duration = _fb_keyboard_continue_allKeys[-1].duration
-                    # a response ends the routine
-                    continueRoutine = False
+                    mouse_fb.status = FINISHED
+            if mouse_fb.status == STARTED:  # only update if started and not finished!
+                buttons = mouse_fb.getPressed()
+                if buttons != prevButtonState:  # button state changed?
+                    prevButtonState = buttons
+                    if sum(buttons) > 0:  # state changed to a new click
+                        pass
+                        x, y = mouse_fb.getPos()
+                        mouse_fb.x.append(x)
+                        mouse_fb.y.append(y)
+                        buttons = mouse_fb.getPressed()
+                        mouse_fb.leftButton.append(buttons[0])
+                        mouse_fb.midButton.append(buttons[1])
+                        mouse_fb.rightButton.append(buttons[2])
+                        mouse_fb.time.append(mouse_fb.mouseClock.getTime())
             
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1986,19 +1967,21 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         print("timing_map[\"dITI\"]:", timing_map["dITI"])
         print("current loop that ended is:", currentLoop.thisTrial)
         
-        # log reaction time and accuracy percentage
-        thisExp.addData('reactionTime', key_resp.rt)
-        thisExp.addData('accuracy', "correct" if (key_resp.corr == 1) else "incorrect")
-        thisExp.addData('prompt', stim_map["string_prompt"])
-        thisExp.addData('character', stim_map["key_prompt"])
         
         # rewind trial to overwrite timeout data
-        if key_resp.keys == None:
+        if mouse_rawval == mouse_map["none"]:
             currentLoop.rewindTrials()
         else:
-            RT_list.append(key_resp.rt)
-            ACC_list.append(key_resp.corr)
+            RT_list.append(mouse.time[-1])
+            ACC_list.append(mouse_correct)
             
+        # store data for loop_maintrial (TrialHandler)
+        loop_maintrial.addData('mouse_fb.x', mouse_fb.x)
+        loop_maintrial.addData('mouse_fb.y', mouse_fb.y)
+        loop_maintrial.addData('mouse_fb.leftButton', mouse_fb.leftButton)
+        loop_maintrial.addData('mouse_fb.midButton', mouse_fb.midButton)
+        loop_maintrial.addData('mouse_fb.rightButton', mouse_fb.rightButton)
+        loop_maintrial.addData('mouse_fb.time', mouse_fb.time)
         # the Routine "button_record" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         
@@ -2226,16 +2209,20 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # create an object to store info about Routine end
     end = data.Routine(
         name='end',
-        components=[end_text_block, key_next],
+        components=[end_text_block, mouse_end],
     )
     end.status = NOT_STARTED
     continueRoutine = True
     # update component parameters for each repeat
     end_text_block.setText(end_text)
-    # create starting attributes for key_next
-    key_next.keys = []
-    key_next.rt = []
-    _key_next_allKeys = []
+    # setup some python lists for storing info about the mouse_end
+    mouse_end.x = []
+    mouse_end.y = []
+    mouse_end.leftButton = []
+    mouse_end.midButton = []
+    mouse_end.rightButton = []
+    mouse_end.time = []
+    gotValidClick = False  # until a click is received
     # store start times for end
     end.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
     end.tStart = globalClock.getTime(format='float')
@@ -2285,29 +2272,37 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if end_text_block.status == STARTED:
             # update params
             pass
+        # *mouse_end* updates
         
-        # *key_next* updates
-        
-        # if key_next is starting this frame...
-        if key_next.status == NOT_STARTED and t >= 0.0-frameTolerance:
+        # if mouse_end is starting this frame...
+        if mouse_end.status == NOT_STARTED and t >= 0.0-frameTolerance:
             # keep track of start time/frame for later
-            key_next.frameNStart = frameN  # exact frame index
-            key_next.tStart = t  # local t and not account for scr refresh
-            key_next.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(key_next, 'tStartRefresh')  # time at next scr refresh
+            mouse_end.frameNStart = frameN  # exact frame index
+            mouse_end.tStart = t  # local t and not account for scr refresh
+            mouse_end.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(mouse_end, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.addData('mouse_end.started', t)
             # update status
-            key_next.status = STARTED
-            # keyboard checking is just starting
-            key_next.clock.reset()  # now t=0
-        if key_next.status == STARTED:
-            theseKeys = key_next.getKeys(keyList=None, ignoreKeys=["escape"], waitRelease=False)
-            _key_next_allKeys.extend(theseKeys)
-            if len(_key_next_allKeys):
-                key_next.keys = _key_next_allKeys[-1].name  # just the last key pressed
-                key_next.rt = _key_next_allKeys[-1].rt
-                key_next.duration = _key_next_allKeys[-1].duration
-                # a response ends the routine
-                continueRoutine = False
+            mouse_end.status = STARTED
+            mouse_end.mouseClock.reset()
+            prevButtonState = mouse_end.getPressed()  # if button is down already this ISN'T a new click
+        if mouse_end.status == STARTED:  # only update if started and not finished!
+            buttons = mouse_end.getPressed()
+            if buttons != prevButtonState:  # button state changed?
+                prevButtonState = buttons
+                if sum(buttons) > 0:  # state changed to a new click
+                    pass
+                    x, y = mouse_end.getPos()
+                    mouse_end.x.append(x)
+                    mouse_end.y.append(y)
+                    buttons = mouse_end.getPressed()
+                    mouse_end.leftButton.append(buttons[0])
+                    mouse_end.midButton.append(buttons[1])
+                    mouse_end.rightButton.append(buttons[2])
+                    mouse_end.time.append(mouse_end.mouseClock.getTime())
+                    
+                    continueRoutine = False  # end routine on response
         
         # check for quit (typically the Esc key)
         if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -2348,6 +2343,13 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     end.tStop = globalClock.getTime(format='float')
     end.tStopRefresh = tThisFlipGlobal
     thisExp.addData('end.stopped', end.tStop)
+    # store data for thisExp (ExperimentHandler)
+    thisExp.addData('mouse_end.x', mouse_end.x)
+    thisExp.addData('mouse_end.y', mouse_end.y)
+    thisExp.addData('mouse_end.leftButton', mouse_end.leftButton)
+    thisExp.addData('mouse_end.midButton', mouse_end.midButton)
+    thisExp.addData('mouse_end.rightButton', mouse_end.rightButton)
+    thisExp.addData('mouse_end.time', mouse_end.time)
     thisExp.nextEntry()
     # the Routine "end" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()

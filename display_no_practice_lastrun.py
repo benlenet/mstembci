@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on July 15, 2025, at 12:57
+    on July 15, 2025, at 16:30
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -110,9 +110,9 @@ stim_map = {"loop_iter": 0,
 
 
 # initialize udp connection to MATLAB
-#UDP_IP = "10.68.17.253"
-#UDP_PORT = 8000
-#sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+UDP_IP = "10.68.17.253"
+UDP_PORT = 8000
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 # UDP int values, sent to MATLAB
 udp_map = {"f": bytes([1]),
@@ -128,9 +128,8 @@ udp_map = {"f": bytes([1]),
 
 # send value to UDP Port, mapped via udp_map
 def matlab_send(stage):
-    pass
-#    if stage in udp_map:
-#        sock.sendto(udp_map[stage], (UDP_IP, UDP_PORT))
+    if stage in udp_map:
+        sock.sendto(udp_map[stage], (UDP_IP, UDP_PORT))
 
 
 # return a character for response stimulus
@@ -269,7 +268,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\04Ben\\github\\mstembci\\display_no_practice_lastrun.py',
+        originPath='C:\\Users\\benlenet\\mstembci\\display_no_practice_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -1473,7 +1472,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         try:
             if  mouse_rawval == mouse_map["none"]:
                 # add timeout text, decrement loop, enable fixation
-                fb_text = 'Response took too long. Press any key to continue.'
+                fb_text = 'Response took too long. Press middle mouse button to continue.'
                 timing_map["dFb"] = TIMEOUT_DURATION
                 stim_map["loop_iter"] -= 1
                 stim_map["cross_en"] = False
@@ -1497,8 +1496,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
               
         # increment characters after specified loop count
         if stim_map["loop_iter"] == stim_map["loop_count"]:
-            # display countdown
-            skip_break = False
+            # display countdown unless end of experiment
+            skip_break = (stim_map["char_length"] == MAX_CHARACTERS)
             # adjust variables for looping scheduler
             stim_map["loop_iter"] = 0
             stim_map["char_length"] += CHARACTER_INCREMENT
@@ -1507,7 +1506,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             timing_map["dFb"] = DEFAULT_FEEDBACK
             # display text during break
             fb_text = 'feedback:\n' + block_fb[:int(len(block_fb)/2)] + '\n' + block_fb[int(len(block_fb)/2):]
-            text_break = "test will resume in 20 seconds"
+            text_break = "relax: test will resume in 20 seconds." if not skip_break else "the experiment has finished."
             
             # send signal to MATLAB showing it is a fb, ignore
             matlab_send("fb")
@@ -1515,12 +1514,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         fb_disp.setText(fb_text)
         fb_break.setText(text_break)
         # setup some python lists for storing info about the mouse_fb
-        mouse_fb.x = []
-        mouse_fb.y = []
-        mouse_fb.leftButton = []
-        mouse_fb.midButton = []
-        mouse_fb.rightButton = []
-        mouse_fb.time = []
         gotValidClick = False  # until a click is received
         # store start times for button_record
         button_record.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
@@ -1646,20 +1639,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     mouse_fb.frameNStop = frameN  # exact frame index
                     # update status
                     mouse_fb.status = FINISHED
-            if mouse_fb.status == STARTED:  # only update if started and not finished!
-                buttons = mouse_fb.getPressed()
-                if buttons != prevButtonState:  # button state changed?
-                    prevButtonState = buttons
-                    if sum(buttons) > 0:  # state changed to a new click
-                        pass
-                        x, y = mouse_fb.getPos()
-                        mouse_fb.x.append(x)
-                        mouse_fb.y.append(y)
-                        buttons = mouse_fb.getPressed()
-                        mouse_fb.leftButton.append(buttons[0])
-                        mouse_fb.midButton.append(buttons[1])
-                        mouse_fb.rightButton.append(buttons[2])
-                        mouse_fb.time.append(mouse_fb.mouseClock.getTime())
             
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1724,7 +1703,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         try:
             thisExp.addData('reactionTime', mouse.time[-1])
         except:
-            thisExp.addData('reactionTime', "timmed out")
+            thisExp.addData('reactionTime', "timed out")
         thisExp.addData('accuracy', "correct" if mouse_correct else "incorrect")
         thisExp.addData('prompt', stim_map["string_prompt"])
         thisExp.addData('character', stim_map["key_prompt"])
@@ -1737,12 +1716,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             ACC_list.append(mouse_correct)
             
         # store data for loop_maintrial (TrialHandler)
-        loop_maintrial.addData('mouse_fb.x', mouse_fb.x)
-        loop_maintrial.addData('mouse_fb.y', mouse_fb.y)
-        loop_maintrial.addData('mouse_fb.leftButton', mouse_fb.leftButton)
-        loop_maintrial.addData('mouse_fb.midButton', mouse_fb.midButton)
-        loop_maintrial.addData('mouse_fb.rightButton', mouse_fb.rightButton)
-        loop_maintrial.addData('mouse_fb.time', mouse_fb.time)
         # the Routine "button_record" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         
@@ -1884,7 +1857,8 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         continueRoutine = True
         # update component parameters for each repeat
         # Run 'Begin Routine' code from code_ITI
-        if mouse.getPressed() == mouse_map["none"]:
+        print("value is", mouse.getPressed())
+        if (mouse.getPressed() != mouse_map["none"]) and (mouse.getPressed() != mouse_map["middle"]):
             matlab_send("ITI")
         # store start times for ITI
         ITI.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
