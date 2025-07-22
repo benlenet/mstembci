@@ -98,7 +98,7 @@
         <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
       </RoutineSettingsComponent>
       <TextComponent name="key_response_disp" plugin="None">
-        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="-1.0000, 1.0000, 1.0000" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
